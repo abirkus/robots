@@ -80,9 +80,9 @@ Tier One has tests provided. These tests are meant to guide your development by 
 The only tests that affect your score are the ones you are expected to write yourself. They look like this:
 
 ```javascript
-xit('*** renders "No Campuses" if passed an empty array of campuses', () => {
-  throw new Error('replace this error with your own test')
-})
+  xit('*** renders "No Robots" if passed an empty array of robots or if robots is undefined', () => {
+    throw new Error('replace this error with your own test')
+  })
 ```
 
 So, when you see a test with `***` at the beginning, you should delete the `throw new Error` portion and replace it with your own test. Do not change the test description.
