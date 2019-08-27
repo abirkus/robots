@@ -1,7 +1,6 @@
-'use strict'
-
-const router = require('express').Router()
-
+'use strict';
+const router = require('express').Router();
+const {Robot} = require('../db');
 // Your routes go here!
 // NOTE: Any routes that you put here are ALREADY mounted on `/api`
 // You can put all routes in this file HOWEVER,
@@ -19,10 +18,21 @@ const router = require('express').Router()
 // middleware will generate a 404, and send it to your
 // error-handling endware!
 
-router.use((req, res, next) => {
-  const err = new Error('API route not found!')
-  err.status = 404
-  next(err)
-})
+router.get('/robots', async (req, res, next) => {
+	try {
+		// console.log(Robot);
+		const result = await Robot.findAll();
+		console.log('our result', result);
+		res.send(result);
+	} catch (err) {
+		next(err);
+	}
+});
 
-module.exports = router
+router.use((req, res, next) => {
+	const err = new Error('API route not found!');
+	err.status = 404;
+	next(err);
+});
+
+module.exports = router;

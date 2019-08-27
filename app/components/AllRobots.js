@@ -1,20 +1,15 @@
-import 'jsdom-global/register';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import store from '../store';
+//import store from '../store';
 import {fetchRobots} from '../redux/robots';
-import mock from '../../tests/mock-axios';
 
-export class AllRobots extends Component {
-	constructor(props) {
-		super(props);
-	}
+class DisconnectedAllRobots extends Component {
 	// componentDidMount() {
-	// 	this.props.fetchRobots();
+
 	// }
 
 	render() {
-		console.log(this.props);
+		//console.log('inside render Allrobots', this.props);
 		return (
 			<div>
 				{this.props.robots[0] ? (
@@ -45,13 +40,5 @@ const mapStateToProps = state => {
 		robots: state.robots,
 	};
 };
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchRobots: () => dispatch(fetchRobots()),
-	};
-};
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(AllRobots);
+export default connect(mapStateToProps)(DisconnectedAllRobots);

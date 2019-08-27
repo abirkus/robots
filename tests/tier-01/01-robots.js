@@ -126,16 +126,13 @@ describe('Tier One: Robots', () => {
 			};
 			it('*** returns the initial state by default', () => {
 				expect(
-					appReducer(testStore, testRun).robotReducer
-				).to.deep.equal({
-					robots: [],
-				});
+					appReducer(testStore.getState(), testRun).robots
+				).to.deep.equal([]);
 				//throw new Error('replace this error with your own test');
 			});
 
-			xit('reduces on SET_ROBOTS action', () => {
+			it('reduces on SET_ROBOTS action', () => {
 				const action = {type: 'SET_ROBOTS', robots};
-
 				const prevState = testStore.getState();
 				testStore.dispatch(action);
 				const newState = testStore.getState();
@@ -148,6 +145,7 @@ describe('Tier One: Robots', () => {
 	describe('Connect: react-redux', () => {
 		it('initializes robots from the server when the app first loads', async () => {
 			const reduxStateBeforeMount = store.getState();
+			console.log('reduxStateBeforeMount', reduxStateBeforeMount);
 			expect(reduxStateBeforeMount.robots).to.deep.equal([]);
 			mount(
 				<Provider store={store}>
@@ -158,6 +156,7 @@ describe('Tier One: Robots', () => {
 			);
 			await waitFor(10); // wait for 10 milliseconds
 			const reduxStateAfterMount = store.getState();
+			console.log('reduxStateAfterMount', reduxStateAfterMount);
 			expect(reduxStateAfterMount.robots).to.deep.equal(robots);
 		});
 
@@ -188,7 +187,7 @@ describe('Tier One: Robots', () => {
 			rrd.BrowserRouter.restore();
 		});
 
-		xit('renders <AllRobots /> at path /robots', () => {
+		it('renders <AllRobots /> at path /robots', () => {
 			const wrapper = mount(
 				<Provider store={fakeStore}>
 					<MemoryRouter initialEntries={['/robots']}>
@@ -197,10 +196,19 @@ describe('Tier One: Robots', () => {
 				</Provider>
 			);
 			expect(wrapper.find(AllRobots)).to.have.length(1);
+			//bascially tests if we reference componenet AllRobots only 1 time
 		});
 
-		xit('*** navbar has links to "/robots" and "/" (homepage)', () => {
-			throw new Error('replace this error with your own test');
+		it('*** navbar has links to "/robots" and "/" (homepage)', () => {
+			const wrapper = mount(
+				<Provider store={fakeStore}>
+					<MemoryRouter initialEntries={['/robots']}>
+						<Root />
+					</MemoryRouter>
+				</Provider>
+			);
+			expect(wrapper.find('Link')).to.have.length(2);
+			//check 2 see if we have 2 links
 		});
 	});
 
@@ -223,7 +231,7 @@ describe('Tier One: Robots', () => {
 			sinon.restore();
 		});
 
-		xit('GET /api/robots responds with all robots', async () => {
+		it('GET /api/robots responds with all robots', async () => {
 			const response = await agent
 				.get('/api/robots')
 				.timeout({deadline: 20})
@@ -235,7 +243,7 @@ describe('Tier One: Robots', () => {
 			expect(Robot.findAll.calledOnce).to.be.equal(true);
 		});
 
-		xit('GET /api/robots responds with error 500 when database throws error', async () => {
+		it('GET /api/robots responds with error 500 when database throws error', async () => {
 			sinon.restore();
 			const fakeFindAllWithError = sinon.fake.rejects(
 				Error('Ooopsies, the database is on fire!')
@@ -262,7 +270,7 @@ describe('Tier One: Robots', () => {
 		});
 		afterEach(() => db.sync({force: true}));
 
-		xit('has fields name, imageUrl, fuelType, fuelLevel', async () => {
+		it('has fields name, imageUrl, fuelType, fuelLevel', async () => {
 			robot.notARealAttribute = 'does not compute';
 			const savedRobot = await Robot.create(robot);
 			expect(savedRobot.name).to.equal('R2-D2');
@@ -272,11 +280,37 @@ describe('Tier One: Robots', () => {
 			expect(savedRobot.notARealAttribute).to.equal(undefined);
 		});
 
-		xit('*** name cannot be null or an empty string', async () => {
-			throw new Error('replace this error with your own test');
+		it('*** name cannot be null', async () => {
+			robot.name = null;
+
+			let result, error;
+			try {
+				result = await robot.validate();
+			} catch (err) {
+				error = err;
+			}
+
+			if (result) throw Error('validation should fail when content is null');
+
+			expect(error).to.be.an.instanceOf(Error);
 		});
 
-		xit('fuelType can only be gas, diesel, or electric (defaults to electric)', async () => {
+		it('*** name cannot be an empty string', async () => {
+			robot.name = '';
+
+			let result, error;
+			try {
+				result = await robot.validate();
+			} catch (err) {
+				error = err;
+			}
+
+			if (result) throw Error('validation should fail when content is null');
+
+			expect(error).to.be.an.instanceOf(Error);
+		});
+
+		it('fuelType can only be gas, diesel, or electric (defaults to electric)', async () => {
 			robot.fuelType = 'the power of love';
 			try {
 				const badFuelRobot = await Robot.create(robot);
@@ -295,7 +329,7 @@ describe('Tier One: Robots', () => {
 			expect(defaultFuelRobot.fuelType).to.equal('electric');
 		});
 
-		xit('fuelLevel must be between 0 and 100 (defaults to 100)', async () => {
+		it('fuelLevel must be between 0 and 100 (defaults to 100)', async () => {
 			robot.fuelLevel = -10;
 			try {
 				const negativeFuelRobot = await Robot.create(robot);
@@ -327,10 +361,10 @@ describe('Tier One: Robots', () => {
 			expect(defaultFuelLevelRobot.fuelLevel).to.equal(100);
 		});
 	});
-	describe('Seed File', () => {
+	describe.only('Seed File', () => {
 		beforeEach(seed);
 
-		xit('populates the database with at least three robots', async () => {
+		it('populates the database with at least three robots', async () => {
 			const seedRobots = await Robot.findAll();
 			expect(seedRobots).to.have.lengthOf.at.least(3);
 		});

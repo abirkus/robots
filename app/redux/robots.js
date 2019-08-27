@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import mock from '../../tests/mock-axios';
+
 //action type
 export const SET_ROBOTS = 'SET_ROBOTS';
 
@@ -24,17 +24,13 @@ export const fetchRobots = () => {
 	};
 };
 
-const initialState = {
-	robots: [],
-};
+const initialState = [];
 
 //reducer
-export const robotReducer = (state = initialState, action) => {
+export const robots = (state = initialState, action) => {
 	switch (action.type) {
 		case SET_ROBOTS: {
-			//console.log(state);
-			//console.log(action.robots);
-			return {...state, robots: [...state.robots, action.robots]};
+			return action.robots;
 		}
 		default: {
 			return state;
