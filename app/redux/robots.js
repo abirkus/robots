@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 //action type
 export const SET_ROBOTS = 'SET_ROBOTS';
@@ -11,12 +11,12 @@ export const setRobots = robots => {
 	};
 };
 
-//thunk creator
+//thunk creators
 
 export const fetchRobots = () => {
 	return async dispatch => {
 		try {
-			const {data} = await Axios.get('/api/robots');
+			const {data} = await axios.get('/api/robots');
 			dispatch(setRobots(data));
 		} catch (err) {
 			console.log('Error', err);
@@ -27,7 +27,7 @@ export const fetchRobots = () => {
 const initialState = [];
 
 //reducer
-export const robots = (state = initialState, action) => {
+export default (state = initialState, action) => {
 	switch (action.type) {
 		case SET_ROBOTS: {
 			return action.robots;
@@ -37,9 +37,3 @@ export const robots = (state = initialState, action) => {
 		}
 	}
 };
-
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		updateName: name => dispatch(newName(name)),
-// 	};
-// };

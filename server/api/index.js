@@ -20,10 +20,8 @@ const {Robot, Project} = require('../db');
 
 router.get('/robots', async (req, res, next) => {
 	try {
-		const result = await Robot.findAll({
-			include: [Project],
-		});
-		res.send(result);
+		const result = await Robot.findAll();
+		res.json(result);
 	} catch (err) {
 		next(err);
 	}
@@ -31,13 +29,14 @@ router.get('/robots', async (req, res, next) => {
 
 router.get('/robots/:id', async (req, res, next) => {
 	try {
-		const oneRobot = await Robot.findById({
+		console.log('INSIDE API, the route is working');
+		const oneRobot = await Robot.findOne({
 			where: {
 				id: req.params.id,
 			},
-			include: [Project, {model: Project, include: Project}],
+			include: [Project],
 		});
-		res.send(oneRobot);
+		res.json(oneRobot);
 	} catch (err) {
 		next(err);
 	}

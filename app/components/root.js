@@ -2,14 +2,19 @@ import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import AllRobots from './AllRobots';
 import AllProjects from './AllProjects';
+import SingleRobot from './SingleRobot';
 import {connect} from 'react-redux';
 import {fetchRobots} from '../redux/robots';
 import {fetchProjects} from '../redux/projects';
 
 class Root extends React.Component {
 	componentDidMount() {
-		this.props.fetchRobots();
-		this.props.fetchProjects();
+		try {
+			this.props.fetchRobots();
+			this.props.fetchProjects();
+		} catch (err) {
+			console.error(err);
+		}
 	}
 
 	render() {
@@ -28,6 +33,10 @@ class Root extends React.Component {
 					<div>
 						<Route exact path="/robots" component={AllRobots} />
 						<Route exact path="/projects" component={AllProjects} />
+						<Route
+							path="/robots/:robotId"
+							component={SingleRobot}
+						/>
 					</div>
 				</div>
 			</Router>

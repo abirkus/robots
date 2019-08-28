@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import axios from 'axios';
 
 //action type
 export const SET_PROJECTS = 'SET_PROJECTS';
@@ -16,7 +16,7 @@ export const setProjects = projects => {
 export const fetchProjects = () => {
 	return async dispatch => {
 		try {
-			const {data} = await Axios.get('/api/projects');
+			const {data} = await axios.get('/api/projects');
 			dispatch(setProjects(data));
 		} catch (err) {
 			console.log('Error', err);
@@ -27,7 +27,7 @@ export const fetchProjects = () => {
 const initialState = [];
 
 //reducer
-export const projects = (state = initialState, action) => {
+export default (state = initialState, action) => {
 	switch (action.type) {
 		case SET_PROJECTS: {
 			return action.projects;

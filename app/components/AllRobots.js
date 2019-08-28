@@ -1,15 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import SingleRobot from './SingleRobot';
+import {Link} from 'react-router-dom';
 
 const AllRobots = props => {
-	console.log('ALLROBOTS', props.robots);
+	const robots = props.robots;
 	return (
 		<div>
-			{props.robots[0].id ? (
+			{robots[0].id ? (
 				<ul>
-					{props.robots.map(el => (
-						<SingleRobot key={el.id} robot={el} />
+					{robots.map(bot => (
+						<Link to={`/robots/${bot.id}`} key={bot.id}>
+							<img src={bot.imageUrl} />
+							<p>{bot.name}</p>
+						</Link>
 					))}
 				</ul>
 			) : (
