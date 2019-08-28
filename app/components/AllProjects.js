@@ -1,16 +1,24 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 const AllProjects = props => {
+	const projects = props.projects;
 	return (
 		<div>
-			{props.projects[0].id ? (
+			{projects[0].id ? (
 				<ul>
-					{props.projects.map(el => (
-						<div key={el.id}>
-							<li>{el.title}</li>
-							<li>{el.deadline ? el.deadline : 'No deadline'}</li>
-						</div>
+					{projects.map(proj => (
+						<Link to={`/projects/${proj.id}`} key={proj.id}>
+							<h4>{proj.title}</h4>
+							<ul>
+								<li>
+									{proj.deadline
+										? proj.deadline
+										: 'No deadline'}
+								</li>
+							</ul>
+						</Link>
 					))}
 				</ul>
 			) : (

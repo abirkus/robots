@@ -16,7 +16,6 @@ export const getSingleRobot = robot => {
 export const fetchSingleRobot = id => {
 	return async dispatch => {
 		try {
-			console.log('API fetch request received');
 			const {data} = await axios.get(`/api/robots/${id}`);
 			dispatch(getSingleRobot(data));
 		} catch (err) {
@@ -25,14 +24,14 @@ export const fetchSingleRobot = id => {
 	};
 };
 
-const initialState = [];
+const initialState = {};
 
 //reducer
 //our single robot state will hold only one robot at a time
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_SINGLE_ROBOT:
-			return [action.robot];
+			return action.robot;
 		default: {
 			return state;
 		}

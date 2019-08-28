@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-
+import {Link} from 'react-router-dom';
 import {fetchSingleRobot} from '../redux/singlerobot';
 
 class SingleRobot extends Component {
@@ -14,8 +14,8 @@ class SingleRobot extends Component {
 	}
 
 	render() {
-		const robot = this.props.robot[0];
-		return robot ? (
+		const robot = this.props.robot;
+		return robot.id ? (
 			<div>
 				<ul>
 					<div key={robot.id}>
@@ -26,7 +26,11 @@ class SingleRobot extends Component {
 						{robot.projects[0] ? (
 							<ul>
 								{robot.projects.map(proj => (
-									<li key={proj.id}>{proj.title}</li>
+									<Link
+										to={`/projects/${proj.id}`}
+										key={proj.id}>
+										<li>{proj.title}</li>
+									</Link>
 								))}
 							</ul>
 						) : (
@@ -41,6 +45,7 @@ class SingleRobot extends Component {
 	}
 }
 
+//here we look at state in redux and only grab one array - singleRobot
 const mapStateToProps = state => {
 	return {
 		robot: state.singleRobot,

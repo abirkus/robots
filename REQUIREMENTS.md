@@ -66,11 +66,11 @@ Congrats! You have completed your first vertical slice! Make sure to `commit -m 
 - [X] Display the appropriate robot when the url matches `/robots/:robotId`
 - [X] Clicking on a robot from the all-robots view should navigate to show that robot in the single-robot view
 
-- [ ] Write a component to display a single project with the following information:
-  - [ ] The project's title, deadline, priority, description
-  - [ ] A list of the names of all robots in that project (or a helpful message if it doesn't have any robots)
-- [ ] Display the appropriate project's info when the url matches `/projects/:projectId`
-- [ ] Clicking on a project from the all-projects view should navigate to show that project in the single-project view
+- [X] Write a component to display a single project with the following information:
+  - [X] The project's title, deadline, priority, description
+  - [X] A list of the names of all robots in that project (or a helpful message if it doesn't have any robots)
+- [X] Display the appropriate project's info when the url matches `/projects/:projectId`
+- [X] Clicking on a project from the all-projects view should navigate to show that project in the single-project view
 
 - [ ] Clicking on the name of a robot in the single-project view should navigate to show that robot in the single-robot view
 - [ ] Clicking on the name of a project in the single-robot view should navigate to show that project in the single-project view

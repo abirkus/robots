@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import AllRobots from './AllRobots';
 import AllProjects from './AllProjects';
 import SingleRobot from './SingleRobot';
+import SingleProject from './SingleProject';
 import {connect} from 'react-redux';
 import {fetchRobots} from '../redux/robots';
 import {fetchProjects} from '../redux/projects';
@@ -36,6 +37,10 @@ class Root extends React.Component {
 						<Route
 							path="/robots/:robotId"
 							component={SingleRobot}
+						/>
+						<Route
+							path="/projects/:projectId"
+							component={SingleProject}
 						/>
 					</div>
 				</div>
