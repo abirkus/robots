@@ -361,7 +361,7 @@ describe('Tier One: Robots', () => {
 			expect(defaultFuelLevelRobot.fuelLevel).to.equal(100);
 		});
 	});
-	describe.only('Seed File', () => {
+	describe('Seed File', () => {
 		beforeEach(seed);
 
 		it('populates the database with at least three robots', async () => {

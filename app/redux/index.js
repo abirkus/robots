@@ -1,5 +1,6 @@
 import {combineReducers} from 'redux';
-import {robots, SET_ROBOTS, setRobots} from './robots';
+import {robots} from './robots';
+import {projects} from './projects';
 
 // This reducer is just a stub. We should probably do something
 // with that combineReducers thing up there...
@@ -7,7 +8,7 @@ import {robots, SET_ROBOTS, setRobots} from './robots';
 //const appReducer = () => {};
 const appReducer = combineReducers({
 	robots,
-	//projects,
+	projects,
 });
 
 export default appReducer;

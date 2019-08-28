@@ -1,6 +1,6 @@
 'use strict';
 const router = require('express').Router();
-const {Robot} = require('../db');
+const {Robot, Project} = require('../db');
 // Your routes go here!
 // NOTE: Any routes that you put here are ALREADY mounted on `/api`
 // You can put all routes in this file HOWEVER,
@@ -20,10 +20,47 @@ const {Robot} = require('../db');
 
 router.get('/robots', async (req, res, next) => {
 	try {
-		// console.log(Robot);
-		const result = await Robot.findAll();
-		console.log('our result', result);
+		const result = await Robot.findAll({
+			include: [Project],
+		});
 		res.send(result);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.get('/robots/:id', async (req, res, next) => {
+	try {
+		const oneRobot = await Robot.findById({
+			where: {
+				id: req.params.id,
+			},
+			include: [Project, {model: Project, include: Project}],
+		});
+		res.send(oneRobot);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.get('/projects', async (req, res, next) => {
+	try {
+		const result = await Project.findAll();
+		res.send(result);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.get('/projects/:id', async (req, res, next) => {
+	try {
+		const oneProject = await Project.findById({
+			where: {
+				id: req.params.id,
+			},
+			include: [{model: Robot}],
+		});
+		res.send(oneProject);
 	} catch (err) {
 		next(err);
 	}

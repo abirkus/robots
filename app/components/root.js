@@ -1,30 +1,33 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
 import AllRobots from './AllRobots';
+import AllProjects from './AllProjects';
 import {connect} from 'react-redux';
 import {fetchRobots} from '../redux/robots';
+import {fetchProjects} from '../redux/projects';
 
 class Root extends React.Component {
 	componentDidMount() {
-		// Huh, I wonder what this mysterious componentDidMount is doing here... 🤔
 		this.props.fetchRobots();
+		this.props.fetchProjects();
 	}
+
 	render() {
-		console.log('inside render for root', this.props);
 		return (
 			<Router>
 				<div>
 					<nav className="topnav">
 						<Link to="/">Home</Link>
 						<Link to="/robots">All Robots</Link>
+						<Link to="/projects">All Projects</Link>
 					</nav>
 					<h1>
 						Welcome to StackBot Project Management: your robot
 						employees are awaiting assignments!
 					</h1>
 					<div>
-						<AllRobots />
-						{/* <Route path="/robots" component={AllRobots} /> */}
+						<Route exact path="/robots" component={AllRobots} />
+						<Route exact path="/projects" component={AllProjects} />
 					</div>
 				</div>
 			</Router>
@@ -35,6 +38,7 @@ class Root extends React.Component {
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchRobots: () => dispatch(fetchRobots()),
+		fetchProjects: () => dispatch(fetchProjects()),
 	};
 };
 
