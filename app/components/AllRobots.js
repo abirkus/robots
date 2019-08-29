@@ -1,12 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import AddRobot from './AddRobot.js';
 
-const AllRobots = props => {
-	const robots = props.robots;
-	return (
-		<div>
-			{robots[0].id ? (
+class AllRobots extends Component {
+	render() {
+		const robots = this.props.robots;
+		return robots[0].id ? (
+			<div>
 				<ul>
 					{robots.map(bot => (
 						<Link to={`/robots/${bot.id}`} key={bot.id}>
@@ -15,12 +16,20 @@ const AllRobots = props => {
 						</Link>
 					))}
 				</ul>
-			) : (
-				<div>No Robots</div>
-			)}
-		</div>
-	);
-};
+				<div>
+					<h1>Add a new robot</h1>
+					<AddRobot />
+				</div>
+			</div>
+		) : (
+			<div>
+				<div>No Robots Found</div>
+				<h1>Add a new robot</h1>
+				<AddRobot />
+			</div>
+		);
+	}
+}
 
 const mapStateToProps = state => {
 	return {

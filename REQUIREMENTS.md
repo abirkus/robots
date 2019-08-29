@@ -72,8 +72,8 @@ Congrats! You have completed your first vertical slice! Make sure to `commit -m 
 - [X] Display the appropriate project's info when the url matches `/projects/:projectId`
 - [X] Clicking on a project from the all-projects view should navigate to show that project in the single-project view
 
-- [ ] Clicking on the name of a robot in the single-project view should navigate to show that robot in the single-robot view
-- [ ] Clicking on the name of a project in the single-robot view should navigate to show that project in the single-project view
+- [X] Clicking on the name of a robot in the single-project view should navigate to show that robot in the single-robot view
+- [X] Clicking on the name of a project in the single-robot view should navigate to show that project in the single-project view
 
 #### Backend
 
@@ -104,7 +104,7 @@ Congrats! You have completed your second vertical slice! Make sure to `commit -m
 
 #### Backend
 
-- [ ] Write a route to add a new robot
+- [X] Write a route to add a new robot
 - [ ] Write a route to add a new project
 
 Congrats! You have completed your third vertical slice! Make sure to `commit -m "Feature: Add Robot and Project"` before moving on (see RUBRIC.md - points are awarded/deducted for a proper git workflow)!
