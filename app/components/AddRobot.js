@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {addRobot} from '../redux/robots.js';
+import {addRobotThunk} from '../redux/robots.js';
 
 class AddRobot extends Component {
 	constructor(props) {
@@ -8,7 +8,7 @@ class AddRobot extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.handleChange = this.handleChange.bind(this);
 		this.state = {
-			robotName: '',
+			name: '',
 			fuelType: '',
 			fuelLevel: '',
 			imageUrl: '',
@@ -24,7 +24,7 @@ class AddRobot extends Component {
 		evt.preventDefault();
 		this.props.post(this.state);
 		this.setState({
-			robotName: '',
+			name: '',
 			fuelType: '',
 			fuelLevel: '',
 			imageUrl: '',
@@ -32,15 +32,14 @@ class AddRobot extends Component {
 	}
 
 	render() {
-		console.log('form state', this.state);
 		return (
 			<form id="robot-form" onSubmit={this.handleSubmit}>
-				<label htmlFor="robotName">Robot Name:</label>
+				<label htmlFor="name">Robot Name:</label>
 				<input
-					name="robotName"
+					name="name"
 					type="text"
 					onChange={this.handleChange}
-					value={this.state.robotName}
+					value={this.state.name}
 				/>
 
 				<label htmlFor="fuelType">Fuel Type:</label>
@@ -54,7 +53,7 @@ class AddRobot extends Component {
 				<label htmlFor="fuelLevel">Fuel Level:</label>
 				<input
 					name="fuelLevel"
-					type="text"
+					type="number"
 					onChange={this.handleChange}
 					value={this.state.fuelLevel}
 				/>
@@ -75,7 +74,7 @@ class AddRobot extends Component {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		post: obj => dispatch(addRobot(obj)),
+		post: obj => dispatch(addRobotThunk(obj)),
 	};
 };
 export default connect(

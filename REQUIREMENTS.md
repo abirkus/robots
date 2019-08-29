@@ -90,11 +90,11 @@ Congrats! You have completed your second vertical slice! Make sure to `commit -m
 
 #### Frontend
 
-- [ ] Write a component to display a form for adding a new robot that contains _at least_ an input for name
-- [ ] Display this component EITHER as part of the all-robots view, or as its own view
-- [ ] Submitting the form with valid data should:
-  - [ ] Make an AJAX request that causes the new robot to be persisted in the database
-  - [ ] Add the new robot to the list of robots without needing to refresh the page
+- [X] Write a component to display a form for adding a new robot that contains _at least_ an input for name
+- [X] Display this component EITHER as part of the all-robots view, or as its own view
+- [X] Submitting the form with valid data should:
+  - [X] Make an AJAX request that causes the new robot to be persisted in the database
+  - [X] Add the new robot to the list of robots without needing to refresh the page
 
 - [ ] Write a component to display a form for adding a new project that contains _at least_ an input for title
 - [ ] Display this component EITHER as part of the all-projects view, or as its own view (your choice)

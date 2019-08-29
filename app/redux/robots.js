@@ -31,13 +31,10 @@ export const fetchRobots = () => {
 	};
 };
 
-export const addRobots = robot => {
+export const addRobotThunk = robot => {
 	return async dispatch => {
 		try {
-			const {data} = await axios.post('/api/robots/', robot);
-			console.log('Added robot', data);
-			//the dispatch should add the new robot to our array in state
-
+			const {data} = await axios.post('/api/robots', robot);
 			dispatch(addRobot(data));
 		} catch (err) {
 			console.log('Error', err);

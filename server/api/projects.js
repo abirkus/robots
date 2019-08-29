@@ -25,4 +25,13 @@ router.get('/:id', async (req, res, next) => {
 	}
 });
 
+router.post('/', async (req, res, next) => {
+	try {
+		const project = await Project.create(req.body);
+		res.json(project);
+	} catch (err) {
+		next(err);
+	}
+});
+
 module.exports = router;

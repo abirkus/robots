@@ -1,29 +1,34 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
+import AddProject from './AddProject.js';
 
 const AllProjects = props => {
 	const projects = props.projects;
-	return (
+	return projects[0].id ? (
 		<div>
-			{projects[0].id ? (
-				<ul>
-					{projects.map(proj => (
-						<Link to={`/projects/${proj.id}`} key={proj.id}>
-							<h4>{proj.title}</h4>
-							<ul>
-								<li>
-									{proj.deadline
-										? proj.deadline
-										: 'No deadline'}
-								</li>
-							</ul>
-						</Link>
-					))}
-				</ul>
-			) : (
-				<div>No Projects</div>
-			)}
+			<ul>
+				{projects.map(proj => (
+					<Link to={`/projects/${proj.id}`} key={proj.id}>
+						<h4>{proj.title}</h4>
+						<ul>
+							<li>
+								{proj.deadline ? proj.deadline : 'No deadline'}
+							</li>
+						</ul>
+					</Link>
+				))}
+			</ul>
+			<div>
+				<h1>Add a new project</h1>
+				<AddProject />
+			</div>
+		</div>
+	) : (
+		<div>
+			<div>No Projects</div>
+			<h1>Add a new project</h1>
+			<AddProject />
 		</div>
 	);
 };

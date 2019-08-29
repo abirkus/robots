@@ -26,10 +26,7 @@ router.get('/:id', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
 	try {
-		console.log('CALLED router post');
-		console.log('req.body', req.body);
 		const robot = await Robot.create(req.body);
-		console.log(robot);
 		res.json(robot);
 	} catch (err) {
 		next(err);
