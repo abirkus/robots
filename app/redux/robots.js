@@ -4,6 +4,7 @@ import axios from 'axios';
 export const SET_ROBOTS = 'SET_ROBOTS';
 export const ADD_ROBOT = 'ADD_ROBOT';
 export const REMOVE_ROBOT = 'REMOVE_ROBOT';
+export const UPDATE_ROBOT = 'UPDATE_ROBOT';
 
 //action creator
 export const setRobots = robots => {
@@ -26,12 +27,21 @@ export const removeRobot = id => {
 		id,
 	};
 };
+
+export const updateRobot = robot => {
+	return {
+		type: UPDATE_ROBOT,
+		robot,
+	};
+};
 //thunk creators
 
 export const fetchRobots = () => {
 	return async dispatch => {
 		try {
 			const {data} = await axios.get('/api/robots');
+
+			console.log('FETCH ROBOTS', data);
 			dispatch(setRobots(data));
 		} catch (err) {
 			console.log('Error', err);
@@ -61,6 +71,17 @@ export const removeRobotThunk = id => {
 	};
 };
 
+export const updateRobotThunk = (id, robot) => {
+	return async dispatch => {
+		try {
+			const {data} = await axios.put(`/api/robots/${id}`, robot);
+			dispatch(updateRobot(data));
+		} catch (err) {
+			console.log('Error', err);
+		}
+	};
+};
+
 const initialState = [];
 
 //reducer
@@ -74,6 +95,14 @@ export default (state = initialState, action) => {
 		}
 		case REMOVE_ROBOT: {
 			return state.filter(bot => bot.id !== Number(action.id));
+		}
+		case UPDATE_ROBOT: {
+			return state.map(bot => {
+				if (bot.id === Number(action.robot.id)) {
+					bot = action.robot;
+				}
+				return bot;
+			});
 		}
 		default: {
 			return state;

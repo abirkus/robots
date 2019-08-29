@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {fetchSingleRobot} from '../redux/singlerobot';
+import UpdateRobot from './UpdateRobot.js';
 
 class SingleRobot extends Component {
 	componentDidMount() {
@@ -36,6 +37,13 @@ class SingleRobot extends Component {
 						) : (
 							<li>No projects for this robot</li>
 						)}
+					</div>
+					<div>
+						<h1>Update robot</h1>
+						<UpdateRobot
+							params={this.props.match.params}
+							fetchSingleRobot={this.props.fetchSingleRobot}
+						/>
 					</div>
 				</ul>
 			</div>

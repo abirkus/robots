@@ -3,7 +3,9 @@ const {Robot, Project} = require('../db');
 
 router.get('/', async (req, res, next) => {
 	try {
-		const result = await Robot.findAll();
+		const result = await Robot.findAll({
+			order: [['id', 'ASC']],
+		});
 		res.json(result);
 	} catch (err) {
 		next(err);
@@ -39,6 +41,17 @@ router.delete('/:id', async (req, res, next) => {
 		await Robot.destroy({
 			where: {id},
 		});
+		res.status(204).end();
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.put('/:id', async (req, res, next) => {
+	try {
+		const id = req.params.id;
+		const robot = await Robot.findByPk(id);
+		await robot.update(req.body);
 		res.status(204).end();
 	} catch (err) {
 		next(err);

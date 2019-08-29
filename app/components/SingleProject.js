@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchSingleProject} from '../redux/singleproject';
 import {Link} from 'react-router-dom';
+import UpdateProject from './UpdateProject.js';
 
 class SingleProject extends Component {
 	componentDidMount() {
@@ -28,7 +29,8 @@ class SingleProject extends Component {
 							{project.deadline}
 						</li>
 						<li>
-							<span>Priority: </span>project.priority}
+							<span>Priority: </span>
+							{project.priority}
 						</li>
 						<li>
 							<span>Description: </span>
@@ -50,6 +52,13 @@ class SingleProject extends Component {
 						)}
 					</div>
 				</ul>
+				<div>
+					<h1>Update project</h1>
+					<UpdateProject
+						params={this.props.match.params}
+						fetchSingleProject={this.props.fetchSingleProject}
+					/>
+				</div>
 			</div>
 		) : (
 			<div />

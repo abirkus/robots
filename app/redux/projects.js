@@ -4,6 +4,7 @@ import axios from 'axios';
 export const SET_PROJECTS = 'SET_PROJECTS';
 export const ADD_PROJECT = 'ADD_PROJECT';
 export const REMOVE_PROJECT = 'REMOVE_PROJECT';
+export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 
 //action creator
 export const setProjects = projects => {
@@ -24,6 +25,13 @@ export const removeProject = id => {
 	return {
 		type: REMOVE_PROJECT,
 		id,
+	};
+};
+
+export const updateProject = project => {
+	return {
+		type: UPDATE_PROJECT,
+		project,
 	};
 };
 
@@ -62,6 +70,17 @@ export const removeProjectThunk = id => {
 	};
 };
 
+export const updateProjectThunk = (id, project) => {
+	return async dispatch => {
+		try {
+			const {data} = await axios.put(`/api/projects/${id}`, project);
+			dispatch(updateProject(data));
+		} catch (err) {
+			console.log('Error', err);
+		}
+	};
+};
+
 const initialState = [];
 
 //reducer
@@ -75,6 +94,14 @@ export default (state = initialState, action) => {
 		}
 		case REMOVE_PROJECT: {
 			return state.filter(proj => proj.id !== Number(action.id));
+		}
+		case UPDATE_PROJECT: {
+			return state.map(proj => {
+				if (proj.id === Number(action.project.id)) {
+					proj = action.project;
+				}
+				return proj;
+			});
 		}
 		default: {
 			return state;
