@@ -3,6 +3,7 @@ import axios from 'axios';
 //action type
 export const SET_ROBOTS = 'SET_ROBOTS';
 export const ADD_ROBOT = 'ADD_ROBOT';
+export const REMOVE_ROBOT = 'REMOVE_ROBOT';
 
 //action creator
 export const setRobots = robots => {
@@ -16,6 +17,13 @@ export const addRobot = robot => {
 	return {
 		type: ADD_ROBOT,
 		robot,
+	};
+};
+
+export const removeRobot = id => {
+	return {
+		type: REMOVE_ROBOT,
+		id,
 	};
 };
 //thunk creators
@@ -42,6 +50,17 @@ export const addRobotThunk = robot => {
 	};
 };
 
+export const removeRobotThunk = id => {
+	return async dispatch => {
+		try {
+			await axios.delete(`/api/robots/${id}`);
+			dispatch(removeRobot(id));
+		} catch (err) {
+			console.log('Error', err);
+		}
+	};
+};
+
 const initialState = [];
 
 //reducer
@@ -52,6 +71,9 @@ export default (state = initialState, action) => {
 		}
 		case ADD_ROBOT: {
 			return [...state, action.robot];
+		}
+		case REMOVE_ROBOT: {
+			return state.filter(bot => bot.id !== Number(action.id));
 		}
 		default: {
 			return state;

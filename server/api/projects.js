@@ -12,7 +12,6 @@ router.get('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
 	try {
-		console.log('inside API request');
 		const oneProject = await Project.findOne({
 			where: {
 				id: req.params.id,
@@ -29,6 +28,18 @@ router.post('/', async (req, res, next) => {
 	try {
 		const project = await Project.create(req.body);
 		res.json(project);
+	} catch (err) {
+		next(err);
+	}
+});
+
+router.delete('/:id', async (req, res, next) => {
+	try {
+		const id = req.params.id;
+		await Project.destroy({
+			where: {id},
+		});
+		res.status(204).end();
 	} catch (err) {
 		next(err);
 	}

@@ -9,7 +9,7 @@ class AddRobot extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.state = {
 			name: '',
-			fuelType: '',
+			fuelType: 'electric',
 			fuelLevel: '',
 			imageUrl: '',
 		};
@@ -25,7 +25,7 @@ class AddRobot extends Component {
 		this.props.post(this.state);
 		this.setState({
 			name: '',
-			fuelType: '',
+			fuelType: 'electric',
 			fuelLevel: '',
 			imageUrl: '',
 		});
@@ -43,12 +43,15 @@ class AddRobot extends Component {
 				/>
 
 				<label htmlFor="fuelType">Fuel Type:</label>
-				<input
+				<select
+					defaultValue="electric"
 					name="fuelType"
 					type="text"
-					onChange={this.handleChange}
-					value={this.state.fuelType}
-				/>
+					onChange={this.handleChange}>
+					<option value="gas">gas</option>
+					<option value="diesel">diesel</option>
+					<option value="electric">electric</option>
+				</select>
 
 				<label htmlFor="fuelLevel">Fuel Level:</label>
 				<input

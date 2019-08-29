@@ -145,7 +145,6 @@ describe('Tier One: Robots', () => {
 	describe('Connect: react-redux', () => {
 		it('initializes robots from the server when the app first loads', async () => {
 			const reduxStateBeforeMount = store.getState();
-			console.log('reduxStateBeforeMount', reduxStateBeforeMount);
 			expect(reduxStateBeforeMount.robots).to.deep.equal([]);
 			mount(
 				<Provider store={store}>
@@ -156,7 +155,6 @@ describe('Tier One: Robots', () => {
 			);
 			await waitFor(10); // wait for 10 milliseconds
 			const reduxStateAfterMount = store.getState();
-			console.log('reduxStateAfterMount', reduxStateAfterMount);
 			expect(reduxStateAfterMount.robots).to.deep.equal(robots);
 		});
 

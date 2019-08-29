@@ -11,7 +11,7 @@ class AddProject extends Component {
 			title: '',
 			deadline: '',
 			priority: '',
-			completed: '',
+			completed: false,
 			description: '',
 		};
 	}
@@ -28,14 +28,12 @@ class AddProject extends Component {
 			title: '',
 			deadline: '',
 			priority: '',
-			completed: '',
+			completed: false,
 			description: '',
 		});
 	}
 
 	render() {
-		console.log('form state', this.state);
-		console.log('form props', this.props);
 		return (
 			<form id="project-form" onSubmit={this.handleSubmit}>
 				<label htmlFor="title">Project Title:</label>
