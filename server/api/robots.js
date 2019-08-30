@@ -58,4 +58,15 @@ router.put('/:id', async (req, res, next) => {
 	}
 });
 
+router.put('/assignments/:id', async (req, res, next) => {
+	try {
+		const id = req.params.id;
+		const robot = await Robot.findByPk(id);
+		await robot.removeProject(req.body.id);
+		res.status(204).end();
+	} catch (err) {
+		next(err);
+	}
+});
+
 module.exports = router;

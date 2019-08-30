@@ -1,6 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {fetchSingleProject} from '../redux/singleproject';
+import {
+	fetchSingleProject,
+	unassignRobotThunk,
+	completeProjectThunk,
+} from '../redux/singleproject';
 import {Link} from 'react-router-dom';
 import UpdateProject from './UpdateProject.js';
 
@@ -13,7 +17,15 @@ class SingleProject extends Component {
 			console.error(error);
 		}
 	}
-
+	handleClick = evt => {
+		const projectId = this.props.project.id;
+		const robotId = evt.target.id;
+		this.props.unassignRobot(projectId, robotId);
+	};
+	handleComplete = evt => {
+		const completed = !this.props.project.completed;
+		this.props.completeProject(evt.target.id, completed);
+	};
 	render() {
 		const project = this.props.project;
 		return project.id ? (
@@ -33,23 +45,47 @@ class SingleProject extends Component {
 							{project.priority}
 						</li>
 						<li>
+							<span>Completed: </span>
+							{project.completed ? 'YES' : 'NO'}
+						</li>
+						<li>
 							<span>Description: </span>
 							{project.description}
 						</li>
 						{project.robots[0] ? (
 							<ul>
 								{project.robots.map(bot => (
-									<Link key={bot.id} to={`/robots/${bot.id}`}>
-										<li>
+									<li key={bot.id}>
+										<Link to={`/robots/${bot.id}`}>
 											<span>Robot: </span>
-											{bot.name}
-										</li>
-									</Link>
+											<span>{bot.name}</span>
+										</Link>
+										<span>
+											<button
+												type="button"
+												id={bot.id}
+												onClick={evt => {
+													this.handleClick(evt);
+												}}>
+												Unassign
+											</button>
+										</span>
+									</li>
 								))}
 							</ul>
 						) : (
 							<li>No robots for this project</li>
 						)}
+						<div>
+							<button
+								type="button"
+								id={project.id}
+								onClick={evt => {
+									this.handleComplete(evt);
+								}}>
+								Complete
+							</button>
+						</div>
 					</div>
 				</ul>
 				<div>
@@ -76,6 +112,9 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchSingleProject: id => dispatch(fetchSingleProject(id)),
+		unassignRobot: (projectId, robotId) =>
+			dispatch(unassignRobotThunk(projectId, robotId)),
+		completeProject: (id, bool) => dispatch(completeProjectThunk(id, bool)),
 	};
 };
 

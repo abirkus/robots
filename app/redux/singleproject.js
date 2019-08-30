@@ -2,6 +2,8 @@ import axios from 'axios';
 
 //action type
 export const GET_SINGLE_PROJECT = 'GET_SINGLE_PROJECT';
+export const UNASSIGN_ROBOT = 'UNASSIGN_ROBOT';
+export const COMPLETE_PROJECT = 'COMPLETE_PROJECT';
 
 //action creator
 export const getSingleProject = project => {
@@ -11,6 +13,19 @@ export const getSingleProject = project => {
 	};
 };
 
+export const unassignRobot = id => {
+	return {
+		type: UNASSIGN_ROBOT,
+		id,
+	};
+};
+
+export const completeProject = id => {
+	return {
+		type: COMPLETE_PROJECT,
+		id,
+	};
+};
 //thunk creators
 
 export const fetchSingleProject = id => {
@@ -24,13 +39,50 @@ export const fetchSingleProject = id => {
 	};
 };
 
+export const unassignRobotThunk = (projectId, robotId) => {
+	return async dispatch => {
+		try {
+			const robot = {
+				id: robotId,
+			};
+			await axios.put(`/api/projects/assignments/${projectId}`, robot);
+			dispatch(unassignRobot(robotId));
+		} catch (err) {
+			console.log('Error', err);
+		}
+	};
+};
+
+export const completeProjectThunk = (id, bool) => {
+	return async dispatch => {
+		try {
+			await axios.put(`/api/projects/complete/${id}`, {
+				completed: bool,
+			});
+			dispatch(completeProject(id));
+		} catch (err) {
+			console.log('Error', err);
+		}
+	};
+};
+
 const initialState = {};
 
 //reducer
 export default (state = initialState, action) => {
 	switch (action.type) {
-		case GET_SINGLE_PROJECT:
+		case GET_SINGLE_PROJECT: {
 			return action.project;
+		}
+		case UNASSIGN_ROBOT: {
+			const newRobotArr = state.robots.filter(
+				bot => bot.id !== Number(action.id)
+			);
+			return {...state, robots: newRobotArr};
+		}
+		case COMPLETE_PROJECT: {
+			return {...state, completed: !state.completed};
+		}
 		default: {
 			return state;
 		}

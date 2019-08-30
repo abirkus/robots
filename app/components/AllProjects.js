@@ -22,32 +22,30 @@ class AllProjects extends Component {
 				<ul>
 					{projects.map(proj => (
 						<li key={proj.id}>
-							<Link to={`/projects/${proj.id}`} key={proj.id}>
-								<div>
+							<div>
+								<Link to={`/projects/${proj.id}`} key={proj.id}>
 									<span>{proj.title}</span>
-									<span>
-										<button
-											type="button"
-											onClick={id =>
-												this.handleClick(id)
-											}>
-											<img
-												id={proj.id}
-												src="http://www.clker.com/cliparts/b/5/2/d/1350385451825974658x-red-md.png"
-												height="20"
-												width="20"
-											/>
-										</button>
-									</span>
-								</div>
-								<ul>
-									<li>
-										{proj.deadline
-											? proj.deadline
-											: 'No deadline'}
-									</li>
-								</ul>
-							</Link>
+								</Link>
+								<span>
+									<button
+										type="button"
+										onClick={id => this.handleClick(id)}>
+										<img
+											id={proj.id}
+											src="http://www.clker.com/cliparts/b/5/2/d/1350385451825974658x-red-md.png"
+											height="20"
+											width="20"
+										/>
+									</button>
+								</span>
+							</div>
+							<ul>
+								<li>
+									{proj.deadline
+										? proj.deadline
+										: 'No deadline'}
+								</li>
+							</ul>
 						</li>
 					))}
 				</ul>

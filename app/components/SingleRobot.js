@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
-import {fetchSingleRobot} from '../redux/singlerobot';
+import {fetchSingleRobot, unassignProjectThunk} from '../redux/singlerobot';
 import UpdateRobot from './UpdateRobot.js';
 
 class SingleRobot extends Component {
@@ -14,7 +14,14 @@ class SingleRobot extends Component {
 		}
 	}
 
+	handleClick = evt => {
+		const robotId = this.props.robot.id;
+		const projectId = evt.target.id;
+		this.props.unassignProject(robotId, projectId);
+	};
+
 	render() {
+		console.log('PROPS', this.props);
 		const robot = this.props.robot;
 		return robot.id ? (
 			<div>
@@ -27,11 +34,21 @@ class SingleRobot extends Component {
 						{robot.projects[0] ? (
 							<ul>
 								{robot.projects.map(proj => (
-									<Link
-										to={`/projects/${proj.id}`}
-										key={proj.id}>
-										<li>{proj.title}</li>
-									</Link>
+									<li key={proj.id}>
+										<Link to={`/projects/${proj.id}`}>
+											<span>{proj.title}</span>
+										</Link>
+										<span>
+											<button
+												type="button"
+												id={proj.id}
+												onClick={evt => {
+													this.handleClick(evt);
+												}}>
+												Unassign
+											</button>
+										</span>
+									</li>
 								))}
 							</ul>
 						) : (
@@ -63,6 +80,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchSingleRobot: id => dispatch(fetchSingleRobot(id)),
+		unassignProject: (robotId, projectId) =>
+			dispatch(unassignProjectThunk(robotId, projectId)),
 	};
 };
 
