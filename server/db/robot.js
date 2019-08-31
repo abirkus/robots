@@ -6,7 +6,11 @@ const Robot = db.define('robot', {
 		type: Sequelize.STRING,
 		allowNull: false,
 	},
-	imageUrl: Sequelize.STRING,
+	imageUrl: {
+		type: Sequelize.STRING,
+		defaultValue:
+			'https://media.giphy.com/media/1BdJd24oEwvuSvXYb0/giphy.gif',
+	},
 	fuelType: {
 		type: Sequelize.STRING,
 		validate: {

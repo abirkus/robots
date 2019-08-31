@@ -21,7 +21,7 @@ class Root extends React.Component {
 	render() {
 		return (
 			<Router>
-				<div>
+				<div id="container">
 					<nav className="topnav">
 						<Link to="/">Home</Link>
 						<Link to="/robots">All Robots</Link>
@@ -31,7 +31,8 @@ class Root extends React.Component {
 						Welcome to StackBot Project Management: your robot
 						employees are awaiting assignments!
 					</h1>
-					<div>
+
+					<div id="root">
 						<Route exact path="/robots" component={AllRobots} />
 						<Route exact path="/projects" component={AllProjects} />
 						<Route

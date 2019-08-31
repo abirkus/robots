@@ -29,9 +29,9 @@ class SingleProject extends Component {
 	render() {
 		const project = this.props.project;
 		return project.id ? (
-			<div>
+			<div className="allItems">
 				<ul>
-					<div key={project.id}>
+					<div key={project.id} className="list">
 						<li>
 							<span>Title: </span>
 							{project.title}
@@ -88,8 +88,7 @@ class SingleProject extends Component {
 						</div>
 					</div>
 				</ul>
-				<div>
-					<h1>Update project</h1>
+				<div className="form">
 					<UpdateProject
 						params={this.props.match.params}
 						fetchSingleProject={this.props.fetchSingleProject}

@@ -21,14 +21,13 @@ class SingleRobot extends Component {
 	};
 
 	render() {
-		console.log('PROPS', this.props);
 		const robot = this.props.robot;
 		return robot.id ? (
-			<div>
-				<ul>
-					<div key={robot.id}>
+			<div className="allItems">
+				<div key={robot.id} className="list">
+					<ul>
+						<img src={robot.imageUrl} height="300" width="400" />
 						<li>{robot.name}</li>
-						<img src={robot.imageUrl} />
 						<li>{robot.fuelType}</li>
 						<li>{robot.fuelLevel}</li>
 						{robot.projects[0] ? (
@@ -54,15 +53,14 @@ class SingleRobot extends Component {
 						) : (
 							<li>No projects for this robot</li>
 						)}
-					</div>
-					<div>
-						<h1>Update robot</h1>
-						<UpdateRobot
-							params={this.props.match.params}
-							fetchSingleRobot={this.props.fetchSingleRobot}
-						/>
-					</div>
-				</ul>
+					</ul>
+				</div>
+				<div className="form">
+					<UpdateRobot
+						params={this.props.match.params}
+						fetchSingleRobot={this.props.fetchSingleRobot}
+					/>
+				</div>
 			</div>
 		) : (
 			<div />

@@ -17,47 +17,49 @@ class AllProjects extends Component {
 
 	render() {
 		const projects = this.props.projects;
-		return projects[0].id ? (
-			<div>
-				<ul>
-					{projects.map(proj => (
-						<li key={proj.id}>
-							<div>
-								<Link to={`/projects/${proj.id}`} key={proj.id}>
-									<span>{proj.title}</span>
-								</Link>
-								<span>
-									<button
-										type="button"
-										onClick={id => this.handleClick(id)}>
-										<img
-											id={proj.id}
-											src="http://www.clker.com/cliparts/b/5/2/d/1350385451825974658x-red-md.png"
-											height="20"
-											width="20"
-										/>
-									</button>
-								</span>
-							</div>
-							<ul>
-								<li>
-									{proj.deadline
-										? proj.deadline
-										: 'No deadline'}
-								</li>
-							</ul>
-						</li>
-					))}
-				</ul>
-				<div>
-					<h1>Add a new project</h1>
-					<AddProject />
+		return projects.length ? (
+			<div className="allItems">
+				<div className="list">
+					<ul>
+						{projects.map(proj => (
+							<li key={proj.id}>
+								<div>
+									<Link
+										to={`/projects/${proj.id}`}
+										key={proj.id}>
+										<span>{proj.title}</span>
+									</Link>
+									<span>
+										<button
+											type="button"
+											onClick={id =>
+												this.handleClick(id)
+											}>
+											<img
+												id={proj.id}
+												src="http://www.clker.com/cliparts/b/5/2/d/1350385451825974658x-red-md.png"
+												height="20"
+												width="20"
+											/>
+										</button>
+									</span>
+								</div>
+								<ul>
+									<li>
+										{proj.deadline
+											? proj.deadline
+											: 'No deadline'}
+									</li>
+								</ul>
+							</li>
+						))}
+					</ul>
 				</div>
+				<AddProject />
 			</div>
 		) : (
 			<div>
 				<div>No Projects</div>
-				<h1>Add a new project</h1>
 				<AddProject />
 			</div>
 		);

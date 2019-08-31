@@ -9,7 +9,7 @@ class UpdateRobot extends Component {
 		this.handleChange = this.handleChange.bind(this);
 		this.state = {
 			name: '',
-			fuelType: 'electric',
+			fuelType: '',
 			fuelLevel: '',
 			imageUrl: '',
 		};
@@ -22,56 +22,73 @@ class UpdateRobot extends Component {
 	}
 	handleSubmit(evt) {
 		evt.preventDefault();
-		this.props.update(this.props.params.robotId, this.state);
+		let obj = {};
+		if (this.state.name) {
+			obj.name = this.state.name;
+		}
+		if (this.state.fuelType) {
+			obj.fuelType = this.state.fuelType;
+		}
+		if (this.state.fuelLevel) {
+			obj.fuelLevel = this.state.fuelLevel;
+		}
+		if (this.state.imageUrl) {
+			obj.imageUrl = this.state.imageUrl;
+		}
+		this.props.update(this.props.params.robotId, obj);
 		this.setState({
 			name: '',
-			fuelType: 'electric',
+			fuelType: '',
 			fuelLevel: '',
 			imageUrl: '',
 		});
+		obj = {};
 		this.props.fetchSingleRobot(this.props.params.robotId);
 	}
 
 	render() {
 		return (
-			<form id="update-form" onSubmit={this.handleSubmit}>
-				<label htmlFor="name">Robot Name:</label>
-				<input
-					name="name"
-					type="text"
-					onChange={this.handleChange}
-					value={this.state.name}
-				/>
+			<div>
+				<h1>Update robot</h1>
+				<form onSubmit={this.handleSubmit}>
+					<label htmlFor="name">Robot Name:</label>
+					<input
+						name="name"
+						type="text"
+						onChange={this.handleChange}
+						value={this.state.name}
+					/>
 
-				<label htmlFor="fuelType">Fuel Type:</label>
-				<select
-					defaultValue="electric"
-					name="fuelType"
-					type="text"
-					onChange={this.handleChange}>
-					<option value="gas">gas</option>
-					<option value="diesel">diesel</option>
-					<option value="electric">electric</option>
-				</select>
+					<label htmlFor="fuelType">Fuel Type:</label>
+					<select
+						defaultValue="electric"
+						name="fuelType"
+						type="text"
+						onChange={this.handleChange}>
+						<option value="gas">gas</option>
+						<option value="diesel">diesel</option>
+						<option value="electric">electric</option>
+					</select>
 
-				<label htmlFor="fuelLevel">Fuel Level:</label>
-				<input
-					name="fuelLevel"
-					type="number"
-					onChange={this.handleChange}
-					value={this.state.fuelLevel}
-				/>
+					<label htmlFor="fuelLevel">Fuel Level:</label>
+					<input
+						name="fuelLevel"
+						type="number"
+						onChange={this.handleChange}
+						value={this.state.fuelLevel}
+					/>
 
-				<label htmlFor="imageUrl">Image URL:</label>
-				<input
-					name="imageUrl"
-					type="text"
-					onChange={this.handleChange}
-					value={this.state.imageUrl}
-				/>
+					<label htmlFor="imageUrl">Image URL:</label>
+					<input
+						name="imageUrl"
+						type="text"
+						onChange={this.handleChange}
+						value={this.state.imageUrl}
+					/>
 
-				<button type="submit">Update</button>
-			</form>
+					<button type="submit">Update</button>
+				</form>
+			</div>
 		);
 	}
 }
