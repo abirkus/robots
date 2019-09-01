@@ -3,14 +3,26 @@ const {db, Project, Robot} = require('./server/db');
 const anHourFromNow = new Date(Date.now() + 60 * (60 * 1000)).toString();
 
 const coolBots = [
-	{name: 'Billy', imageUrl: 'google.com', fuelType: 'gas', fuelLevel: '50'},
-	{name: 'Johnny', imageUrl: 'go.com', fuelType: 'electric', fuelLevel: '90'},
-	{name: 'Joel', imageUrl: 'google.com', fuelType: 'diesel', fuelLevel: '20'},
 	{
-		name: 'Steve',
-		imageUrl: 'google.com',
+		name: 'Terminator',
+		imageUrl: 'https://media.giphy.com/media/gjx7kFmMm2ekfU7fYP/giphy.gif',
+		fuelType: 'gas',
+		fuelLevel: '50',
+	},
+	{
+		name: 'Robocop',
+		imageUrl: 'https://media.giphy.com/media/4EFuzRi9HpbW/giphy.gif',
+		fuelType: 'electric',
+		fuelLevel: '90',
+	},
+	{
+		name: 'R2-D2',
+		imageUrl: 'https://media.giphy.com/media/3ornk6WzdmnbTIh8Gs/giphy.gif',
 		fuelType: 'diesel',
-		fuelLevel: '85',
+		fuelLevel: '20',
+	},
+	{
+		name: 'Sophia',
 	},
 ];
 

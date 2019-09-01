@@ -125,5 +125,3 @@ export default connect(
 	null,
 	mapDispatchToProps
 )(UpdateProject);
-
-// <button type='submit' disabled={!props.robotName || !props.fuelType}>

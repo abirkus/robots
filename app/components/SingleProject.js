@@ -30,8 +30,8 @@ class SingleProject extends Component {
 		const project = this.props.project;
 		return project.id ? (
 			<div className="allItems">
-				<ul>
-					<div key={project.id} className="list">
+				<div key={project.id} className="list">
+					<ul>
 						<li>
 							<span>Title: </span>
 							{project.title}
@@ -53,7 +53,7 @@ class SingleProject extends Component {
 							{project.description}
 						</li>
 						{project.robots[0] ? (
-							<ul>
+							<ul className="associations">
 								{project.robots.map(bot => (
 									<li key={bot.id}>
 										<Link to={`/robots/${bot.id}`}>
@@ -77,6 +77,7 @@ class SingleProject extends Component {
 							<li>No robots for this project</li>
 						)}
 						<div>
+							<br />
 							<button
 								type="button"
 								id={project.id}
@@ -86,8 +87,9 @@ class SingleProject extends Component {
 								Complete
 							</button>
 						</div>
-					</div>
-				</ul>
+					</ul>
+				</div>
+
 				<div className="form">
 					<UpdateProject
 						params={this.props.match.params}
@@ -101,7 +103,6 @@ class SingleProject extends Component {
 	}
 }
 
-//here we look at state in redux and only grab one array - singleproject
 const mapStateToProps = state => {
 	return {
 		project: state.singleProject,

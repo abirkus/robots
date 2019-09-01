@@ -31,7 +31,7 @@ class SingleRobot extends Component {
 						<li>{robot.fuelType}</li>
 						<li>{robot.fuelLevel}</li>
 						{robot.projects[0] ? (
-							<ul>
+							<ul className="associations">
 								{robot.projects.map(proj => (
 									<li key={proj.id}>
 										<Link to={`/projects/${proj.id}`}>
@@ -68,7 +68,6 @@ class SingleRobot extends Component {
 	}
 }
 
-//here we look at state in redux and only grab one array - singleRobot
 const mapStateToProps = state => {
 	return {
 		robot: state.singleRobot,

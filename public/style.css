@@ -3,38 +3,69 @@
  * but feel free to change me to your heart's content!
  */
 
+@keyframes bounceIn {
+	0% {
+		transform: scale(0.1);
+		opacity: 0;
+	}
+	60% {
+		transform: scale(1.2);
+		opacity: 1;
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+
 #container {
 	height: 100%;
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	/* align-content: center; */
+	justify-content: space-between;
 }
+
+.topnav {
+	display: flex;
+	justify-content: space-between;
+	align-self: center;
+	width: 30%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
 .topnav a {
-	color: #f2f2f2;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	text-align: center;
 	padding: 14px 16px;
 	text-decoration: none;
-	font-size: 17px;
-	background-color: #333;
-	overflow: hidden;
-}
-#container > .topnav {
-	align-self: center;
 }
 
 .topnav a:hover {
-	background-color: #ddd;
+	background-color: rgb(100, 216, 100);
 	color: black;
 }
-h1 {
-	align-self: center;
-}
+
 #root {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
+	align-items: center;
+}
+.greeting {
+	flex-direction: column;
+	display: flex;
+	height: 400px;
+	width: 300px;
+	justify-content: center;
+	animation-duration: 2s;
+	animation-name: bounceIn;
 }
 
 .allItems {
@@ -44,12 +75,15 @@ h1 {
 }
 
 .list {
+	display: flex;
 	justify-content: center;
 	align-self: center;
 	flex-grow: 2;
 	margin: 1em;
 	order: 1;
-	width: 500px;
+	width: 25%;
+	animation-duration: 2s;
+	animation-name: bounceIn;
 }
 
 .form {
@@ -59,17 +93,103 @@ h1 {
 	flex-wrap: wrap;
 	flex-grow: 2;
 	order: 2;
-	width: 500px;
+	width: 25%;
+	animation-duration: 2s;
+	animation-name: bounceIn;
 }
 
 body {
-	background: linear-gradient(#ffffff, #c0c0c0);
-	height: 100vh;
+	background-image: url('https://wallpapercave.com/wp/wp2042096.jpg');
+	background-color: #cccccc;
+	background-repeat: no-repeat;
+	background-size: cover;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-/* Style the links inside the navigation bar */
+a {
+	font-size: 3rem;
+	font-style: bold;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
 
-/* Change the color of links on hover */
+li {
+	font-size: 3rem;
+	font-style: bold;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+.associations a {
+	font-size: 2rem;
+	font-style: bold;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+.associations button {
+	font-size: 1rem;
+}
+
+.redx {
+	list-style: none;
+	padding-left: 0;
+}
+
+.redx li {
+	position: relative;
+	padding-left: 20px;
+}
+
+.redx li:before {
+	content: '';
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	background-image: url('http://www.clker.com/cliparts/b/5/2/d/1350385451825974658x-red-md.png');
+	background-size: cover;
+	background-position: center;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+.preview {
+	position: relative;
+	z-index: 0;
+}
+
+.preview:hover {
+	background-color: transparent;
+	z-index: 50;
+}
+
+.preview span {
+	/*CSS for enlarged image*/
+	position: absolute;
+	background-color: lightyellow;
+	padding: 2px;
+	left: -1000px;
+	border: 1px solid black;
+	border-radius: 80%;
+	visibility: hidden;
+	color: black;
+	text-decoration: none;
+}
+
+.preview span img {
+	/*CSS for enlarged image*/
+	border-width: 0;
+	padding: 2px;
+	border-radius: 80%;
+}
+
+.preview:hover span {
+	/*CSS for enlarged image on hover*/
+	visibility: visible;
+	top: 0;
+	left: -600px; /*position where enlarged image should offset horizontally */
+}
 
 button {
 	padding: 0 0;
@@ -78,6 +198,10 @@ button {
 	transition: all 1s ease;
 	outline: none;
 	letter-spacing: 0.1em;
+}
+
+span {
+	margin: 10px;
 }
 
 /* form */
@@ -93,16 +217,20 @@ form select {
 	width: 100%;
 }
 
-form button {
+button {
 	color: white;
 	background-color: #59a9e9;
+	border-radius: 8px;
+	border: 2px solid black;
+	transition-duration: 0s;
 }
 
-form button:hover {
-	background-color: #59a9c2;
+button:hover {
+	background-color: white; /* Green */
+	color: rgb(0, 183, 255);
 }
 
-form button:disabled {
+button:disabled {
 	background-color: #ccc;
 }
 

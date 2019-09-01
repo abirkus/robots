@@ -12,7 +12,9 @@ class AllProjects extends Component {
 
 	handleClick = evt => {
 		evt.preventDefault();
-		this.props.remove(evt.target.id);
+		if (evt.target.id) {
+			this.props.remove(evt.target.id);
+		}
 	};
 
 	render() {
@@ -20,37 +22,22 @@ class AllProjects extends Component {
 		return projects.length ? (
 			<div className="allItems">
 				<div className="list">
-					<ul>
+					<ul className="redx">
 						{projects.map(proj => (
-							<li key={proj.id}>
+							<li
+								key={proj.id}
+								id={proj.id}
+								type="button"
+								onClick={id => this.handleClick(id)}>
 								<div>
-									<Link
-										to={`/projects/${proj.id}`}
-										key={proj.id}>
-										<span>{proj.title}</span>
-									</Link>
 									<span>
-										<button
-											type="button"
-											onClick={id =>
-												this.handleClick(id)
-											}>
-											<img
-												id={proj.id}
-												src="http://www.clker.com/cliparts/b/5/2/d/1350385451825974658x-red-md.png"
-												height="20"
-												width="20"
-											/>
-										</button>
+										<Link
+											to={`/projects/${proj.id}`}
+											key={proj.id}>
+											{proj.title}
+										</Link>
 									</span>
 								</div>
-								<ul>
-									<li>
-										{proj.deadline
-											? proj.deadline
-											: 'No deadline'}
-									</li>
-								</ul>
 							</li>
 						))}
 					</ul>

@@ -7,6 +7,7 @@ import SingleProject from './SingleProject';
 import {connect} from 'react-redux';
 import {fetchRobots} from '../redux/robots';
 import {fetchProjects} from '../redux/projects';
+import Greeting from './Greeting';
 
 class Root extends React.Component {
 	componentDidMount() {
@@ -27,10 +28,6 @@ class Root extends React.Component {
 						<Link to="/robots">All Robots</Link>
 						<Link to="/projects">All Projects</Link>
 					</nav>
-					<h1>
-						Welcome to StackBot Project Management: your robot
-						employees are awaiting assignments!
-					</h1>
 
 					<div id="root">
 						<Route exact path="/robots" component={AllRobots} />
@@ -43,6 +40,7 @@ class Root extends React.Component {
 							path="/projects/:projectId"
 							component={SingleProject}
 						/>
+						<Route exact path="/" component={Greeting} />
 					</div>
 				</div>
 			</Router>
