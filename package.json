@@ -1,5 +1,5 @@
 {
-	"name": "final-project",
+	"name": "robots",
 	"version": "0.0.1",
 	"description": "A review time project",
 	"main": "index.js",
@@ -51,6 +51,7 @@
 		"eslint-plugin-react": "^7.8.2",
 		"jsdom": "11.12.0",
 		"jsdom-global": "3.0.2",
+		"minimist": "^1.2.5",
 		"mocha": "^5.2.0",
 		"nodemon": "^1.19.1",
 		"redux-devtools-extension": "^2.13.8",
