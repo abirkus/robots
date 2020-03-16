@@ -17,7 +17,7 @@
 		"skeleton"
 	],
 	"dependencies": {
-		"axios": "^0.18.0",
+		"axios": "^0.18.1",
 		"body-parser": "^1.18.2",
 		"chalk": "^2.4.1",
 		"express": "^4.14.0",
@@ -30,7 +30,7 @@
 		"redux": "^4.0.0",
 		"redux-logger": "^3.0.6",
 		"redux-thunk": "^2.2.0",
-		"sequelize": "^4.37.8"
+		"sequelize": "^4.44.4"
 	},
 	"devDependencies": {
 		"axios-mock-adapter": "^1.15.0",
