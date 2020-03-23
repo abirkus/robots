@@ -1,27 +1,25 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, {useEffect} from 'react';
+import { useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import {fetchSingleRobot, unassignProjectThunk} from '../redux/singlerobot';
 import UpdateRobot from './UpdateRobot.js';
 
-class SingleRobot extends Component {
-	componentDidMount() {
-		try {
-			const robotId = this.props.match.params.robotId;
-			this.props.fetchSingleRobot(robotId);
-		} catch (error) {
-			console.error(error);
-		}
-	}
+function SingleRobot(props) {
 
-	handleClick = evt => {
-		const robotId = this.props.robot.id;
-		const projectId = evt.target.id;
-		this.props.unassignProject(robotId, projectId);
+	const dispatch = useDispatch()
+	const robot = useSelector( state => state.robot) || {}
+	useEffect(() => {
+		try {
+			dispatch(fetchSingleRobot(props.match.params.robotId))
+		} catch (e) {
+			console.error(e.message)
+		}
+	}, [robot.id])
+
+	const handleClick = evt => {
+		dispatch(unassignProjectThunk(robot.id, evt.target.id))
 	};
 
-	render() {
-		const robot = this.props.robot;
 		return robot.id ? (
 			<div className="allItems">
 				<div key={robot.id} className="list">
@@ -42,7 +40,7 @@ class SingleRobot extends Component {
 												type="button"
 												id={proj.id}
 												onClick={evt => {
-													this.handleClick(evt);
+													handleClick(evt);
 												}}>
 												Unassign
 											</button>
@@ -57,32 +55,34 @@ class SingleRobot extends Component {
 				</div>
 				<div className="form">
 					<UpdateRobot
-						params={this.props.match.params}
-						fetchSingleRobot={this.props.fetchSingleRobot}
+						params={props.match.params}
+						fetchSingleRobot={props.fetchSingleRobot}
 					/>
 				</div>
 			</div>
 		) : (
 			<div />
 		);
-	}
+	
 }
 
-const mapStateToProps = state => {
-	return {
-		robot: state.singleRobot,
-	};
-};
+export default SingleRobot
 
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchSingleRobot: id => dispatch(fetchSingleRobot(id)),
-		unassignProject: (robotId, projectId) =>
-			dispatch(unassignProjectThunk(robotId, projectId)),
-	};
-};
+// const mapStateToProps = state => {
+// 	return {
+// 		robot: state.singleRobot,
+// 	};
+// };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(SingleRobot);
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		fetchSingleRobot: id => dispatch(fetchSingleRobot(id)),
+// 		unassignProject: (robotId, projectId) =>
+// 			dispatch(unassignProjectThunk(robotId, projectId)),
+// 	};
+// };
+
+// export default connect(
+// 	mapStateToProps,
+// 	mapDispatchToProps
+// )(SingleRobot);

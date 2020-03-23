@@ -1,24 +1,30 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import AddProject from './AddProject.js';
-import {removeProjectThunk} from '../redux/projects.js';
+import {removeProjectThunk, fetchProjectsThunk, clearProjectsThunk} from '../redux/projects.js';
 
-class AllProjects extends Component {
-	constructor(props) {
-		super(props);
-		this.handleClick = this.handleClick.bind(this);
-	}
+function AllProjects() {
 
-	handleClick = evt => {
+	const dispatch = useDispatch()
+	const projects = useSelector( state => state.projects)
+
+	useEffect(() => {
+		try {
+			dispatch(fetchProjectsThunk())
+		} catch (e) {
+			console.error(e.message)
+		}
+		return () => { dispatch(clearProjectsThunk()) }
+	}, projects)
+
+	const handleClick = evt => {
 		evt.preventDefault();
 		if (evt.target.id) {
-			this.props.remove(evt.target.id);
+			dispatch(removeProjectThunk(evt.target.id))
 		}
 	};
 
-	render() {
-		const projects = this.props.projects;
 		return projects.length ? (
 			<div className="allItems">
 				<div className="list">
@@ -28,7 +34,7 @@ class AllProjects extends Component {
 								key={proj.id}
 								id={proj.id}
 								type="button"
-								onClick={id => this.handleClick(id)}>
+								onClick={id => handleClick(id)}>
 								<div>
 									<span>
 										<Link
@@ -46,26 +52,30 @@ class AllProjects extends Component {
 			</div>
 		) : (
 			<div>
-				<div>No Projects</div>
+				<div>No000 Projects</div>
 				<AddProject />
 			</div>
-		);
-	}
+		)
+
 }
 
-const mapStateToProps = state => {
-	return {
-		projects: state.projects,
-	};
-};
+export default AllProjects;
 
-const mapDispatchToProps = dispatch => {
-	return {
-		remove: id => dispatch(removeProjectThunk(id)),
-	};
-};
+// const mapStateToProps = state => {
+// 	return {
+// 		projects: state.projects,
+// 	};
+// };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(AllProjects);
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		fetchProjects: () => dispatch(fetchProjectsThunk()),
+// 		remove: id => dispatch(removeProjectThunk(id)),
+// 		clearProjects: () => dispatch(clearProjectsThunk())
+// 	};
+// };
+
+// export default connect(
+// 	mapStateToProps,
+// 	mapDispatchToProps
+// )(AllProjects);

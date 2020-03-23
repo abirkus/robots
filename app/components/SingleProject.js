@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect } from 'react';
+import { useSelector, useDispatch} from 'react-redux';
 import {
 	fetchSingleProject,
 	unassignRobotThunk,
@@ -8,26 +8,27 @@ import {
 import {Link} from 'react-router-dom';
 import UpdateProject from './UpdateProject.js';
 
-class SingleProject extends Component {
-	componentDidMount() {
+function SingleProject (props) {
+
+	const dispatch = useDispatch()
+	const project = useSelector( state => state.project) || {}
+
+	useEffect(() => {
 		try {
-			const projectId = this.props.match.params.projectId;
-			this.props.fetchSingleProject(projectId);
-		} catch (error) {
-			console.error(error);
+			dispatch(fetchSingleProject(props.match.params.projectId))
+		} catch (e) {
+			console.error(e.message)
 		}
-	}
-	handleClick = evt => {
-		const projectId = this.props.project.id;
-		const robotId = evt.target.id;
-		this.props.unassignRobot(projectId, robotId);
+	}, [project.id])
+
+	const handleClick = evt => {
+		dispatch(unassignRobotThunk(project.id, evt.target.id))
 	};
-	handleComplete = evt => {
-		const completed = !this.props.project.completed;
-		this.props.completeProject(evt.target.id, completed);
+	const handleComplete = evt => {
+		const completed = !props.project.completed;
+		dispatch(completeProjectThunk(evt.target.id, completed))
 	};
-	render() {
-		const project = this.props.project;
+
 		return project.id ? (
 			<div className="allItems">
 				<div key={project.id} className="list">
@@ -65,7 +66,7 @@ class SingleProject extends Component {
 												type="button"
 												id={bot.id}
 												onClick={evt => {
-													this.handleClick(evt);
+													handleClick(evt);
 												}}>
 												Unassign
 											</button>
@@ -82,7 +83,7 @@ class SingleProject extends Component {
 								type="button"
 								id={project.id}
 								onClick={evt => {
-									this.handleComplete(evt);
+									handleComplete(evt);
 								}}>
 								Complete
 							</button>
@@ -92,33 +93,33 @@ class SingleProject extends Component {
 
 				<div className="form">
 					<UpdateProject
-						params={this.props.match.params}
-						fetchSingleProject={this.props.fetchSingleProject}
+						params={props.match.params}
+						fetchSingleProject={props.fetchSingleProject}
 					/>
 				</div>
 			</div>
 		) : (
 			<div />
-		);
-	}
+		);	
 }
 
-const mapStateToProps = state => {
-	return {
-		project: state.singleProject,
-	};
-};
+export default SingleProject;
+// const mapStateToProps = state => {
+// 	return {
+// 		project: state.singleProject,
+// 	};
+// };
 
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchSingleProject: id => dispatch(fetchSingleProject(id)),
-		unassignRobot: (projectId, robotId) =>
-			dispatch(unassignRobotThunk(projectId, robotId)),
-		completeProject: (id, bool) => dispatch(completeProjectThunk(id, bool)),
-	};
-};
+// const mapDispatchToProps = dispatch => {
+// 	return {
+// 		fetchSingleProject: id => dispatch(fetchSingleProject(id)),
+// 		unassignRobot: (projectId, robotId) =>
+// 			dispatch(unassignRobotThunk(projectId, robotId)),
+// 		completeProject: (id, bool) => dispatch(completeProjectThunk(id, bool)),
+// 	};
+// };
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(SingleProject);
+// export default connect(
+// 	mapStateToProps,
+// 	mapDispatchToProps
+// )(SingleProject);

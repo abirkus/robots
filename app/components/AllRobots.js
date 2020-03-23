@@ -1,26 +1,31 @@
-import React, { useState, useEffect } from 'react';
-import {connect} from 'react-redux';
+import React, { useEffect, useCallback } from 'react';
+import { useSelector, useDispatch} from 'react-redux';
+import { createSelector } from 'reselect';
 import {Link} from 'react-router-dom';
 import AddRobot from './AddRobot.js';
-import {removeRobotThunk} from '../redux/robots.js';
-import {fetchRobots} from '../redux/robots';
-
-function AllRobots(props) {
-
-		console.log("props ---", props)
+import {removeRobotThunk, fetchRobotsThunk, clearRobotsThunk} from '../redux/robots.js';
 
 
+function AllRobots() {
+
+		const dispatch = useDispatch()
+
+		const robots = useSelector( state => state.robots)
 		useEffect(() => {
-			console.log("using effect - robots length", props.robots.length)
-			props.fetchRobots()
-		}, [props.robots.length])
+			try {
+				dispatch(fetchRobotsThunk())
+			} catch (e) {
+				console.error(e.message)
+			}
+			return () => { dispatch(clearRobotsThunk()) }
+		}, robots)
 
-		const robots = props.robots || []
 
+		console.log('robots from selector', robots)
 		const handleClick = evt => {
 			evt.preventDefault();
 			if (evt.target.id) {
-				props.remove(evt.target.id);
+				dispatch(removeRobotThunk(evt.target.id))
 			}
 		};
 
@@ -57,21 +62,4 @@ function AllRobots(props) {
 		);
 }
 
-
-const mapStateToProps = state => {
-	return {
-		robots: state.robots,
-	};
-};
-
-const mapDispatchToProps = dispatch => {
-	return {
-		fetchRobots: () => dispatch(fetchRobots()),
-		remove: id => dispatch(removeRobotThunk(id)),
-	};
-};
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(AllRobots);
+export default AllRobots;

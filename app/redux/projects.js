@@ -4,8 +4,7 @@ import axios from 'axios';
 export const SET_PROJECTS = 'SET_PROJECTS';
 export const ADD_PROJECT = 'ADD_PROJECT';
 export const REMOVE_PROJECT = 'REMOVE_PROJECT';
-export const UPDATE_PROJECT = 'UPDATE_PROJECT';
-
+export const CLEAR_PROJECTS = 'CLEAR_PROJECTS'
 //action creator
 export const setProjects = projects => {
 	return {
@@ -28,16 +27,17 @@ export const removeProject = id => {
 	};
 };
 
-export const updateProject = project => {
+export const clearProjects = projects => {
 	return {
-		type: UPDATE_PROJECT,
-		project,
+		type: CLEAR_PROJECTS,
+		projects,
 	};
 };
 
+
 //thunk creator
 
-export const fetchProjects = () => {
+export const fetchProjectsThunk = () => {
 	return async dispatch => {
 		try {
 			const {data} = await axios.get('/api/projects');
@@ -70,16 +70,14 @@ export const removeProjectThunk = id => {
 	};
 };
 
-export const updateProjectThunk = (id, project) => {
-	return async dispatch => {
-		try {
-			const {data} = await axios.put(`/api/projects/${id}`, project);
-			dispatch(updateProject(data));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
+export const clearProjectsThunk = () => dispatch => {
+	try {
+		dispatch(clearProjects([]));
+	} catch (err) {
+		console.log('Error', err);
+	}
 };
+
 
 const initialState = [];
 
@@ -95,13 +93,8 @@ export default (state = initialState, action) => {
 		case REMOVE_PROJECT: {
 			return state.filter(proj => proj.id !== Number(action.id));
 		}
-		case UPDATE_PROJECT: {
-			return state.map(proj => {
-				if (proj.id === Number(action.project.id)) {
-					proj = action.project;
-				}
-				return proj;
-			});
+		case CLEAR_PROJECTS: {
+			return action.projects;
 		}
 		default: {
 			return state;

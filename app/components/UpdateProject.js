@@ -1,75 +1,62 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import {connect} from 'react-redux';
-import {updateProjectThunk} from '../redux/projects.js';
+import {updateProjectThunk} from '../redux/singleproject.js';
 
-class UpdateProject extends Component {
-	constructor(props) {
-		super(props);
-		this.handleSubmit = this.handleSubmit.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-		this.state = {
-			title: '',
-			deadline: '',
-			priority: '',
-			completed: '',
-			description: '',
-		};
+function UpdateProject(props) {
+	const [title, setTitle] = useState('')
+	const [deadline, setDeadline] = useState('')
+	const [priority, setPriority] = useState('')
+	const [completed, setCompleted] = useState(false)
+	const [description, setDescription] = useState('')
+
+	const handleTitleChange = (evt) => {
+		setTitle(evt.target.value)
 	}
 
-	handleChange(evt) {
-		this.setState({
-			[evt.target.name]: evt.target.value,
-		});
+	const handleDeadlineChange = (evt) => {
+		setDeadline(evt.target.value)
 	}
-	handleSubmit(evt) {
+
+	const handlePriorityChange = (evt) => {
+		setPriority(evt.target.value)
+	}
+
+	const handleCompletedChange = (evt) => {
+		setCompleted(evt.target.value)
+	}
+
+	const handleDescriptionChange = (evt) => {
+		setDescription(evt.target.value)
+	}
+
+	const handleSubmit = evt => {
 		evt.preventDefault();
-		let obj = {};
-		if (this.state.title) {
-			obj.title = this.state.title;
-		}
-		if (this.state.deadline) {
-			obj.deadline = this.state.deadline;
-		}
-		if (this.state.priority) {
-			obj.priority = this.state.priority;
-		}
-		if (this.state.completed) {
-			obj.completed = this.state.completed;
-		}
-		if (this.state.description) {
-			obj.description = this.state.description;
-		}
-		this.props.update(this.props.params.projectId, obj);
-		this.setState({
-			title: '',
-			deadline: '',
-			priority: '',
-			completed: '',
-			description: '',
-		});
-		obj = {};
-		this.props.fetchSingleProject(this.props.params.projectId);
+		props.update({title, deadline, priority, completed, description})
+		setTitle('')
+		setDeadline('')
+		setPriority('')
+		setCompleted(false)
+		setDescription('')
 	}
 
-	render() {
 		return (
 			<div>
 				<h1>Update project</h1>
-				<form onSubmit={this.handleSubmit}>
+				<form onSubmit={handleSubmit}>
 					<label htmlFor="title">Project Title:</label>
 					<input
 						name="title"
 						type="text"
-						onChange={this.handleChange}
-						value={this.state.title}
+						onChange={handleTitleChange}
+						value={title}
 					/>
 
 					<label htmlFor="deadline">Deadline:</label>
 					<input
 						name="deadline"
 						type="date"
-						onChange={this.handleChange}
-						value={this.state.deadline}
+						onChange={handleDeadlineChange}
+						value={deadline}
 					/>
 
 					<label htmlFor="priority">Priority:</label>
@@ -77,7 +64,7 @@ class UpdateProject extends Component {
 						defaultValue="none"
 						name="priority"
 						type="number"
-						onChange={this.handleChange}>
+						onChange={handlePriorityChange}>
 						<option value="none" />
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -96,7 +83,7 @@ class UpdateProject extends Component {
 						defaultValue="false"
 						name="completed"
 						type="text"
-						onChange={this.handleChange}>
+						onChange={handleCompletedChange}>
 						<option value="true">Yes</option>
 						<option value="false">No</option>
 					</select>
@@ -105,15 +92,14 @@ class UpdateProject extends Component {
 					<input
 						name="description"
 						type="text"
-						onChange={this.handleChange}
-						value={this.state.description}
+						onChange={handleDescriptionChange}
+						value={description}
 					/>
 
 					<button type="submit">Submit</button>
 				</form>
 			</div>
 		);
-	}
 }
 
 const mapDispatchToProps = dispatch => {

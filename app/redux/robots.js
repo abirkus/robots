@@ -4,7 +4,7 @@ import axios from 'axios';
 export const SET_ROBOTS = 'SET_ROBOTS';
 export const ADD_ROBOT = 'ADD_ROBOT';
 export const REMOVE_ROBOT = 'REMOVE_ROBOT';
-export const UPDATE_ROBOT = 'UPDATE_ROBOT';
+export const CLEAR_ROBOTS = 'CLEAR_ROBOTS';
 
 //action creator
 export const setRobots = robots => {
@@ -28,15 +28,16 @@ export const removeRobot = id => {
 	};
 };
 
-export const updateRobot = robot => {
+export const clearRobots = robots => {
 	return {
-		type: UPDATE_ROBOT,
-		robot,
+		type: CLEAR_ROBOTS,
+		robots
 	};
 };
+
 //thunk creators
 
-export const fetchRobots = () => {
+export const fetchRobotsThunk = () => {
 	return async dispatch => {
 		try {
 			const {data} = await axios.get('/api/robots');
@@ -69,16 +70,15 @@ export const removeRobotThunk = id => {
 	};
 };
 
-export const updateRobotThunk = (id, robot) => {
-	return async dispatch => {
-		try {
-			const {data} = await axios.put(`/api/robots/${id}`, robot);
-			dispatch(updateRobot(data));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
-};
+
+export const clearRobotsThunk = () => dispatch => {
+	try {
+		dispatch(clearRobots([]))
+	} catch (err) {
+		console.error(err)
+	}
+}
+
 
 const initialState = [];
 
@@ -94,13 +94,8 @@ export default (state = initialState, action) => {
 		case REMOVE_ROBOT: {
 			return state.filter(bot => bot.id !== Number(action.id));
 		}
-		case UPDATE_ROBOT: {
-			return state.map(bot => {
-				if (bot.id === Number(action.robot.id)) {
-					bot = action.robot;
-				}
-				return bot;
-			});
+		case CLEAR_ROBOTS: {
+			return action.robots
 		}
 		default: {
 			return state;

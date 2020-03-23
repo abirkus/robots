@@ -1,9 +1,9 @@
-import React, { useState, useEffect} from 'react';
-import {connect} from 'react-redux';
+import React, { useState} from 'react';
 import {addRobotThunk} from '../redux/robots.js';
+import { useDispatch} from 'react-redux';
 
-
-function AddRobot(props) {
+function AddRobot() {
+	const dispatch = useDispatch()
 	const [name, setName] = useState('')
 	const [fuelType, setFuelType] = useState('')
 	const [fuelLevel, setFuelLevel] = useState('')
@@ -29,11 +29,15 @@ function AddRobot(props) {
 
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
-		props.post({name, fuelType, fuelLevel, imageUrl});
-		setName('')
-		setFuelLevel('')
-		setFuelType('')
-		setImage('')
+		try {
+			dispatch(addRobotThunk({name, fuelType, fuelLevel, imageUrl}))
+			setName('')
+			setFuelLevel('')
+			setFuelType('')
+			setImage('')
+		} catch (e) {
+			console.error(e.message)
+		}
 	}
 
 	return (
@@ -61,7 +65,9 @@ function AddRobot(props) {
 				<select
 					name="fuelType"
 					type="text"
+					defaultValue="---"
 					onChange={handleFuelTypeChange}>
+					<option value="---">---</option>
 					<option value="gas">gas</option>
 					<option value="diesel">diesel</option>
 					<option value="electric">electric</option>
@@ -91,12 +97,4 @@ function AddRobot(props) {
 	);
 	}
 
-const mapDispatchToProps = dispatch => {
-	return {
-		post: obj => dispatch(addRobotThunk(obj)),
-	};
-};
-export default connect(
-	null,
-	mapDispatchToProps
-)(AddRobot);
+export default AddRobot
