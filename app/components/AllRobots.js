@@ -1,27 +1,26 @@
 import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { createSelector } from 'reselect';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import AddRobot from './AddRobot.js';
 import {removeRobotThunk, fetchRobotsThunk, clearRobotsThunk} from '../redux/robots.js';
 
 
-function AllRobots() {
-
+function AllRobots(props) {
 		const dispatch = useDispatch()
-
 		const robots = useSelector( state => state.robots)
 		useEffect(() => {
 			try {
-				dispatch(fetchRobotsThunk())
+				//dispatch(fetchRobotsThunk())
+				dispatch({ type: "FETCH_BOTS", value: 0})
 			} catch (e) {
 				console.error(e.message)
 			}
-			return () => { dispatch(clearRobotsThunk()) }
-		}, robots)
+			//we don't want to clear the redux state for this component but we can
+			//using the return message below
+			//return () => {dispatch(clearRobotsThunk())}
+		}, [props.match.path])
 
-
-		console.log('robots from selector', robots)
 		const handleClick = evt => {
 			evt.preventDefault();
 			if (evt.target.id) {

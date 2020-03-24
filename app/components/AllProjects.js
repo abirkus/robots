@@ -4,19 +4,19 @@ import {Link} from 'react-router-dom';
 import AddProject from './AddProject.js';
 import {removeProjectThunk, fetchProjectsThunk, clearProjectsThunk} from '../redux/projects.js';
 
-function AllProjects() {
-
+function AllProjects(props) {
 	const dispatch = useDispatch()
 	const projects = useSelector( state => state.projects)
-
 	useEffect(() => {
 		try {
 			dispatch(fetchProjectsThunk())
 		} catch (e) {
 			console.error(e.message)
 		}
-		return () => { dispatch(clearProjectsThunk()) }
-	}, projects)
+		//we don't want to clear the redux state for this component but we can
+		//using the return message below
+		//return () => { dispatch(clearProjectsThunk()) }
+	}, [props.match.path])
 
 	const handleClick = evt => {
 		evt.preventDefault();

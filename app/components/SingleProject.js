@@ -4,25 +4,27 @@ import {
 	fetchSingleProject,
 	unassignRobotThunk,
 	completeProjectThunk,
+	clearProjectThunk
 } from '../redux/singleproject';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import UpdateProject from './UpdateProject.js';
 
 function SingleProject (props) {
-
+	const {projectId} = useParams()
 	const dispatch = useDispatch()
-	const project = useSelector( state => state.project) || {}
+	const project = useSelector( state => state.singleProject)
 
 	useEffect(() => {
 		try {
-			dispatch(fetchSingleProject(props.match.params.projectId))
+			dispatch(fetchSingleProject(projectId))
 		} catch (e) {
 			console.error(e.message)
 		}
-	}, [project.id])
+		return () => { dispatch(clearProjectThunk())}
+	}, [projectId])
 
 	const handleClick = evt => {
-		dispatch(unassignRobotThunk(project.id, evt.target.id))
+		dispatch(unassignRobotThunk(projectId, evt.target.id))
 	};
 	const handleComplete = evt => {
 		const completed = !props.project.completed;

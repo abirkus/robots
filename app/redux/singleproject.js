@@ -5,6 +5,7 @@ export const GET_SINGLE_PROJECT = 'GET_SINGLE_PROJECT';
 export const UNASSIGN_ROBOT = 'UNASSIGN_ROBOT';
 export const COMPLETE_PROJECT = 'COMPLETE_PROJECT';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
+export const CLEAR_PROJECT = 'CLEAR_PROJECT';
 
 //action creator
 export const getSingleProject = project => {
@@ -31,6 +32,13 @@ export const completeProject = id => {
 export const updateProject = project => {
 	return {
 		type: UPDATE_PROJECT,
+		project,
+	};
+};
+
+export const clearProject = project => {
+	return {
+		type: CLEAR_PROJECT,
 		project,
 	};
 };
@@ -85,6 +93,17 @@ export const updateProjectThunk = (id, project) => {
 	};
 };
 
+export const clearProjectThunk = () => {
+	return dispatch => {
+		try {
+			dispatch(clearProject({}));
+		} catch (err) {
+			console.log('Error', err);
+		}
+	};
+};
+
+
 const initialState = {};
 
 //reducer
@@ -103,6 +122,9 @@ export default (state = initialState, action) => {
 			return {...state, completed: !state.completed};
 		}
 		case UPDATE_PROJECT: {
+			return action.project;
+		}
+		case CLEAR_PROJECT: {
 			return action.project;
 		}
 		default: {

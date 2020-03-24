@@ -1,23 +1,32 @@
 import React, {useEffect} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
-import {Link} from 'react-router-dom';
-import {fetchSingleRobot, unassignProjectThunk} from '../redux/singlerobot';
+import {Link, useParams} from 'react-router-dom';
+import {fetchSingleRobot, unassignProjectThunk, clearRobotThunk} from '../redux/singlerobot';
 import UpdateRobot from './UpdateRobot.js';
 
 function SingleRobot(props) {
+	const {robotId} = useParams()
 
 	const dispatch = useDispatch()
-	const robot = useSelector( state => state.robot) || {}
+
+	const robot = useSelector( state => state.singleRobot)
+
+	console.log('robot from selector before dispatch', robot)
 	useEffect(() => {
 		try {
-			dispatch(fetchSingleRobot(props.match.params.robotId))
+			dispatch(fetchSingleRobot(robotId))
 		} catch (e) {
 			console.error(e.message)
 		}
-	}, [robot.id])
 
+		//clear single robot
+		return () => { dispatch(clearRobotThunk())}
+	}, [robotId])
+
+
+	console.log('robot from selector after dispatch', robot)
 	const handleClick = evt => {
-		dispatch(unassignProjectThunk(robot.id, evt.target.id))
+		dispatch(unassignProjectThunk(robotId, evt.target.id))
 	};
 
 		return robot.id ? (
@@ -61,7 +70,7 @@ function SingleRobot(props) {
 				</div>
 			</div>
 		) : (
-			<div />
+			<div>No robot loading ...</div>
 		);
 	
 }

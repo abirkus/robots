@@ -4,17 +4,21 @@ import appReducer from './redux';
 import {createLogger} from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
+import createSagaMiddleware from "redux-saga";
+import { watchAgeUp } from "./sagas/saga";
 
-let middleware = [
-	// `withExtraArgument` gives us access to axios in our async action creators!
-	// https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
-	thunkMiddleware.withExtraArgument({axios}),
-];
-if (process.browser) {
-	// We'd like the redux logger to only log messages when it's running in the
-	// browser, and not when we run the tests from within Mocha.
-	middleware = [...middleware, createLogger({collapsed: true})];
-}
+const sagaMiddleware = createSagaMiddleware();
+
+// let middleware = [
+// 	// `withExtraArgument` gives us access to axios in our async action creators!
+// 	// https://github.com/reduxjs/redux-thunk#injecting-a-custom-argument
+// 	thunkMiddleware.withExtraArgument({axios}),
+// ];
+// if (process.browser) {
+// 	// We'd like the redux logger to only log messages when it's running in the
+// 	// browser, and not when we run the tests from within Mocha.
+// 	middleware = [...middleware, createLogger({collapsed: true})];
+// }
 
 /** We wrap the entire redux store in a root reducer with a special
  * action, RESET_STORE. It calls our application's reducer with
@@ -32,9 +36,12 @@ const rootReducer = (state, action) => {
 	return appReducer(state, action);
 };
 
-export default createStore(
+const store = createStore(
 	rootReducer,
 	// 👇 This uses the Redux DevTools extension, assuming you have it installed in your browser.
 	// 👇 See: https://github.com/zalmoxisus/redux-devtools-extension
-	composeWithDevTools(applyMiddleware(...middleware))
+	applyMiddleware(sagaMiddleware)
 );
+
+sagaMiddleware.run(watchAgeUp)
+export default store;

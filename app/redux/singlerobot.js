@@ -4,7 +4,7 @@ import axios from 'axios';
 export const GET_SINGLE_ROBOT = 'GET_SINGLE_ROBOT';
 export const UNASSIGN_PROJECT = 'UNASSIGN_PROJECT';
 export const UPDATE_ROBOT = 'UPDATE_ROBOT';
-
+export const CLEAR_ROBOT = 'CLEAR_ROBOT';
 //action creator
 export const getSingleRobot = robot => {
 	return {
@@ -25,6 +25,14 @@ export const updateRobot = robot => {
 		robot,
 	};
 };
+
+export const clearRobot = robot => {
+	return {
+		type: CLEAR_ROBOT,
+		robot,
+	};
+};
+
 //thunk creators
 
 export const fetchSingleRobot = id => {
@@ -63,6 +71,17 @@ export const updateRobotThunk = (id, robot) => {
 	};
 };
 
+export const clearRobotThunk = () => {
+	return dispatch => {
+		try {
+			dispatch(clearRobot({}));
+		} catch (err) {
+			console.log('Error', err);
+		}
+	};
+};
+
+
 const initialState = {};
 
 //reducer
@@ -79,6 +98,9 @@ export default (state = initialState, action) => {
 			return {...state, projects: newProjArr};
 		}
 		case UPDATE_ROBOT: {
+			return action.robot;
+		}
+		case CLEAR_ROBOT: {
 			return action.robot;
 		}
 		default: {
