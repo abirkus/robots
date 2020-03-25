@@ -1,10 +1,25 @@
-import { takeLatest, put, delay } from 'redux-saga/effects';
+import { takeLatest, put, delay, call } from 'redux-saga/effects';
+import axios from 'axios';
+import * as actions from '../actions'
 
-function* ageUpAsync() {
+
+function* fetchingBotsAsync() {
+    console.log("inside second saga")
+
   yield delay(4000);
-  yield put({ type: "SET_ROBOTS", value: 1 });
+  console.log("inside second saga")
+
+   const {data} = yield call(axios.get, '/api/robots')
+  const obj = yield actions.setRobots(data)
+  console.log("inside second saga", obj)
+
+  yield put(obj)
+  //const {data} = yield call(axios.get, '/api/robots')
+  console.log("inside second saga")
+
+
 }
 
-export function* watchAgeUp() {
-  yield takeLatest("FETCH_BOTS", ageUpAsync);
+export function* watchRobotFetch() {
+    yield takeLatest("FETCH_BOTS", fetchingBotsAsync) 
 }

@@ -5,7 +5,7 @@ import {createLogger} from 'redux-logger'; // https://github.com/evgenyrodionov/
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
 import createSagaMiddleware from "redux-saga";
-import { watchAgeUp } from "./sagas/saga";
+import { watchRobotFetch } from "./sagas/saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -43,5 +43,5 @@ const store = createStore(
 	applyMiddleware(sagaMiddleware)
 );
 
-sagaMiddleware.run(watchAgeUp)
+sagaMiddleware.run(watchRobotFetch)
 export default store;
