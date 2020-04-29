@@ -4,6 +4,24 @@ import { createSelector } from 'reselect';
 import {Link, useParams} from 'react-router-dom';
 import AddRobot from './AddRobot.js';
 import {removeRobotThunk, fetchRobotsThunk, clearRobotsThunk} from '../redux/robots.js';
+import { Table } from 'antd';
+import DeleteRowCell from './Cells/DeleteCell'
+
+
+const columns = [
+	{
+	//   title: 'Name',
+	  dataIndex: 'name',
+	  key: 'name',
+	},
+	{
+		// title: 'Remove',
+		dataIndex: 'id',
+		render: () => <DeleteRowCell />,
+		key: 'id',
+	  },
+  ];
+  
 
 
 function AllRobots(props) {
@@ -32,7 +50,8 @@ function AllRobots(props) {
 		return robots.length ? (
 			<div className="allItems">
 				<div className="list">
-					<ul className="redx">
+					<Table dataSource={robots} columns={columns} pagination={false}/>
+					{/* <ul className="redx">
 						{robots.map(bot => (
 							<li
 								key={bot.id}
@@ -49,7 +68,7 @@ function AllRobots(props) {
 								</span>
 							</li>
 						))}
-					</ul>
+					</ul> */}
 					<div />
 				</div>
 				<AddRobot />

@@ -9,7 +9,10 @@ function AllProjects(props) {
 	const projects = useSelector( state => state.projects)
 	useEffect(() => {
 		try {
-			dispatch(fetchProjectsThunk())
+			console.log("fetchings projects")
+
+			dispatch({ type: "FETCH_PROJECTS"})
+			//dispatch(fetchProjectsThunk())
 		} catch (e) {
 			console.error(e.message)
 		}
@@ -52,7 +55,7 @@ function AllProjects(props) {
 			</div>
 		) : (
 			<div>
-				<div>No000 Projects</div>
+				<div>No Projects Found</div>
 				<AddProject />
 			</div>
 		)

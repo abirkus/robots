@@ -6,12 +6,12 @@ export const ADD_PROJECT = 'ADD_PROJECT';
 export const REMOVE_PROJECT = 'REMOVE_PROJECT';
 export const CLEAR_PROJECTS = 'CLEAR_PROJECTS'
 //action creator
-export const setProjects = projects => {
-	return {
-		type: SET_PROJECTS,
-		projects,
-	};
-};
+// export const setProjects = projects => {
+// 	return {
+// 		type: SET_PROJECTS,
+// 		projects,
+// 	};
+// };
 
 export const addProject = project => {
 	return {
@@ -37,16 +37,16 @@ export const clearProjects = projects => {
 
 //thunk creator
 
-export const fetchProjectsThunk = () => {
-	return async dispatch => {
-		try {
-			const {data} = await axios.get('/api/projects');
-			dispatch(setProjects(data));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
-};
+// export const fetchProjectsThunk = () => {
+// 	return async dispatch => {
+// 		try {
+// 			const {data} = await axios.get('/api/projects');
+// 			dispatch(setProjects(data));
+// 		} catch (err) {
+// 			console.log('Error', err);
+// 		}
+// 	};
+// };
 
 export const addProjectThunk = project => {
 	return async dispatch => {

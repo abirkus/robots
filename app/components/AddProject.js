@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { useDispatch} from 'react-redux';
 import {addProjectThunk} from '../redux/projects.js';
-
+import { DatePicker, Button } from 'antd';
 
 function AddProject(props) {
 	const dispatch = useDispatch()
@@ -69,12 +69,13 @@ function AddProject(props) {
 				/>
 
 				<label htmlFor="deadline">Deadline:</label>
-				<input
+				<DatePicker value={deadline} onChange={handleDeadlineChange} />
+				{/* <input
 					name="deadline"
 					type="date"
 					onChange={handleDeadlineChange}
 					value={deadline}
-				/>
+				/> */}
 
 				<label htmlFor="priority">Priority:</label>
 				<select
@@ -113,9 +114,9 @@ function AddProject(props) {
 					value={description}
 				/>
 
-				<button type="submit" disabled={!title}>
+				<Button type="primary" disabled={!title}>
 					Submit
-				</button>
+				</Button>
 			</form>
 		</div>
 	);

@@ -1,11 +1,11 @@
-import {createStore, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import axios from 'axios';
 import appReducer from './redux';
 import {createLogger} from 'redux-logger'; // https://github.com/evgenyrodionov/redux-logger
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk'; // https://github.com/gaearon/redux-thunk
 import createSagaMiddleware from "redux-saga";
-import { watchRobotFetch } from "./sagas/saga";
+import { mySaga } from "./sagas/saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -36,12 +36,15 @@ const rootReducer = (state, action) => {
 	return appReducer(state, action);
 };
 
+ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 const store = createStore(
 	rootReducer,
 	// 👇 This uses the Redux DevTools extension, assuming you have it installed in your browser.
 	// 👇 See: https://github.com/zalmoxisus/redux-devtools-extension
-	applyMiddleware(sagaMiddleware)
+	composeEnhancers(applyMiddleware(sagaMiddleware))
 );
 
-sagaMiddleware.run(watchRobotFetch)
+sagaMiddleware.run(mySaga)
+
 export default store;

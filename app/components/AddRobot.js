@@ -30,7 +30,7 @@ function AddRobot() {
 	const handleSubmit = (evt) => {
 		evt.preventDefault();
 		try {
-			dispatch(addRobotThunk({name, fuelType, fuelLevel, imageUrl}))
+			dispatch({type: 'ADD_BOT', value: {name, fuelType, fuelLevel, imageUrl}})
 			setName('')
 			setFuelLevel('')
 			setFuelType('')
