@@ -1,5 +1,4 @@
 import React, { useState} from 'react';
-import {addRobotThunk} from '../redux/robots.js';
 import { useDispatch} from 'react-redux';
 
 function AddRobot() {

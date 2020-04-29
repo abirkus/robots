@@ -24,6 +24,15 @@ function* addRobotAsync(robot) {
   yield put(obj)
 }
 
+function* removeRobotAsync(actionObj) {
+  const id = Number(actionObj.value)
+  console.log("removing robot", id)
+  yield call(axios.delete, `/api/robots/${id}`)
+  const obj = yield actions.removeRobot(id)
+  console.log("yield put obj", obj)
+  yield put(obj)
+}
+
 // export const addRobotThunk = robot => {
 // 	return async dispatch => {
 // 		try {
@@ -35,16 +44,7 @@ function* addRobotAsync(robot) {
 // 	};
 // };
 
-// export const removeRobotThunk = id => {
-// 	return async dispatch => {
-// 		try {
-// 			await axios.delete(`/api/robots/${id}`);
-// 			dispatch(removeRobot(id));
-// 		} catch (err) {
-// 			console.log('Error', err);
-// 		}
-// 	};
-// };
+
 
 
 // export const clearRobotsThunk = () => dispatch => {
@@ -60,4 +60,5 @@ export function* mySaga() {
     yield takeLatest("FETCH_BOTS", fetchingBotsAsync)
     yield takeLatest("FETCH_PROJECTS", fetchingProjectsAsync)
     yield takeLatest("ADD_BOT", addRobotAsync)
+    yield takeLatest("REMOVE_BOT", removeRobotAsync)
 }

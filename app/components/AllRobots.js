@@ -10,19 +10,16 @@ import DeleteRowCell from './Cells/DeleteCell'
 
 const columns = [
 	{
-	//   title: 'Name',
 	  dataIndex: 'name',
 	  key: 'name',
 	},
 	{
-		// title: 'Remove',
 		dataIndex: 'id',
-		render: () => <DeleteRowCell />,
+		render: (record) => <DeleteRowCell record={record} />,
 		key: 'id',
 	  },
   ];
   
-
 
 function AllRobots(props) {
 		const dispatch = useDispatch()
@@ -40,17 +37,17 @@ function AllRobots(props) {
 			//return () => {dispatch(clearRobotsThunk())}
 		}, [props.match.path])
 
-		const handleClick = evt => {
-			evt.preventDefault();
-			if (evt.target.id) {
-				dispatch(removeRobotThunk(evt.target.id))
-			}
-		};
+		// const handleClick = evt => {
+		// 	evt.preventDefault();
+		// 	if (evt.target.id) {
+		// 		dispatch(removeRobotThunk(evt.target.id))
+		// 	}
+		// };
 
 		return robots.length ? (
 			<div className="allItems">
 				<div className="list">
-					<Table dataSource={robots} columns={columns} pagination={false}/>
+					<Table dataSource={robots} columns={columns} pagination={false} />
 					{/* <ul className="redx">
 						{robots.map(bot => (
 							<li
