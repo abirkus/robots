@@ -7,41 +7,7 @@ export const COMPLETE_PROJECT = 'COMPLETE_PROJECT';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 export const CLEAR_PROJECT = 'CLEAR_PROJECT';
 
-//action creator
-export const getSingleProject = project => {
-	return {
-		type: GET_SINGLE_PROJECT,
-		project,
-	};
-};
 
-export const unassignRobot = id => {
-	return {
-		type: UNASSIGN_ROBOT,
-		id,
-	};
-};
-
-export const completeProject = id => {
-	return {
-		type: COMPLETE_PROJECT,
-		id,
-	};
-};
-
-export const updateProject = project => {
-	return {
-		type: UPDATE_PROJECT,
-		project,
-	};
-};
-
-export const clearProject = project => {
-	return {
-		type: CLEAR_PROJECT,
-		project,
-	};
-};
 //thunk creators
 
 export const fetchSingleProject = id => {

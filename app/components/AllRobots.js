@@ -6,12 +6,13 @@ import AddRobot from './AddRobot.js';
 import {removeRobotThunk, fetchRobotsThunk, clearRobotsThunk} from '../redux/robots.js';
 import { Table } from 'antd';
 import DeleteRowCell from './Cells/DeleteCell'
-
+import { RobotNameCell } from './Cells/nameCell'
 
 const columns = [
 	{
 	  dataIndex: 'name',
 	  key: 'name',
+	  render: (value, row) => <RobotNameCell value={value} id={row.id}/>
 	},
 	{
 		dataIndex: 'id',
@@ -37,35 +38,11 @@ function AllRobots(props) {
 			//return () => {dispatch(clearRobotsThunk())}
 		}, [props.match.path])
 
-		// const handleClick = evt => {
-		// 	evt.preventDefault();
-		// 	if (evt.target.id) {
-		// 		dispatch(removeRobotThunk(evt.target.id))
-		// 	}
-		// };
 
 		return robots.length ? (
 			<div className="allItems">
 				<div className="list">
 					<Table dataSource={robots} columns={columns} pagination={false} />
-					{/* <ul className="redx">
-						{robots.map(bot => (
-							<li
-								key={bot.id}
-								id={bot.id}
-								type="button"
-								onClick={id => handleClick(id)}>
-								<span className="preview" href={bot.imageUrl}>
-									<Link to={`/robots/${bot.id}`} key={bot.id}>
-										{bot.name}
-										<span>
-											<img src={bot.imageUrl} />
-										</span>
-									</Link>
-								</span>
-							</li>
-						))}
-					</ul> */}
 					<div />
 				</div>
 				<AddRobot />

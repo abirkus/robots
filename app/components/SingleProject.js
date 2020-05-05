@@ -16,7 +16,7 @@ function SingleProject (props) {
 
 	useEffect(() => {
 		try {
-			dispatch(fetchSingleProject(projectId))
+			dispatch({type: 'FETCH_SINGLE_PROJECT', value: projectId})
 		} catch (e) {
 			console.error(e.message)
 		}

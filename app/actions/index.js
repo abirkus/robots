@@ -25,3 +25,13 @@ export const clearRobots = robots => ({
 		type: 'CLEAR_ROBOTS',
 		robots
 })
+
+export const getSingleRobot = robot => ({
+	type: 'GET_SINGLE_ROBOT',
+	robot,
+})
+
+export const getSingleProject = project => ({
+	type: 'GET_SINGLE_PROJECT',
+	project,
+})

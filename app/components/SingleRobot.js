@@ -12,15 +12,17 @@ function SingleRobot(props) {
 	const robot = useSelector( state => state.singleRobot)
 
 	console.log('robot from selector before dispatch', robot)
+
 	useEffect(() => {
 		try {
-			dispatch(fetchSingleRobot(robotId))
+			console.log('inside use effect', robotId)
+			dispatch({ type: 'FETCH_SINGLE_ROBOT', value: robotId })
 		} catch (e) {
 			console.error(e.message)
 		}
 
 		//clear single robot
-		return () => { dispatch(clearRobotThunk())}
+		//return () => { dispatch(clearRobotThunk())}
 	}, [robotId])
 
 

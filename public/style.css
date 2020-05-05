@@ -130,28 +130,6 @@ li {
 	font-size: 1rem;
 }
 
-.redx {
-	list-style: none;
-	padding-left: 0;
-}
-
-.redx li {
-	position: relative;
-	padding-left: 20px;
-}
-
-.redx li:before {
-	content: '';
-	width: 20px;
-	height: 20px;
-	position: absolute;
-	background-image: url('http://www.clker.com/cliparts/b/5/2/d/1350385451825974658x-red-md.png');
-	background-size: cover;
-	background-position: center;
-	left: 0;
-	top: 50%;
-	transform: translateY(-50%);
-}
 
 .preview {
 	position: relative;

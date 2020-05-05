@@ -5,33 +5,6 @@ export const GET_SINGLE_ROBOT = 'GET_SINGLE_ROBOT';
 export const UNASSIGN_PROJECT = 'UNASSIGN_PROJECT';
 export const UPDATE_ROBOT = 'UPDATE_ROBOT';
 export const CLEAR_ROBOT = 'CLEAR_ROBOT';
-//action creator
-export const getSingleRobot = robot => {
-	return {
-		type: GET_SINGLE_ROBOT,
-		robot,
-	};
-};
-export const unassignProject = id => {
-	return {
-		type: UNASSIGN_PROJECT,
-		id,
-	};
-};
-
-export const updateRobot = robot => {
-	return {
-		type: UPDATE_ROBOT,
-		robot,
-	};
-};
-
-export const clearRobot = robot => {
-	return {
-		type: CLEAR_ROBOT,
-		robot,
-	};
-};
 
 //thunk creators
 
