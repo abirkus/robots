@@ -20,7 +20,6 @@ function SingleProject (props) {
 		} catch (e) {
 			console.error(e.message)
 		}
-		return () => { dispatch(clearProjectThunk())}
 	}, [projectId])
 
 	const handleClick = evt => {
@@ -106,22 +105,3 @@ function SingleProject (props) {
 }
 
 export default SingleProject;
-// const mapStateToProps = state => {
-// 	return {
-// 		project: state.singleProject,
-// 	};
-// };
-
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		fetchSingleProject: id => dispatch(fetchSingleProject(id)),
-// 		unassignRobot: (projectId, robotId) =>
-// 			dispatch(unassignRobotThunk(projectId, robotId)),
-// 		completeProject: (id, bool) => dispatch(completeProjectThunk(id, bool)),
-// 	};
-// };
-
-// export default connect(
-// 	mapStateToProps,
-// 	mapDispatchToProps
-// )(SingleProject);

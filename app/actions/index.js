@@ -35,3 +35,8 @@ export const getSingleProject = project => ({
 	type: 'GET_SINGLE_PROJECT',
 	project,
 })
+
+export const removeProject = id => ({
+	type: 'REMOVE_PROJECT',
+	id,
+})

@@ -48,6 +48,12 @@ function* fetchingSingleProjectAsync(actionObj) {
   yield put(obj)
 }
 
+function* removeProjectAsync(actionObj) {
+  yield call(axios.delete, `/api/projects/${actionObj.value}`)
+  const obj = yield actions.removeProject(Number(actionObj.value))
+  yield put(obj)
+}
+
 // export const addRobotThunk = robot => {
 // 	return async dispatch => {
 // 		try {
@@ -78,4 +84,5 @@ export function* mySaga() {
     yield takeLatest('REMOVE_BOT', removeRobotAsync)
     yield takeLatest('FETCH_SINGLE_ROBOT', fetchingSingleRobotAsync)
     yield takeLatest('FETCH_SINGLE_PROJECT', fetchingSingleProjectAsync)
+    yield takeLatest('DELETE_PROJECT', removeProjectAsync)
 }

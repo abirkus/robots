@@ -20,9 +20,6 @@ function SingleRobot(props) {
 		} catch (e) {
 			console.error(e.message)
 		}
-
-		//clear single robot
-		//return () => { dispatch(clearRobotThunk())}
 	}, [robotId])
 
 
@@ -78,22 +75,3 @@ function SingleRobot(props) {
 }
 
 export default SingleRobot
-
-// const mapStateToProps = state => {
-// 	return {
-// 		robot: state.singleRobot,
-// 	};
-// };
-
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		fetchSingleRobot: id => dispatch(fetchSingleRobot(id)),
-// 		unassignProject: (robotId, projectId) =>
-// 			dispatch(unassignProjectThunk(robotId, projectId)),
-// 	};
-// };
-
-// export default connect(
-// 	mapStateToProps,
-// 	mapDispatchToProps
-// )(SingleRobot);

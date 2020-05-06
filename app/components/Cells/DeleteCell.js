@@ -8,9 +8,12 @@ function DeleteRowCell(props) {
     const dispatch = useDispatch()
 
     const handleClick = evt => {
-        console.log("trying to delete", evt.target.id)
         try {
-            dispatch({ type: 'REMOVE_BOT', value: evt.target.id})
+            if (props.type === 'robot') {
+                dispatch({ type: 'REMOVE_BOT', value: evt.target.id})
+            } else if (props.type === 'project') {
+                dispatch({ type: 'DELETE_PROJECT', value: evt.target.id})
+            }
         } catch (err) {
             console.error(err)
         }

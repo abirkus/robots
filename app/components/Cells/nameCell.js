@@ -7,6 +7,6 @@ export const RobotNameCell = ({ value, id }) => (
     <Link to={`/robots/${id}`}>{value}</Link>
 )
 
-export const projectNameCell = (row) => ( 
-    <Link to={`/projects/${row.id}`}>{row.name}</Link>
+export const ProjectNameCell = ({ value, id})=> ( 
+    <Link to={`/projects/${id}`}>{value}</Link>
 )

@@ -16,7 +16,7 @@ const columns = [
 	},
 	{
 		dataIndex: 'id',
-		render: (record) => <DeleteRowCell record={record} />,
+		render: (record) => <DeleteRowCell record={record} type="robot" />,
 		key: 'id',
 	  },
   ];
@@ -27,8 +27,6 @@ function AllRobots(props) {
 		const robots = useSelector( state => state.robots)
 		useEffect(() => {
 			try {
-				console.log("fetchings bots")
-				//dispatch(fetchRobotsThunk())
 				dispatch({ type: "FETCH_BOTS"})
 			} catch (e) {
 				console.error(e.message)

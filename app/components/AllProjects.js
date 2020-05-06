@@ -3,16 +3,30 @@ import { useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import AddProject from './AddProject.js';
 import {removeProjectThunk, fetchProjectsThunk, clearProjectsThunk} from '../redux/projects.js';
+import { Table } from 'antd';
+import { ProjectNameCell } from './Cells/nameCell'
+import DeleteRowCell from './Cells/DeleteCell'
+
+const columns = [
+	{
+	  dataIndex: 'title',
+	  key: 'title',
+	  render: (value, row) => <ProjectNameCell value={value} id={row.id}/>
+	},
+	{
+		dataIndex: 'id',
+		render: (record) => <DeleteRowCell record={record} type="project" />,
+		key: 'id',
+	  },
+  ];
+
 
 function AllProjects(props) {
 	const dispatch = useDispatch()
 	const projects = useSelector( state => state.projects)
 	useEffect(() => {
 		try {
-			console.log("fetchings projects")
-
 			dispatch({ type: "FETCH_PROJECTS"})
-			//dispatch(fetchProjectsThunk())
 		} catch (e) {
 			console.error(e.message)
 		}
@@ -21,35 +35,10 @@ function AllProjects(props) {
 		//return () => { dispatch(clearProjectsThunk()) }
 	}, [props.match.path])
 
-	const handleClick = evt => {
-		evt.preventDefault();
-		if (evt.target.id) {
-			dispatch(removeProjectThunk(evt.target.id))
-		}
-	};
-
 		return projects.length ? (
 			<div className="allItems">
 				<div className="list">
-					<ul className="redx">
-						{projects.map(proj => (
-							<li
-								key={proj.id}
-								id={proj.id}
-								type="button"
-								onClick={id => handleClick(id)}>
-								<div>
-									<span>
-										<Link
-											to={`/projects/${proj.id}`}
-											key={proj.id}>
-											{proj.title}
-										</Link>
-									</span>
-								</div>
-							</li>
-						))}
-					</ul>
+					<Table dataSource={projects} columns={columns} pagination={false} />
 				</div>
 				<AddProject />
 			</div>
@@ -63,22 +52,3 @@ function AllProjects(props) {
 }
 
 export default AllProjects;
-
-// const mapStateToProps = state => {
-// 	return {
-// 		projects: state.projects,
-// 	};
-// };
-
-// const mapDispatchToProps = dispatch => {
-// 	return {
-// 		fetchProjects: () => dispatch(fetchProjectsThunk()),
-// 		remove: id => dispatch(removeProjectThunk(id)),
-// 		clearProjects: () => dispatch(clearProjectsThunk())
-// 	};
-// };
-
-// export default connect(
-// 	mapStateToProps,
-// 	mapDispatchToProps
-// )(AllProjects);
