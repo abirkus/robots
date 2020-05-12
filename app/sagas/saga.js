@@ -54,27 +54,12 @@ function* removeProjectAsync(actionObj) {
   yield put(obj)
 }
 
-// export const addRobotThunk = robot => {
-// 	return async dispatch => {
-// 		try {
-
-// 			dispatch(addRobot(data));
-// 		} catch (err) {
-// 			console.log('Error', err);
-// 		}
-// 	};
-// };
-
-
-
-
-// export const clearRobotsThunk = () => dispatch => {
-// 	try {
-// 		dispatch(clearRobots([]))
-// 	} catch (err) {
-// 		console.error(err)
-// 	}
-// }
+function* addProjectAsync(project) {
+  console.log("inside saga", project)
+  const {data} = yield call(axios.post, '/api/projects', project.value)
+  const obj = yield actions.addProject(data)
+  yield put(obj)
+}
 
 
 export function* mySaga() {
@@ -85,4 +70,5 @@ export function* mySaga() {
     yield takeLatest('FETCH_SINGLE_ROBOT', fetchingSingleRobotAsync)
     yield takeLatest('FETCH_SINGLE_PROJECT', fetchingSingleProjectAsync)
     yield takeLatest('DELETE_PROJECT', removeProjectAsync)
+    yield takeLatest('ADD_PRJCT', addProjectAsync)
 }

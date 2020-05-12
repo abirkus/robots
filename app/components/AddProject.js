@@ -25,7 +25,7 @@ function AddProject(props) {
 	const onFinish = values => {
 		try {
 			console.log("values", values)
-			//dispatch({type: 'ADD_PROJ', value: values.project})
+			dispatch({type: 'ADD_PRJCT', value: values.project})
 			form.resetFields()
 		} catch (e) {
 			console.error(e.message)

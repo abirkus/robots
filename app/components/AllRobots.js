@@ -4,7 +4,7 @@ import { createSelector } from 'reselect';
 import {Link, useParams} from 'react-router-dom';
 import AddRobot from './AddRobot.js';
 import {removeRobotThunk, fetchRobotsThunk, clearRobotsThunk} from '../redux/robots.js';
-import { Table } from 'antd';
+import { Table, List, Avatar } from 'antd';
 import DeleteRowCell from './Cells/DeleteCell'
 import { RobotNameCell } from './Cells/nameCell'
 
@@ -40,7 +40,20 @@ function AllRobots(props) {
 		return robots.length ? (
 			<div className="allItems">
 				<div className="list">
-					<Table dataSource={robots} columns={columns} pagination={false} />
+				<List
+					itemLayout="horizontal"
+					dataSource={robots}
+					renderItem={item => (
+					<List.Item>
+						<List.Item.Meta
+						avatar={<Avatar src={`${item.imageUrl}`} />}
+						title={<Link to={`/robots/${item.id}`}>{item.name}</Link>}
+						/>
+						<div><DeleteRowCell record={item} /></div>
+					</List.Item>
+					)}
+				/>
+					{/* <Table dataSource={robots} columns={columns} pagination={false} size="small" /> */}
 					<div />
 				</div>
 				<AddRobot />

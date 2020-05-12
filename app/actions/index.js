@@ -40,3 +40,8 @@ export const removeProject = id => ({
 	type: 'REMOVE_PROJECT',
 	id,
 })
+
+export const addProject = project => ({
+	type: 'ADD_PROJECT',
+	project,
+})

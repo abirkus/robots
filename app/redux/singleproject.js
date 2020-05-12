@@ -8,19 +8,6 @@ export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 export const CLEAR_PROJECT = 'CLEAR_PROJECT';
 
 
-//thunk creators
-
-export const fetchSingleProject = id => {
-	return async dispatch => {
-		try {
-			const {data} = await axios.get(`/api/projects/${id}`);
-			dispatch(getSingleProject(data));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
-};
-
 export const unassignRobotThunk = (projectId, robotId) => {
 	return async dispatch => {
 		try {

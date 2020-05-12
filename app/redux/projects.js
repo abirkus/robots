@@ -48,35 +48,35 @@ export const clearProjects = projects => {
 // 	};
 // };
 
-export const addProjectThunk = project => {
-	return async dispatch => {
-		try {
-			const {data} = await axios.post('/api/projects', project);
-			dispatch(addProject(data));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
-};
+// export const addProjectThunk = project => {
+// 	return async dispatch => {
+// 		try {
+// 			const {data} = await axios.post('/api/projects', project);
+// 			dispatch(addProject(data));
+// 		} catch (err) {
+// 			console.log('Error', err);
+// 		}
+// 	};
+// };
 
-export const removeProjectThunk = id => {
-	return async dispatch => {
-		try {
-			await axios.delete(`/api/projects/${id}`);
-			dispatch(removeProject(id));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
-};
+// export const removeProjectThunk = id => {
+// 	return async dispatch => {
+// 		try {
+// 			await axios.delete(`/api/projects/${id}`);
+// 			dispatch(removeProject(id));
+// 		} catch (err) {
+// 			console.log('Error', err);
+// 		}
+// 	};
+// };
 
-export const clearProjectsThunk = () => dispatch => {
-	try {
-		dispatch(clearProjects([]));
-	} catch (err) {
-		console.log('Error', err);
-	}
-};
+// export const clearProjectsThunk = () => dispatch => {
+// 	try {
+// 		dispatch(clearProjects([]));
+// 	} catch (err) {
+// 		console.log('Error', err);
+// 	}
+// };
 
 
 const initialState = [];

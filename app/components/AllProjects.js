@@ -3,7 +3,7 @@ import { useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 import AddProject from './AddProject.js';
 import {removeProjectThunk, fetchProjectsThunk, clearProjectsThunk} from '../redux/projects.js';
-import { Table } from 'antd';
+import { Table, List, Avatar } from 'antd';
 import { ProjectNameCell } from './Cells/nameCell'
 import DeleteRowCell from './Cells/DeleteCell'
 
@@ -38,7 +38,19 @@ function AllProjects(props) {
 		return projects.length ? (
 			<div className="allItems">
 				<div className="list">
-					<Table dataSource={projects} columns={columns} pagination={false} />
+				<List
+					itemLayout="horizontal"
+					dataSource={projects}
+					renderItem={item => (
+					<List.Item>
+						<List.Item.Meta
+						title={<Link to={`/projects/${item.id}`}>{item.title}</Link>}
+						/>
+						<div><DeleteRowCell record={item} /></div>
+					</List.Item>
+					)}
+				/>
+					{/* <Table dataSource={projects} columns={columns} pagination={false} size="small" /> */}
 				</div>
 				<AddProject />
 			</div>
