@@ -5,7 +5,7 @@ import AllProjects from './AllProjects';
 import SingleRobot from './SingleRobot';
 import SingleProject from './SingleProject';
 import {connect} from 'react-redux';
-import Greeting from './Greeting';
+import LandingPage from './LandingPage.js';
 
 function Root() {
 
@@ -29,7 +29,7 @@ function Root() {
 					/>
 					<Route exact path="/robots" component={AllRobots} />
 					<Route exact path="/projects" component={AllProjects} />
-					<Route exact path="/" component={Greeting} />
+					<Route exact path="/" component={LandingPage} />
 				</div>
 			</div>
 		</Router>

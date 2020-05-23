@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { useDispatch} from 'react-redux';
-import {addProjectThunk} from '../redux/projects.js';
 import { Form, Input, Select, Button, Radio, DatePicker } from 'antd';
+import { useParams } from 'react-router-dom';
 
 const layout = {
 	labelCol: { span: 8 },
@@ -17,15 +17,22 @@ const layout = {
 
 
 
-function AddProject(props) {
+function ProjectInputForm(props) {
 	const dispatch = useDispatch()
-
+	const {projectId} = useParams()
 	const [form] = Form.useForm();
 
 	const onFinish = values => {
 		try {
-			console.log("values", values)
-			dispatch({type: 'ADD_PRJCT', value: values.project})
+			if (props.type === 'Add') {
+				dispatch({type: 'ADD_PRJCT', value: values.project})
+			} else {
+				const updatedProj = {
+					id: projectId,
+					project: values.project
+				}
+				dispatch({type: 'UPDATE_PRJCT', value: updatedProj})
+			}
 			form.resetFields()
 		} catch (e) {
 			console.error(e.message)
@@ -33,16 +40,18 @@ function AddProject(props) {
 	}
 
 	const onReset = () => {
+		console.log("props", props)
 		form.resetFields();
 	  };
 
 	return (
 		<div className="form">
-			<h1>Add a new project</h1>
+			<h1>{props.type} project</h1>
 			<Form
 					name="addProject"
 					form={form}
 					onFinish={onFinish}
+					{...layout}
 					>
 				<Form.Item
 					label="Project Title:"
@@ -77,7 +86,7 @@ function AddProject(props) {
 				<Form.Item
 					name={['project', 'completed']} 
 					label="Completed:">
-					<Radio.Group defaultValue="false">
+					<Radio.Group initialValues="false">
 						<Radio value="true">Yes</Radio>
 						<Radio value="false">No</Radio>
 					</Radio.Group>
@@ -89,7 +98,7 @@ function AddProject(props) {
 
 				<Form.Item {...tailLayout}>  
 					<Button type="primary"  htmlType="submit">
-						Submit
+						{props.type} Project
 					</Button>
 					<Button htmlType="button" onClick={onReset} type="danger">
 						Reset
@@ -101,5 +110,5 @@ function AddProject(props) {
 
 }
 
-export default AddProject
+export default ProjectInputForm
 

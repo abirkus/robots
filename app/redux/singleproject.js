@@ -35,16 +35,7 @@ export const completeProjectThunk = (id, bool) => {
 	};
 };
 
-export const updateProjectThunk = (id, project) => {
-	return async dispatch => {
-		try {
-			const {data} = await axios.put(`/api/projects/${id}`, project);
-			dispatch(updateProject(data));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
-};
+
 
 export const clearProjectThunk = () => {
 	return dispatch => {

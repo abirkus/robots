@@ -50,10 +50,16 @@ router.delete('/:id', async (req, res, next) => {
 
 router.put('/:id', async (req, res, next) => {
 	try {
-		const id = req.params.id;
-		const robot = await Robot.findByPk(id);
+		const currId = req.params.id;
+		const robot = await Robot.findByPk(currId)
 		await robot.update(req.body);
-		res.status(204).end();
+		const resp = await Robot.findOne({
+			where: {
+				id: currId
+			},
+			include: [Project],
+		});
+		res.json(resp.dataValues)
 	} catch (err) {
 		next(err);
 	}

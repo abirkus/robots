@@ -45,3 +45,19 @@ export const addProject = project => ({
 	type: 'ADD_PROJECT',
 	project,
 })
+
+export const updateRobot = robot => ({
+	type: 'UPDATE_ROBOT',
+	robot,
+})
+
+export const updateProject = project => ({
+	type: 'UPDATE_PROJECT',
+	project,
+})
+
+
+export const unassignProject = projectId => ({
+	type: 'UNASSIGN_PROJECT',
+	projectId,
+})

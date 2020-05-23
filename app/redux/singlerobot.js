@@ -4,7 +4,6 @@ import axios from 'axios';
 export const GET_SINGLE_ROBOT = 'GET_SINGLE_ROBOT';
 export const UNASSIGN_PROJECT = 'UNASSIGN_PROJECT';
 export const UPDATE_ROBOT = 'UPDATE_ROBOT';
-export const CLEAR_ROBOT = 'CLEAR_ROBOT';
 
 
 export const unassignProjectThunk = (robotId, projectId) => {
@@ -15,27 +14,6 @@ export const unassignProjectThunk = (robotId, projectId) => {
 			};
 			await axios.put(`/api/robots/assignments/${robotId}`, proj);
 			dispatch(unassignProject(projectId));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
-};
-
-export const updateRobotThunk = (id, robot) => {
-	return async dispatch => {
-		try {
-			const {data} = await axios.put(`/api/robots/${id}`, robot);
-			dispatch(updateRobot(data));
-		} catch (err) {
-			console.log('Error', err);
-		}
-	};
-};
-
-export const clearRobotThunk = () => {
-	return dispatch => {
-		try {
-			dispatch(clearRobot({}));
 		} catch (err) {
 			console.log('Error', err);
 		}
@@ -59,9 +37,6 @@ export default (state = initialState, action) => {
 			return {...state, projects: newProjArr};
 		}
 		case UPDATE_ROBOT: {
-			return action.robot;
-		}
-		case CLEAR_ROBOT: {
 			return action.robot;
 		}
 		default: {

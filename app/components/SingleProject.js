@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import {
-	fetchSingleProject,
 	unassignRobotThunk,
-	completeProjectThunk,
-	clearProjectThunk
+	completeProjectThunk
 } from '../redux/singleproject';
 import {Link, useParams} from 'react-router-dom';
-import UpdateProject from './UpdateProject.js';
+import ProjectInputForm from './ProjectInputForm.js';
 
 function SingleProject (props) {
 	const {projectId} = useParams()
@@ -91,13 +89,7 @@ function SingleProject (props) {
 						</div>
 					</ul>
 				</div>
-
-				<div className="form">
-					<UpdateProject
-						params={props.match.params}
-						fetchSingleProject={props.fetchSingleProject}
-					/>
-				</div>
+					<ProjectInputForm type="Update" />
 			</div>
 		) : (
 			<div />

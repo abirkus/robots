@@ -61,6 +61,32 @@ function* addProjectAsync(project) {
   yield put(obj)
 }
 
+function* updateRobotAsync(robot) {
+  console.log('upodating robot - obj received', robot)
+  const {data} = yield call(axios.put, `/api/robots/${robot.value.id}`, robot.value.robot)
+  console.log("passing to actions", data)
+  const obj = yield actions.updateRobot(data)
+  yield put(obj)
+}
+
+function* updateProjectAsync(prjct) {
+  console.log('upodating project - obj received', prjct)
+  const {data} = yield call(axios.put, `/api/projects/${prjct.value.id}`, prjct.value.project)
+  console.log("passing to actions", data)
+  const obj = yield actions.updateProject(data)
+  yield put(obj)
+}
+
+function* unassignProjectAsync(obj) {
+  console.log('unassign project - obj received', obj)
+  const proj = {
+    id: obj.value.projectId,
+  };
+  const {data} = yield call(axios.put, `/api/robots/assignments/${obj.value.robotId}`, proj)
+  const resp = yield actions.unassignProject(obj.value.projectId)
+  yield put(resp)
+}
+
 
 export function* mySaga() {
     yield takeLatest('FETCH_BOTS', fetchingBotsAsync)
@@ -71,4 +97,7 @@ export function* mySaga() {
     yield takeLatest('FETCH_SINGLE_PROJECT', fetchingSingleProjectAsync)
     yield takeLatest('DELETE_PROJECT', removeProjectAsync)
     yield takeLatest('ADD_PRJCT', addProjectAsync)
+    yield takeLatest('UPDATE_BOT', updateRobotAsync)
+    yield takeLatest('UPDATE_PRJCT', updateProjectAsync)
+    yield takeLatest('UNASSIGN_PRJCT_FROM_ROBOT', unassignProjectAsync)
 }

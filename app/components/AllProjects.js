@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
-import AddProject from './AddProject.js';
+import ProjectInputForm from './ProjectInputForm.js';
 import {removeProjectThunk, fetchProjectsThunk, clearProjectsThunk} from '../redux/projects.js';
 import { Table, List, Avatar } from 'antd';
 import { ProjectNameCell } from './Cells/nameCell'
@@ -52,12 +52,12 @@ function AllProjects(props) {
 				/>
 					{/* <Table dataSource={projects} columns={columns} pagination={false} size="small" /> */}
 				</div>
-				<AddProject />
+				<ProjectInputForm type="Add" />
 			</div>
 		) : (
 			<div>
 				<div>No Projects Found</div>
-				<AddProject />
+				<ProjectInputForm type="Add" />
 			</div>
 		)
 

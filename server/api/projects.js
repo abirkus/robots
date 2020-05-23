@@ -52,7 +52,13 @@ router.put('/:id', async (req, res, next) => {
 		const id = req.params.id;
 		const project = await Project.findByPk(id);
 		await project.update(req.body);
-		res.status(204).end();
+		const resp = await Project.findOne({
+			where: {
+				id: req.params.id,
+			},
+			include: [Robot],
+		});
+		res.json(resp.dataValues)
 	} catch (err) {
 		next(err);
 	}

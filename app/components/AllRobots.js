@@ -2,7 +2,7 @@ import React, { useEffect, useCallback } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { createSelector } from 'reselect';
 import {Link, useParams} from 'react-router-dom';
-import AddRobot from './AddRobot.js';
+import RobotInpuForm from './RobotInpuForm.js';
 import {removeRobotThunk, fetchRobotsThunk, clearRobotsThunk} from '../redux/robots.js';
 import { Table, List, Avatar } from 'antd';
 import DeleteRowCell from './Cells/DeleteCell'
@@ -56,12 +56,12 @@ function AllRobots(props) {
 					{/* <Table dataSource={robots} columns={columns} pagination={false} size="small" /> */}
 					<div />
 				</div>
-				<AddRobot />
+				<RobotInpuForm type="Add" />
 			</div>
 		) : (
 			<div>
 				<h1>No Robots Found</h1>
-				<AddRobot />
+				<RobotInpuForm type="Add" />
 			</div>
 		);
 }

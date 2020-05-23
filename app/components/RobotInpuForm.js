@@ -1,5 +1,6 @@
 import React, { useState} from 'react';
 import { useDispatch} from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Form, Input, Select, Button, InputNumber } from 'antd';
 
 const layout = {
@@ -15,13 +16,23 @@ const layout = {
   const { Option } = Select;
 
 
-function AddRobot() {
+function RobotInputForm(props) {
 	const dispatch = useDispatch()
 	const [form] = Form.useForm();
+	const {robotId} = useParams()
 
 	const onFinish = values => {
 		try {
-			dispatch({type: 'ADD_BOT', value: values.robot })
+			if (props.type === 'Add') {
+				dispatch({type: 'ADD_BOT', value: values.robot })
+			} else {
+				const updatedBot = {
+					id: robotId,
+					robot: values.robot
+				}
+				dispatch({type: 'UPDATE_BOT', value: updatedBot })
+			}
+
 			form.resetFields();
 		} catch (e) {
 			console.error(e.message)
@@ -29,17 +40,18 @@ function AddRobot() {
 	  };
 
 	  const onReset = () => {
+		console.log("props", props)
 		form.resetFields();
 	  };
 
 	return (
 		<div className="form">
-			<h1>Add a new robot</h1>
+			<h1>{props.type} robot</h1>
 			<Form
 				form={form}
 				onFinish={onFinish}
 			      {...layout}
-				  name="addrobot"
+				  name={`${props.type}robot`}
 			>
 				<Form.Item
 					label="Name"
@@ -74,7 +86,7 @@ function AddRobot() {
 				</Form.Item>
 				<Form.Item {...tailLayout}>  
 					<Button type="primary"  htmlType="submit">
-						Submit
+						{props.type} Robot
 					</Button>
 					<Button htmlType="button" onClick={onReset} type="danger">
 						Reset
@@ -85,4 +97,4 @@ function AddRobot() {
 	);
 	}
 
-export default AddRobot
+export default RobotInputForm
