@@ -6,6 +6,9 @@ import {
 } from '../redux/singleproject';
 import {Link, useParams} from 'react-router-dom';
 import ProjectInputForm from './ProjectInputForm.js';
+import AssignRobots from './AssignRobots.js'
+
+
 
 function SingleProject (props) {
 	const {projectId} = useParams()
@@ -52,6 +55,7 @@ function SingleProject (props) {
 							<span>Description: </span>
 							{project.description}
 						</li>
+						<AssignRobots />
 						{project.robots[0] ? (
 							<ul className="associations">
 								{project.robots.map(bot => (

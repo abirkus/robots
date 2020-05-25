@@ -4,8 +4,6 @@ import axios from 'axios';
 export const SET_ROBOTS = 'SET_ROBOTS';
 export const ADD_ROBOT = 'ADD_ROBOT';
 export const REMOVE_ROBOT = 'REMOVE_ROBOT';
-export const CLEAR_ROBOTS = 'CLEAR_ROBOTS';
-
 
 
 
@@ -22,9 +20,6 @@ export default (state = initialState, action) => {
 		}
 		case REMOVE_ROBOT: {
 			return state.filter(bot => bot.id !== Number(action.id));
-		}
-		case CLEAR_ROBOTS: {
-			return action.robots
 		}
 		default: {
 			return state;

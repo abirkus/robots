@@ -3,6 +3,8 @@ import { useSelector, useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
 import { unassignProjectThunk} from '../redux/singlerobot';
 import RobotInpuForm from './RobotInpuForm.js';
+import AssignProjects from './AssignProjects'
+
 
 function SingleRobot(props) {
 	const {robotId} = useParams()
@@ -39,6 +41,7 @@ function SingleRobot(props) {
 						<li>{robot.name}</li>
 						<li>{robot.fuelType}</li>
 						<li>{robot.fuelLevel}</li>
+						<AssignProjects />
 						{robot.projects.length ? (
 							<ul className="associations">
 								{robot.projects.map(proj => (
