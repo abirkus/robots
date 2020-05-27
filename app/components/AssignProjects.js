@@ -1,15 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
-import { Button, Modal } from 'antd'
+import { Button, Select, Menu, Dropdown  } from 'antd'
+import { DownOutlined } from '@ant-design/icons';
+
+const { Option } = Select;
+
 
 function AssignProjects(props) {
-    const [show, setShow] = useState(false);
-    const robots = useSelector( state => state.robots)
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const projects = useSelector( state => state.projects)
 
-	const dispatch = useDispatch()
+    const dispatch = useDispatch()
+    
+    const children = []
+
+    projects.forEach((el) => {
+        children.push(<Option key={el.id}>{el.title}</Option>);
+    })
 
 	// if we update robot details this selector will update the dom
 	const robot = useSelector( state => state.singleRobot)
@@ -26,28 +33,29 @@ function AssignProjects(props) {
 		}
 	}, [])
 
+    const handleChange = evt => {
+        // use this handle change to assign and unassign projects
+		console.log(evt)
+	};
 
 	console.log('robot from selector after dispatch', robot)
 	const handleClick = evt => {
 		dispatch({type: 'UNASSIGN_PRJCT_FROM_ROBOT', value: {robotId, projectId: evt.target.id}})
 	};
 
-		return (
+		return children.length ? (
         <div>
-            <Button variant="primary" onClick={handleShow}>
-              Assign Projects to this robot
-            </Button>
-            <Modal
-                title="Basic Modal"
-                visible={show}
-                onOk={handleClose}
-                onCancel={handleClose}
+            <Select
+                    mode="multiple"
+                    style={{ width: '100%' }}
+                    placeholder="Please select"
+                    defaultValue={['a10', 'c12']}
+                    onChange={handleChange}
                 >
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-                <p>Some contents...</p>
-            </Modal>
-        </div>)
+                    {children}
+            </Select>
+        </div>) : ( <div /> )
 }
 
 export default AssignProjects
+
