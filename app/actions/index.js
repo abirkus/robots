@@ -57,7 +57,12 @@ export const updateProject = project => ({
 })
 
 
-export const unassignProject = projectId => ({
-	type: 'UNASSIGN_PROJECT',
-	projectId,
+export const updateProjAssignment = project => ({
+	type: 'UPDATE_PROJ_ASSIGN',
+	project,
+})
+
+export const updateRobotAssignment = robot => ({
+	type: 'UPDATE_ROBOT_ASSIGN',
+	robot,
 })

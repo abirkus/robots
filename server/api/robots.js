@@ -84,8 +84,13 @@ router.put('/assignments/:id', async (req, res, next) => {
 		} else {
 			await robot.addProject(req.body.id);
 		}
-	
-		res.status(204).end();
+		const robotUpdated = await Robot.findOne({
+			where: {
+				id: req.params.id,
+			},
+			include: [Project],
+		});
+		res.json(robotUpdated.dataValues)
 	} catch (err) {
 		next(err);
 	}

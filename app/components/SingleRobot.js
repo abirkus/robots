@@ -1,7 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import {Link, useParams} from 'react-router-dom';
-import { unassignProjectThunk} from '../redux/singlerobot';
 import RobotInpuForm from './RobotInpuForm.js';
 import AssignProjects from './AssignProjects'
 
@@ -29,8 +28,8 @@ function SingleRobot(props) {
 
 
 	console.log('robot from selector after dispatch', robot)
-	const handleClick = evt => {
-		dispatch({type: 'UNASSIGN_PRJCT_FROM_ROBOT', value: {robotId, projectId: evt.target.id}})
+	const handleClick = projectId => {
+		dispatch({type: 'UPDATE_ROBOT_ASSIGNMENT', value: {robotId, projectId: projectId }})
 	};
 
 		return robot.id ? (
@@ -41,30 +40,8 @@ function SingleRobot(props) {
 						<li>{robot.name}</li>
 						<li>{robot.fuelType}</li>
 						<li>{robot.fuelLevel}</li>
-						<AssignProjects />
-						{robot.projects.length ? (
-							<ul className="associations">
-								{robot.projects.map(proj => (
-									<li key={proj.id}>
-										<Link to={`/projects/${proj.id}`}>
-											<span>{proj.title}</span>
-										</Link>
-										<span>
-											<button
-												type="button"
-												id={proj.id}
-												onClick={evt => {
-													handleClick(evt);
-												}}>
-												Unassign
-											</button>
-										</span>
-									</li>
-								))}
-							</ul>
-						) : (
-							<li>No projects for this robot</li>
-						)}
+						<li>Projects assigned to this robot:</li>
+						<AssignProjects handleClick={handleClick} />
 					</ul>
 				</div>
 				<RobotInpuForm type="Update" />
