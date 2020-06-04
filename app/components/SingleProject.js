@@ -24,7 +24,8 @@ function SingleProject (props) {
 	}, [projectId])
 
 	const handleClick = evt => {
-		dispatch(unassignRobotThunk(projectId, evt.target.id))
+		console.log("clicking", evt)
+		//dispatch({type: 'UPDATE_PROJECT_ASSIGNMENT', value: {projectId, robotId: evt.target.id}})
 	};
 	const handleComplete = evt => {
 		const completed = !props.project.completed;
@@ -55,7 +56,7 @@ function SingleProject (props) {
 							<span>Description: </span>
 							{project.description}
 						</li>
-						<AssignRobots />
+						<AssignRobots handleClick={handleClick} />
 						{project.robots[0] ? (
 							<ul className="associations">
 								{project.robots.map(bot => (

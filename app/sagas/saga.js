@@ -77,7 +77,7 @@ function* updateProjectAsync(prjct) {
   yield put(obj)
 }
 
-function* unassignProjectAsync(obj) {
+function* updateProjectAssignmentAsync(obj) {
   console.log('unassign project - obj received', obj)
   const proj = {
     id: obj.value.projectId,
@@ -87,6 +87,9 @@ function* unassignProjectAsync(obj) {
   yield put(resp)
 }
 
+function* updateRobotAssignmentAsync(obj) {
+
+}
 
 export function* mySaga() {
     yield takeLatest('FETCH_BOTS', fetchingBotsAsync)
@@ -99,5 +102,6 @@ export function* mySaga() {
     yield takeLatest('ADD_PRJCT', addProjectAsync)
     yield takeLatest('UPDATE_BOT', updateRobotAsync)
     yield takeLatest('UPDATE_PRJCT', updateProjectAsync)
-    yield takeLatest('UNASSIGN_PRJCT_FROM_ROBOT', unassignProjectAsync)
+    yield takeLatest('UPDATE_PROJECT_ASSIGNMENT', updateProjectAssignmentAsync)
+    yield takeLatest('UPDATE_ROBOT_ASSIGNMENT', updateRobotAssignmentAsync)
 }

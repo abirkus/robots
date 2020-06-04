@@ -66,9 +66,26 @@ router.put('/:id', async (req, res, next) => {
 
 router.put('/assignments/:id', async (req, res, next) => {
 	try {
-		const id = req.params.id;
-		const project = await Project.findByPk(id);
-		await project.removeRobot(req.body.id);
+		const project = await Project.findOne({
+			where: {
+				id: req.params.id,
+			},
+			include: [Robot],
+		});
+		let remove = false
+		project.dataValues.robots.find((el) => {
+			if (el.dataValues.id === Number(req.body.id)) {
+				remove = true
+			}
+		})
+
+		if (remove) {
+			await project.removeRobot(req.body.id);
+		} else {
+			await project.addRobot(req.body.id);
+		}
+
+
 		res.status(204).end();
 	} catch (err) {
 		next(err);
@@ -80,6 +97,7 @@ router.put('/complete/:id', async (req, res, next) => {
 		const id = req.params.id;
 		const project = await Project.findByPk(id);
 		await project.update(req.body);
+
 		res.status(204).end();
 	} catch (err) {
 		next(err);

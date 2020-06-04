@@ -67,9 +67,24 @@ router.put('/:id', async (req, res, next) => {
 
 router.put('/assignments/:id', async (req, res, next) => {
 	try {
-		const id = req.params.id;
-		const robot = await Robot.findByPk(id);
-		await robot.removeProject(req.body.id);
+		const robot = await Robot.findOne({
+			where: {
+				id: req.params.id,
+			},
+			include: [Project],
+		});
+		let remove = false
+		robot.dataValues.projects.find((el) => {
+			if (el.dataValues.id === Number(req.body.id)) {
+				remove = true
+			}
+		})
+		if (remove) {
+			await robot.removeProject(req.body.id);
+		} else {
+			await robot.addProject(req.body.id);
+		}
+	
 		res.status(204).end();
 	} catch (err) {
 		next(err);

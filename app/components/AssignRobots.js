@@ -5,8 +5,13 @@ import { Button, Modal, Select } from 'antd'
 
 function AssignRobots(props) {
     
-    const robots = useSelector( state => state.robots)
-
+    const allRobots = useSelector( state => state.robots)
+    
+    const currentRobots = useSelector( state => state.singleProject.robots)
+    const initialArr = []
+    currentRobots.forEach((bot) => {
+        initialArr.push(bot.name)
+    })
 	const dispatch = useDispatch()
 
 	// if we update robot details this selector will update the dom
@@ -17,8 +22,8 @@ function AssignRobots(props) {
 
     const children = []
 
-    robots.forEach((el) => {
-        children.push(<Option key={el.id}>{el.name}</Option>);
+    allRobots.forEach((el) => {
+        children.push(<Option key={el.id} onClick={props.handleClick}>{el.name}</Option>);
     })
 
 	// we are only using this effect once when we open new single robot page
@@ -31,14 +36,10 @@ function AssignRobots(props) {
 	}, [])
 
     const handleChange = evt => {
-        // use this handle change to assign and unassign projects
-		console.log(evt)
+        console.log("event", evt)
     };
     
-	console.log('robot from selector after dispatch', robot)
-	const handleClick = evt => {
-		dispatch({type: 'UNASSIGN_PRJCT_FROM_ROBOT', value: {robotId, projectId: evt.target.id}})
-	};
+
 
     return children.length ? (
         <div>
@@ -46,7 +47,9 @@ function AssignRobots(props) {
                     mode="multiple"
                     style={{ width: '100%' }}
                     placeholder="Please select"
-                    defaultValue={['a10', 'c12']}
+                    showArrow={true}
+                    showSearch={false}
+                    defaultValue={initialArr}
                     onChange={handleChange}
                 >
                     {children}
