@@ -209,3 +209,11 @@ button:disabled {
 	  height: 40vmin;
 	  pointer-events: none;
   }
+
+  .greetingStart {
+	  height: 600px;
+  }
+
+  .panda-start {
+	  height: 500px;
+  }
