@@ -14,7 +14,7 @@ const Employee = () => {
         curviness: 1.25,
         autoRotate: true,
         values: [
-          {x: 100, y: -20},
+          {x: 0, y: -20},
           {x: 300, y: 10},
           {x: 500, y: 100},
           {x: 750, y: -100},
@@ -27,7 +27,7 @@ const Employee = () => {
 
 
     useEffect(() => {
-          const bee = TweenMax.to('.bee', 1, {
+          const bee = TweenMax.to(employee, 1, {
             bezier: flightPath,
             ease: Power1.easeInOut
           })
@@ -51,7 +51,7 @@ const Employee = () => {
 
     return (
       <div className="bee-container">
-          <img ref={el => {employee = el}} src="/employee.jpg" id="bee" className="bee" />
+          <img ref={el => {employee = el}} src="/employee.png" id="bee" className="bee" />
       </div>
     )
 }
