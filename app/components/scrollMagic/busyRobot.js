@@ -4,9 +4,8 @@ import ScrollMagic from "scrollmagic/scrollmagic/uncompressed/ScrollMagic";
 import "animation.gsap";
 import "debug.addIndicators";
 //import TweenMax from "gsap/src/uncompressed/TweenMax";
-import TimelineMax from "gsap/src/uncompressed/TimelineMax";
 
-const Greeting = () => {
+const BusyRobot = () => {
 	let logoItem = useRef(null)
 	const controller = new ScrollMagic.Controller({addIndicators: true})
 	
@@ -25,13 +24,7 @@ const Greeting = () => {
 	}, [])
 
 	return (
-		<div >
-			<div className="greetingStart">
-			<h1>
-			Welcome to StackBot Project Management: your robot employees are
-			awaiting project assignments!
-			</h1>
-			</div>
+		<div className="greetingStart">
 		<div className="panda-start">
 			<img ref={el => {logoItem = el}} src="/panda.gif" id="logo" className="app-logo" alt="logo" />
 		</div>
@@ -40,4 +33,4 @@ const Greeting = () => {
 	);
 };
 
-export default Greeting;
+export default BusyRobot;

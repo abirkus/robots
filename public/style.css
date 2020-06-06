@@ -13,41 +13,34 @@
 	}
 }
 
+body {
+	background-color: #68b5e2;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
 #container {
-	height: 100%;
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
 .topnav {
-	display: flex;
-	justify-content: space-between;
-	align-self: center;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #333;
-	border-radius: 25px;
+	text-align: center;
+	font-size: 3rem;
+}
+
+.topnav a {
+	color: white;
 }
 
 a {
+	text-align: center;
 	font-style: bold;
 	color: white;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.topnav a {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 3rem;
-}
 
 .topnav a:hover {
 	background-color: rgb(100, 216, 100);
@@ -104,11 +97,7 @@ a {
 	text-align: center;
 }
 
-body > #main {
-	background-color: #68b5e2;
-	color: white;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
+
 
 
 
@@ -182,10 +171,11 @@ button:disabled {
 	text-align: center;
 	position: relative;
 	overflow: hidden;
+
   }
   
   .bcg {
-	background: url('chicago.jpg') no-repeat;
+	background: url('warehouse.jpg') no-repeat;
 	background-size: cover;
 	position: absolute;
 	width: 100%;
@@ -197,6 +187,7 @@ button:disabled {
   
   .content-wrapper {
 	width: 90%;
+	min-height: 400px;
 	margin: 0 auto;
 	max-width: 1140px;
 	position: relative;
@@ -216,4 +207,9 @@ button:disabled {
 
   .panda-start {
 	  height: 500px;
+  }
+
+  .myFooter {
+	  text-align: center;
+	  font-size: x-large;
   }

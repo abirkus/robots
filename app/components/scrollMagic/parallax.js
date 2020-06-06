@@ -30,15 +30,10 @@ const Parallax = () => {
       <div id="animate2" className="bcg" />
 
       <div className="content-wrapper">
-        <h1>Parallax Effect</h1>
+        <h1>Welcome To StackBot Inc.</h1>
         <p>
-          Parallax (from Ancient Greek παράλλαξις (parallaxis), meaning
-          'alternation') is a displacement or difference in the apparent
-          position of an object viewed along two different lines of sight, and
-          is measured by the angle or semi-angle of inclination between those
-          two lines.[1][2] Due to foreshortening, nearby objects show a larger
-          parallax than farther objects when observed from different
-          positions, so parallax can be used to determine distances.
+          This is a place where you can use technology to your advantage by creating robots and assigning projects for them to complete.
+          Automation is inevitable, stay ahead of the curve by utilizing robotics for all your goals.
         </p>
       </div>
     </div>

@@ -1,44 +1,20 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link} from 'react-router-dom';
-import AllRobots from './AllRobots';
-import AllProjects from './AllProjects';
-import SingleRobot from './SingleRobot';
-import SingleProject from './SingleProject';
-import {connect} from 'react-redux';
-import LandingPage from './LandingPage.js';
+import Navbar from './navbar'
+import Routes from './routes'
+import MyFooter from './myFooter'
+import { Layout } from 'antd';
+
+const { Header, Footer, Sider, Content } = Layout;
 
 function Root() {
 
 	return (
-		<Router>
-			<div id="container">
-				<nav className="topnav">
-					<Link to="/">Home</Link>
-					<Link to="/robots">All Robots</Link>
-					<Link to="/projects">All Projects</Link>
-				</nav>
-
-				<div id="root">
-				<Route
-						path="/robots/:robotId"
-						component={SingleRobot}
-					/>
-					<Route
-						path="/projects/:projectId"
-						component={SingleProject}
-					/>
-					<Route exact path="/robots" component={AllRobots} />
-					<Route exact path="/projects" component={AllProjects} />
-					<Route exact path="/" component={LandingPage} />
-				</div>
-			</div>
-		</Router>
+	<Layout>
+		<Header><Navbar /></Header>
+		<Content><Routes /></Content>
+		<Footer className="myFooter"><MyFooter /></Footer>
+	</Layout>
 	);
 }
 
-
-
-export default connect(
-	null,
-	null
-)(Root);
+export default Root;
