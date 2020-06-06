@@ -1,13 +1,11 @@
 import React from 'react';
 import Greeting from './scrollMagic/greeting.js'
-import About from './scrollMagic/about.js'
 import Parallax from './scrollMagic/parallax.js'
 
 const LandingPage = () => {
 	return (
-		<div>
+		<div className="greeting">
 			<Greeting />
-			<About />
 			<Parallax />
 		</div>
 	);

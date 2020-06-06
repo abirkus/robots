@@ -1,5 +1,5 @@
 import React, {Component, useRef, useEffect} from 'react'
-import {TweenMax, Power3, TimelineMax, Power0} from 'react-gsap'
+//import {TweenMax, Power3, TimelineMax, Power0} from 'react-gsap'
 
 import {Controller, Scene} from 'react-scrollmagic'
 

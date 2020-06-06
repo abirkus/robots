@@ -1,6 +1,6 @@
 'use strict'
 
-const { resolve } = require('path')
+const path = require('path')
 
 module.exports = {
   entry: ['babel-polyfill', './app/main'],
@@ -12,13 +12,17 @@ module.exports = {
   context: __dirname,
   devtool: 'source-map',
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
+    alias: {
+      "ScrollMagic": path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/ScrollMagic.js'),
+      "debug.addIndicators": path.resolve('node_modules', 'scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators.js')
+  },
   },
   module: {
     rules: [
       {
         test: /jsx?$/,
-        include: resolve(__dirname, './app'),
+        include: path.resolve(__dirname, './app'),
         loader: 'babel-loader'
       },
       {

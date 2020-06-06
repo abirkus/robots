@@ -64,7 +64,6 @@ a {
 .greeting {
 	flex-direction: column;
 	display: flex;
-	height: 400px;
 	width: 300px;
 	justify-content: center;
 	animation-duration: 2s;
@@ -202,4 +201,11 @@ button:disabled {
 	max-width: 1140px;
 	position: relative;
 	z-index: 2;
+  }
+
+
+  .app-logo {
+	  opacity: 0.2;
+	  height: 40vmin;
+	  pointer-events: none;
   }
