@@ -2,7 +2,7 @@ import axios from 'axios';
 
 //action type
 export const GET_SINGLE_PROJECT = 'GET_SINGLE_PROJECT';
-export const UPDATE_PROJ_ASSIGN = 'UPDATE_PROJ_ASSIGN';
+export const UNASSIGN_ROBOT = 'UNASSIGN_ROBOT';
 export const COMPLETE_PROJECT = 'COMPLETE_PROJECT';
 export const UPDATE_PROJECT = 'UPDATE_PROJECT';
 export const CLEAR_PROJECT = 'CLEAR_PROJECT';
@@ -56,8 +56,11 @@ export default (state = initialState, action) => {
 		case GET_SINGLE_PROJECT: {
 			return action.project;
 		}
-		case UPDATE_PROJ_ASSIGN: {
-			return action.project;
+		case UNASSIGN_ROBOT: {
+			const newRobotArr = state.robots.filter(
+				bot => bot.id !== Number(action.id)
+			);
+			return {...state, robots: newRobotArr};
 		}
 		case COMPLETE_PROJECT: {
 			return {...state, completed: !state.completed};

@@ -78,21 +78,17 @@ function* updateProjectAsync(prjct) {
 }
 
 function* updateProjectAssignmentAsync(obj) {
-  const robot = {
-    id: obj.value.robotId,
+  console.log('unassign project - obj received', obj)
+  const proj = {
+    id: obj.value.projectId,
   };
-  const {data} = yield call(axios.put, `/api/projects/assignments/${obj.value.projectId}`, robot)
-  const resp = yield actions.updateProjAssignment(data)
+  const {data} = yield call(axios.put, `/api/robots/assignments/${obj.value.robotId}`, proj)
+  const resp = yield actions.unassignProject(obj.value.projectId)
   yield put(resp)
 }
 
 function* updateRobotAssignmentAsync(obj) {
-  const project = {
-    id: obj.value.projectId,
-  };
-  const {data} = yield call(axios.put, `/api/robots/assignments/${obj.value.robotId}`, project)
-  const resp = yield actions.updateRobotAssignment(data)
-  yield put(resp)
+
 }
 
 export function* mySaga() {

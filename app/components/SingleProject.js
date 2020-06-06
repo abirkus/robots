@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import {
+	unassignRobotThunk,
 	completeProjectThunk
 } from '../redux/singleproject';
 import {Link, useParams} from 'react-router-dom';
@@ -22,8 +23,9 @@ function SingleProject (props) {
 		}
 	}, [projectId])
 
-	const handleClick = robotId => {
-		dispatch({type: 'UPDATE_PROJECT_ASSIGNMENT', value: {projectId, robotId: robotId }})
+	const handleClick = evt => {
+		console.log("clicking", evt)
+		//dispatch({type: 'UPDATE_PROJECT_ASSIGNMENT', value: {projectId, robotId: evt.target.id}})
 	};
 	const handleComplete = evt => {
 		const completed = !props.project.completed;
@@ -54,8 +56,31 @@ function SingleProject (props) {
 							<span>Description: </span>
 							{project.description}
 						</li>
-						<li>Robots assigned to this project:</li>
 						<AssignRobots handleClick={handleClick} />
+						{project.robots[0] ? (
+							<ul className="associations">
+								{project.robots.map(bot => (
+									<li key={bot.id}>
+										<Link to={`/robots/${bot.id}`}>
+											<span>Robot: </span>
+											<span>{bot.name}</span>
+										</Link>
+										<span>
+											<button
+												type="button"
+												id={bot.id}
+												onClick={evt => {
+													handleClick(evt);
+												}}>
+												Unassign
+											</button>
+										</span>
+									</li>
+								))}
+							</ul>
+						) : (
+							<li>No robots for this project</li>
+						)}
 						<div>
 							<br />
 							<button

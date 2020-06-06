@@ -23,7 +23,7 @@ function AssignRobots(props) {
     const children = []
 
     allRobots.forEach((el) => {
-        children.push(<Option key={el.id}>{el.name}</Option>);
+        children.push(<Option key={el.id} onClick={props.handleClick}>{el.name}</Option>);
     })
 
 	// we are only using this effect once when we open new single robot page
@@ -36,8 +36,9 @@ function AssignRobots(props) {
 	}, [])
 
     const handleChange = evt => {
-        props.handleClick(evt)
+        console.log("event", evt)
     };
+    
 
 
     return children.length ? (
@@ -49,8 +50,7 @@ function AssignRobots(props) {
                     showArrow={true}
                     showSearch={false}
                     defaultValue={initialArr}
-                    onSelect={handleChange}
-                    onDeselect={handleChange}
+                    onChange={handleChange}
                 >
                     {children}
             </Select>

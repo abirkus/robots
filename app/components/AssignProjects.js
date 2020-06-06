@@ -18,19 +18,30 @@ function AssignProjects(props) {
         children.push(<Option key={el.id}>{el.title}</Option>);
     })
 
+	// if we update robot details this selector will update the dom
+	const robot = useSelector( state => state.singleRobot)
+
+	console.log('robot from selector before dispatch', robot)
+
+
 	// we are only using this effect once when we open new single robot page
 	useEffect(() => {
 		try {
-            dispatch({ type: 'FETCH_PROJECTS'})
+            dispatch({ type: "FETCH_PROJECTS"})
 		} catch (e) {
 			console.error(e.message)
 		}
 	}, [])
 
     const handleChange = evt => {
-        props.handleClick(evt)
+        // use this handle change to assign and unassign projects
+		console.log(evt)
 	};
 
+	console.log('robot from selector after dispatch', robot)
+	const handleClick = evt => {
+		dispatch({type: 'UNASSIGN_PRJCT_FROM_ROBOT', value: {robotId, projectId: evt.target.id}})
+	};
 
 		return children.length ? (
         <div>
@@ -38,8 +49,8 @@ function AssignProjects(props) {
                     mode="multiple"
                     style={{ width: '100%' }}
                     placeholder="Please select"
-                    onSelect={handleChange}
-                    onDeselect={handleChange}
+                    defaultValue={['a10', 'c12']}
+                    onChange={handleChange}
                 >
                     {children}
             </Select>
