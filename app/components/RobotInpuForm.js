@@ -78,7 +78,7 @@ function RobotInputForm(props) {
 							  max: 100,
 							},
 						  ]}>
-					<InputNumber />
+					<InputNumber size="default" style={{ width: '100%' }} />
 				</Form.Item>
 
 				<Form.Item label="Image Url:" name={['robot', 'imageUrl']}>

@@ -88,7 +88,6 @@ a {
 	flex-wrap: wrap;
 	flex-grow: 2;
 	order: 2;
-	width: 25%;
 	animation-duration: 2s;
 	animation-name: bounceIn;
 }
@@ -117,50 +116,6 @@ li {
 	font-size: 1rem;
 }
 
-
-
-
-
-/* form */
-
-form input {
-	width: 100%;
-	padding: 0.3em;
-	margin: 0.5em 0;
-	font-size: 0.5em;
-}
-
-form select {
-	width: 100%;
-}
-
-button {
-	color: white;
-	background-color: #59a9e9;
-	border-radius: 8px;
-	border: 2px solid black;
-	transition-duration: 0s;
-}
-
-button:hover {
-	background-color: white; /* Green */
-	color: rgb(0, 183, 255);
-}
-
-button:disabled {
-	background-color: #ccc;
-}
-
-/* utility/layout */
-
-.warning {
-	padding: 0 0.5em;
-	font-size: 1em;
-	letter-spacing: 0.1em;
-	background-color: orange;
-	color: white;
-	margin-left: 1em;
-}
 
 /* PARALLAX */
 
@@ -213,3 +168,4 @@ button:disabled {
 	  text-align: center;
 	  font-size: x-large;
   }
+
