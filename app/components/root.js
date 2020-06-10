@@ -9,9 +9,12 @@ const { Header, Footer, Sider, Content } = Layout;
 function Root() {
 
 	return (
-	<Layout>
-		<Header><Navbar /></Header>
-		<Content><Routes /></Content>
+	<Layout style={{
+        overflow: 'auto',
+        minHeight: '100vh',
+      }}>
+		<Header className="myHeader"><Navbar /></Header>
+		<Content className="myContent"><Routes /></Content>
 		<Footer className="myFooter"><MyFooter /></Footer>
 	</Layout>
 	);
