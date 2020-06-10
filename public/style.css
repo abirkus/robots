@@ -172,3 +172,7 @@ li {
   .myHeader {
 	background:  rgb(12, 13, 66);
   }
+
+  .deadlinePicker {
+	  width: 100%;
+  }

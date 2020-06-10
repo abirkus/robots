@@ -4,7 +4,10 @@ import {Link, useParams} from 'react-router-dom';
 import { unassignProjectThunk} from '../redux/singlerobot';
 import RobotInpuForm from './RobotInpuForm.js';
 import AssignProjects from './AssignProjects'
-import { Row, Col } from 'antd';
+import { Row, Col, Card } from 'antd';
+
+const { Meta } = Card;
+
 
 function SingleRobot(props) {
 	const {robotId} = useParams()
@@ -38,36 +41,20 @@ function SingleRobot(props) {
 				<Col span={12}>
 					<Row justify="center">
 						<Col>
-						<ul>
-						<img src={robot.imageUrl} height="300" width="400" />
-						<li>{robot.name}</li>
-						<li>{robot.fuelType}</li>
-						<li>{robot.fuelLevel}</li>
-						<AssignProjects />
-						{robot.projects.length ? (
-							<ul className="associations">
-								{robot.projects.map(proj => (
-									<li key={proj.id}>
-										<Link to={`/projects/${proj.id}`}>
-											<span>{proj.title}</span>
-										</Link>
-										<span>
-											<button
-												type="button"
-												id={proj.id}
-												onClick={evt => {
-													handleClick(evt);
-												}}>
-												Unassign
-											</button>
-										</span>
-									</li>
-								))}
+
+						<Card
+							hoverable
+							style={{width: '300px', background: 'silver'}}
+							cover={<img alt="example" src={robot.imageUrl} />}
+						>
+							<Meta title={robot.name} />
+							<ul>
+								<li>Fuel Type: {robot.fuelType}</li>
+								<li>Fuel Level: {robot.fuelLevel}</li>
+								<li>Assigned Projects:</li>
+								<AssignProjects />
 							</ul>
-						) : (
-							<li>No projects for this robot</li>
-						)}
-						</ul>
+						</Card>
 						</Col>
 					</Row>
 				</Col>

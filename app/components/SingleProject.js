@@ -1,14 +1,16 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import {
-	unassignRobotThunk,
 	completeProjectThunk
 } from '../redux/singleproject';
 import {Link, useParams} from 'react-router-dom';
 import ProjectInputForm from './ProjectInputForm.js';
 import AssignRobots from './AssignRobots.js'
-import { Row, Col } from 'antd';
+import { Row, Col, Card, Button } from 'antd';
+import { ToolOutlined  } from '@ant-design/icons';
 
+
+const { Meta } = Card;
 
 function SingleProject (props) {
 	const {projectId} = useParams()
@@ -37,64 +39,29 @@ function SingleProject (props) {
 				<Col span={12}>
 					<Row justify="center">
 						<Col>
+						<Card
+							hoverable
+							style={{width: '300px', background: 'silver'}}
+							cover={<ToolOutlined style={{fontSize: '30px'}} />}
+						>
+							<Meta title={project.title} />
 							<ul>
-								<li>
-									<span>Title: </span>
-									{project.title}
-								</li>
-								<li>
-									<span>Deadline: </span>
-									{project.deadline}
-								</li>
-								<li>
-									<span>Priority: </span>
-									{project.priority}
-								</li>
-								<li>
-									<span>Completed: </span>
-									{project.completed ? 'YES' : 'NO'}
-								</li>
-								<li>
-									<span>Description: </span>
-									{project.description}
-								</li>
+								<li>Deadline: {project.deadline}</li>
+								<li>Priority: {project.priority}</li>
+								<li>Completed: {project.completed ? 'YES' : 'NO'}</li>
+								<li>Description: {project.description}</li>
+								<li>Assigned Robots:</li>
 								<AssignRobots handleClick={handleClick} />
-								{project.robots[0] ? (
-									<ul className="associations">
-										{project.robots.map(bot => (
-											<li key={bot.id}>
-												<Link to={`/robots/${bot.id}`}>
-													<span>Robot: </span>
-													<span>{bot.name}</span>
-												</Link>
-												<span>
-													<button
-														type="button"
-														id={bot.id}
-														onClick={evt => {
-															handleClick(evt);
-														}}>
-														Unassign
-													</button>
-												</span>
-											</li>
-										))}
-									</ul>
-								) : (
-									<li>No robots for this project</li>
-								)}
-								<div>
-									<br />
-									<button
+							</ul>
+							<Button
 										type="button"
 										id={project.id}
 										onClick={evt => {
 											handleComplete(evt);
 										}}>
 										Complete
-									</button>
-								</div>
-							</ul>
+							</Button>
+						</Card>
 						</Col>
 					</Row>
 				</Col>
@@ -105,7 +72,6 @@ function SingleProject (props) {
 					</Col>
 				</Row>
 			</Col>
-
 			</Row>
 		) : (
 			<div />
