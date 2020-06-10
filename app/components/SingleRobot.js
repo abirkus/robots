@@ -4,7 +4,7 @@ import {Link, useParams} from 'react-router-dom';
 import { unassignProjectThunk} from '../redux/singlerobot';
 import RobotInpuForm from './RobotInpuForm.js';
 import AssignProjects from './AssignProjects'
-
+import { Row, Col } from 'antd';
 
 function SingleRobot(props) {
 	const {robotId} = useParams()
@@ -34,9 +34,11 @@ function SingleRobot(props) {
 	};
 
 		return robot.id ? (
-			<div className="allItems">
-				<div key={robot.id} className="list">
-					<ul>
+			<Row align="middle">
+				<Col span={12}>
+					<Row justify="center">
+						<Col>
+						<ul>
 						<img src={robot.imageUrl} height="300" width="400" />
 						<li>{robot.name}</li>
 						<li>{robot.fuelType}</li>
@@ -65,10 +67,19 @@ function SingleRobot(props) {
 						) : (
 							<li>No projects for this robot</li>
 						)}
-					</ul>
-				</div>
-				<RobotInpuForm type="Update" />
-			</div>
+						</ul>
+						</Col>
+					</Row>
+				</Col>
+			<Col span={12}>
+				<Row justify="center">
+					<Col>
+						<RobotInpuForm type="Update" />
+					</Col>
+				</Row>
+			</Col>
+
+			</Row>
 		) : (
 			<div>No robot loading ...</div>
 		);
