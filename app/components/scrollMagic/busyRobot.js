@@ -24,7 +24,7 @@ const BusyRobot = () => {
 	}, [])
 
 	return (
-		<div className="greetingStart">
+		<div className="busyRobot">
 		<div className="panda-start">
 			<img ref={el => {logoItem = el}} src="/panda.gif" id="logo" className="app-logo" alt="logo" />
 		</div>

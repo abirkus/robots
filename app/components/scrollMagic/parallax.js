@@ -3,6 +3,7 @@ import {TweenMax, Power0} from 'gsap'
 import ScrollMagic from "scrollmagic/scrollmagic/uncompressed/ScrollMagic";
 import "animation.gsap";
 import "debug.addIndicators";
+import { Row, Col } from 'antd'
 // import 'imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators'
 // import 'imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap'
 
@@ -30,11 +31,14 @@ const Parallax = () => {
       <div id="animate2" className="bcg" />
 
       <div className="content-wrapper">
-        <h1>Welcome To StackBot Inc.</h1>
-        <p>
-          This is a place where you can use technology to your advantage by creating robots and assigning projects for them to complete.
-          Automation is inevitable, stay ahead of the curve by utilizing robotics for all your goals.
-        </p>
+        <Row>
+          <Col span={16} offset={1}>
+            <div>
+              This is a place where you can use technology to your advantage by creating robots and assigning projects for them to complete.
+              Automation is inevitable, stay ahead of the curve by utilizing robotics for all your goals.
+            </div>
+          </Col>
+        </Row>
       </div>
     </div>
   )

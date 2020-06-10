@@ -125,7 +125,9 @@ li {
 	text-align: center;
 	position: relative;
 	overflow: hidden;
-
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
   }
   
   .bcg {
@@ -140,12 +142,12 @@ li {
   }
   
   .content-wrapper {
-	width: 90%;
-	min-height: 400px;
-	margin: 0 auto;
-	max-width: 1140px;
+	font-size: 2rem;
 	position: relative;
 	z-index: 2;
+	display: flex;
+	justify-content: start;
+	align-items: center;
   }
 
 
@@ -175,4 +177,22 @@ li {
 
   .deadlinePicker {
 	  width: 100%;
+  }
+
+  .welcome {
+	  display: flex;
+	  align-items: center;
+	  text-align: center;
+	  font-size: 5rem;
+	  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	  min-height: 100vh;
+	  background: darkslategrey;
+  }
+
+  .bee-container {
+	  min-height: 100vh;
+  }
+
+  .busyRobot {
+	  min-height: 100vh;
   }
