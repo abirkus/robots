@@ -13,7 +13,7 @@ const BusyRobot = () => {
 		const ourScene = new ScrollMagic.Scene({
 			triggerElement: '.panda-start',
 			triggerHook: 0,
-			duration: '50%'
+			duration: '100%'
 		})
 		.setTween(TweenMax.to(logoItem, 0.9, {opacity: 1, y: -20, ease: Power3.easeOut}))
 		.addIndicators({

@@ -37,7 +37,7 @@ const Employee = () => {
           new ScrollMagic.Scene({
             triggerElement: '.bee-container',
             triggerHook: 0,
-            duration: '50%'
+            duration: '100%'
           })
             .setTween(timeline)
             .setPin('.bee-container')

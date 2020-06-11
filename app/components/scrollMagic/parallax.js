@@ -16,7 +16,7 @@ const Parallax = () => {
 		const ourScene = new ScrollMagic.Scene({
 			triggerElement: '.bcg-parallax',
 			triggerHook: 1,
-			duration: '50%'
+			duration: '100%'
 		})
 		.setTween(TweenMax.to('.bcg', 1, {y: '-30%', ease: Power0.easeNone}))
 		.addIndicators({
