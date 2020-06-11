@@ -1,47 +1,47 @@
-import React, {Component, useRef, useEffect} from 'react'
-import {TweenMax, Power3, TimelineMax, Power0} from 'react-gsap'
-
-import {Controller, Scene} from 'react-scrollmagic'
-
+import React, {useRef, useEffect} from 'react';
+import {TweenMax, Power0} from 'gsap'
+import ScrollMagic from "scrollmagic/scrollmagic/uncompressed/ScrollMagic";
+import "animation.gsap";
+import "debug.addIndicators";
+import { Row, Col } from 'antd'
 // import 'imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators'
 // import 'imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap'
 
-class Parallax extends Component {
-  // constructor(props) {
-  //   super(props)
-  //   this.controller = new Controller({addIndicators: true})
-  // }
+const Parallax = () => {
 
-  // componentDidMount() {
-  //   new Scene({
-  //     triggerElement: '.bcg-parallax',
-  //     triggerHook: 1,
-  //     duration: 1000
-  //   })
-  //     .setTween('#animate2', {backgroundColor: 'blue'})
-  //     .addTo(this.controller)
-  // }
+  //let logoItem = useRef(null)
+	const controller = new ScrollMagic.Controller({addIndicators: true})
+	
+	useEffect(() => {
+		const ourScene = new ScrollMagic.Scene({
+			triggerElement: '.bcg-parallax',
+			triggerHook: 1,
+			duration: '100%'
+		})
+		.setTween(TweenMax.to('.bcg', 1, {y: '-30%', ease: Power0.easeNone}))
+		.addIndicators({
+			name: 'parallax scene',
+			colorTrigger: 'black',
+		})
+		.addTo(controller)
+  }, [])
+  
+  return (
+    <div className="bcg-parallax">
+      <div id="animate2" className="bcg" />
 
-  render() {
-    return (
-      <div className="bcg-parallax">
-        <div id="animate2" className="bcg" />
-
-        <div className="content-wrapper">
-          <h1>Parallax Effect</h1>
-          <p>
-            Parallax (from Ancient Greek παράλλαξις (parallaxis), meaning
-            'alternation') is a displacement or difference in the apparent
-            position of an object viewed along two different lines of sight, and
-            is measured by the angle or semi-angle of inclination between those
-            two lines.[1][2] Due to foreshortening, nearby objects show a larger
-            parallax than farther objects when observed from different
-            positions, so parallax can be used to determine distances.
-          </p>
-        </div>
+      <div className="content-wrapper">
+        <Row>
+          <Col span={16} offset={1}>
+            <div>
+              This is a place where you can use technology to your advantage by creating robots and assigning projects for them to complete.
+              Automation is inevitable, stay ahead of the curve by utilizing robotics for all your goals.
+            </div>
+          </Col>
+        </Row>
       </div>
-    )
-  }
+    </div>
+  )
 }
 
 export default Parallax

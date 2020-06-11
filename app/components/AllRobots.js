@@ -3,24 +3,10 @@ import { useSelector, useDispatch} from 'react-redux';
 import { createSelector } from 'reselect';
 import {Link, useParams} from 'react-router-dom';
 import RobotInpuForm from './RobotInpuForm.js';
-import {removeRobotThunk, fetchRobotsThunk, clearRobotsThunk} from '../redux/robots.js';
-import { Table, List, Avatar } from 'antd';
+import { Table, List, Avatar, Row, Col } from 'antd';
 import DeleteRowCell from './Cells/DeleteCell'
 import { RobotNameCell } from './Cells/nameCell'
 
-const columns = [
-	{
-	  dataIndex: 'name',
-	  key: 'name',
-	  render: (value, row) => <RobotNameCell value={value} id={row.id}/>
-	},
-	{
-		dataIndex: 'id',
-		render: (record) => <DeleteRowCell record={record} type="robot" />,
-		key: 'id',
-	  },
-  ];
-  
 
 function AllRobots(props) {
 		const dispatch = useDispatch()
@@ -38,31 +24,46 @@ function AllRobots(props) {
 
 
 		return robots.length ? (
-			<div className="allItems">
-				<div className="list">
-				<List
-					itemLayout="horizontal"
-					dataSource={robots}
-					renderItem={item => (
-					<List.Item>
-						<List.Item.Meta
-						avatar={<Avatar src={`${item.imageUrl}`} />}
-						title={<Link to={`/robots/${item.id}`}>{item.name}</Link>}
-						/>
-						<div><DeleteRowCell record={item} /></div>
-					</List.Item>
-					)}
-				/>
-					{/* <Table dataSource={robots} columns={columns} pagination={false} size="small" /> */}
-					<div />
-				</div>
-				<RobotInpuForm type="Add" />
-			</div>
+			<Row align="middle">
+				<Col span={12} >
+					<Row justify="center">
+					<Col>
+					<List
+						itemLayout="horizontal"
+						dataSource={robots}
+						renderItem={item => (
+						<List.Item>
+							<List.Item.Meta
+							avatar={<Avatar src={`${item.imageUrl}`} />}
+							title={<Link to={`/robots/${item.id}`}>{item.name}</Link>}
+							/>
+							<div><DeleteRowCell record={item} /></div>
+						</List.Item>
+						)}
+					/>
+					</Col>
+					</Row>
+				</Col>
+				<Col span={12} >
+					<Row justify="center">
+						<Col>
+							<RobotInpuForm type="Add" />
+						</Col>
+					</Row>
+				</Col>
+			</Row>
 		) : (
-			<div>
+			<Row align="middle"> 
+			<Col span={24} >
+			<Row justify="center">
+				<Col>
 				<h1>No Robots Found</h1>
-				<RobotInpuForm type="Add" />
-			</div>
+					<RobotInpuForm type="Add" />
+				</Col>
+			</Row>
+			</Col>
+
+			</Row>
 		);
 }
 

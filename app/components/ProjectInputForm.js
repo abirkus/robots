@@ -65,7 +65,7 @@ function ProjectInputForm(props) {
 					label="Deadline:"
 					name = {['project', 'deadline']}
 					>
-					<DatePicker />
+					<DatePicker className="deadlinePicker"/>
 				</Form.Item>
 
 				<Form.Item label="Priority" name={['project', 'priority']}>
@@ -97,10 +97,10 @@ function ProjectInputForm(props) {
 				</Form.Item>
 
 				<Form.Item {...tailLayout}>  
-					<Button type="primary"  htmlType="submit">
+					<Button type="primary"  htmlType="submit" size="small">
 						{props.type} Project
 					</Button>
-					<Button htmlType="button" onClick={onReset} type="danger">
+					<Button htmlType="button" onClick={onReset} type="danger" size="small">
 						Reset
 					</Button>
 				</Form.Item>

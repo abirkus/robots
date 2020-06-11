@@ -13,41 +13,33 @@
 	}
 }
 
+
+.fullBody {
+	background-color: #68b5e2;
+}
+
 #container {
-	height: 100%;
-	width: 100%;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 }
 
 .topnav {
-	display: flex;
-	justify-content: space-between;
-	align-self: center;
-	margin: 0;
-	padding: 0;
-	overflow: hidden;
-	background-color: #333;
-	border-radius: 25px;
+	text-align: center;
+	font-size: 3rem;
+}
+
+.topnav a {
+	color: white;
 }
 
 a {
+	text-align: center;
 	font-style: bold;
 	color: white;
 	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-.topnav a {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	color: white;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
-	font-size: 3rem;
-}
 
 .topnav a:hover {
 	background-color: rgb(100, 216, 100);
@@ -64,7 +56,6 @@ a {
 .greeting {
 	flex-direction: column;
 	display: flex;
-	height: 400px;
 	width: 300px;
 	justify-content: center;
 	animation-duration: 2s;
@@ -96,7 +87,6 @@ a {
 	flex-wrap: wrap;
 	flex-grow: 2;
 	order: 2;
-	width: 25%;
 	animation-duration: 2s;
 	animation-name: bounceIn;
 }
@@ -105,11 +95,7 @@ a {
 	text-align: center;
 }
 
-body > #main {
-	background-color: #68b5e2;
-	color: white;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-}
+
 
 
 
@@ -130,63 +116,21 @@ li {
 }
 
 
-
-
-
-/* form */
-
-form input {
-	width: 100%;
-	padding: 0.3em;
-	margin: 0.5em 0;
-	font-size: 0.5em;
-}
-
-form select {
-	width: 100%;
-}
-
-button {
-	color: white;
-	background-color: #59a9e9;
-	border-radius: 8px;
-	border: 2px solid black;
-	transition-duration: 0s;
-}
-
-button:hover {
-	background-color: white; /* Green */
-	color: rgb(0, 183, 255);
-}
-
-button:disabled {
-	background-color: #ccc;
-}
-
-/* utility/layout */
-
-.warning {
-	padding: 0 0.5em;
-	font-size: 1em;
-	letter-spacing: 0.1em;
-	background-color: orange;
-	color: white;
-	margin-left: 1em;
-}
-
 /* PARALLAX */
 
 .bcg-parallax {
 	padding: 100px 0;
 	color: #fff;
-	background-color: black;
 	text-align: center;
 	position: relative;
 	overflow: hidden;
+	min-height: 100vh;
+	display: flex;
+	align-items: center;
   }
   
   .bcg {
-	background: url('chicago.jpg') no-repeat;
+	background: url('warehouse.jpg') no-repeat;
 	background-size: cover;
 	position: absolute;
 	width: 100%;
@@ -197,9 +141,62 @@ button:disabled {
   }
   
   .content-wrapper {
-	width: 90%;
-	margin: 0 auto;
-	max-width: 1140px;
+	font-size: 2rem;
 	position: relative;
 	z-index: 2;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+  }
+
+
+  .app-logo {
+	  opacity: 0.2;
+	  height: 40vmin;
+	  pointer-events: none;
+  }
+
+  .greetingStart {
+	  height: 600px;
+  }
+
+  .panda-start {
+	  height: 500px;
+  }
+
+  .myFooter {
+	  text-align: center;
+	  font-size: x-large;
+	  background-color: #232F3E;
+  }
+
+  .myHeader {
+	background:  rgb(12, 13, 66);
+  }
+
+  .deadlinePicker {
+	  width: 100%;
+  }
+
+  .welcome {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  text-align: center;
+	  font-size: 5rem;
+	  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	  min-height: 100vh;
+	  background: darkslategrey;
+  }
+
+.welcome h1 {
+	animation-duration: 2s;
+	animation-name: bounceIn;
+}
+  .bee-container {
+	  min-height: 100vh;
+  }
+
+  .busyRobot {
+	  min-height: 100vh;
   }

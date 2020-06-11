@@ -78,17 +78,17 @@ function RobotInputForm(props) {
 							  max: 100,
 							},
 						  ]}>
-					<InputNumber />
+					<InputNumber size="default" style={{ width: '100%' }} />
 				</Form.Item>
 
 				<Form.Item label="Image Url:" name={['robot', 'imageUrl']}>
 					<Input />
 				</Form.Item>
 				<Form.Item {...tailLayout}>  
-					<Button type="primary"  htmlType="submit">
+					<Button type="primary"  htmlType="submit" size="small">
 						{props.type} Robot
 					</Button>
-					<Button htmlType="button" onClick={onReset} type="danger">
+					<Button htmlType="button" onClick={onReset} type="danger" size="small">
 						Reset
 					</Button>
 				</Form.Item>

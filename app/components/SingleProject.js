@@ -6,8 +6,11 @@ import {
 import {Link, useParams} from 'react-router-dom';
 import ProjectInputForm from './ProjectInputForm.js';
 import AssignRobots from './AssignRobots.js'
+import { Row, Col, Card, Button } from 'antd';
+import { ToolOutlined  } from '@ant-design/icons';
 
 
+const { Meta } = Card;
 
 function SingleProject (props) {
 	const {projectId} = useParams()
@@ -22,8 +25,9 @@ function SingleProject (props) {
 		}
 	}, [projectId])
 
-	const handleClick = robotId => {
-		dispatch({type: 'UPDATE_PROJECT_ASSIGNMENT', value: {projectId, robotId: robotId }})
+	const handleClick = evt => {
+		console.log("clicking", evt)
+		//dispatch({type: 'UPDATE_PROJECT_ASSIGNMENT', value: {projectId, robotId: evt.target.id}})
 	};
 	const handleComplete = evt => {
 		const completed = !props.project.completed;
@@ -31,46 +35,44 @@ function SingleProject (props) {
 	};
 
 		return project.id ? (
-			<div className="allItems">
-				<div key={project.id} className="list">
-					<ul>
-						<li>
-							<span>Title: </span>
-							{project.title}
-						</li>
-						<li>
-							<span>Deadline: </span>
-							{project.deadline}
-						</li>
-						<li>
-							<span>Priority: </span>
-							{project.priority}
-						</li>
-						<li>
-							<span>Completed: </span>
-							{project.completed ? 'YES' : 'NO'}
-						</li>
-						<li>
-							<span>Description: </span>
-							{project.description}
-						</li>
-						<li>Robots assigned to this project:</li>
-						<AssignRobots handleClick={handleClick} />
-						<div>
-							<br />
-							<button
-								type="button"
-								id={project.id}
-								onClick={evt => {
-									handleComplete(evt);
-								}}>
-								Complete
-							</button>
-						</div>
-					</ul>
-				</div>
+			<Row align="middle">
+				<Col span={12}>
+					<Row justify="center">
+						<Col>
+						<Card
+							hoverable
+							style={{width: '300px', background: 'silver'}}
+							cover={<ToolOutlined style={{fontSize: '30px'}} />}
+						>
+							<Meta title={project.title} />
+							<ul>
+								<li>Deadline: {project.deadline}</li>
+								<li>Priority: {project.priority}</li>
+								<li>Completed: {project.completed ? 'YES' : 'NO'}</li>
+								<li>Description: {project.description}</li>
+								<li>Assigned Robots:</li>
+								<AssignRobots handleClick={handleClick} />
+							</ul>
+							<Button
+										type="button"
+										id={project.id}
+										onClick={evt => {
+											handleComplete(evt);
+										}}>
+										Complete
+							</Button>
+						</Card>
+						</Col>
+					</Row>
+				</Col>
+			<Col span={12}>
+				<Row justify="center">
+					<Col>
 					<ProjectInputForm type="Update" />
-			</div>
+					</Col>
+				</Row>
+			</Col>
+			</Row>
 		) : (
 			<div />
 		);	
