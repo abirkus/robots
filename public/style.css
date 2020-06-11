@@ -130,7 +130,7 @@ li {
   }
   
   .bcg {
-	background: url('warehouse.jpg') no-repeat;
+	background: url('warehouse.jpg') no-repeat center;
 	background-size: cover;
 	position: absolute;
 	width: 100%;
@@ -178,6 +178,10 @@ li {
 	  width: 100%;
   }
 
+  .welcomeWrapper {
+	background-color: white;
+  }
+
   .welcome {
 	  display: flex;
 	  align-items: center;
@@ -186,7 +190,11 @@ li {
 	  font-size: 5rem;
 	  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	  min-height: 100vh;
-	  background: darkslategrey;
+	  background: url('humanTouch.jpg') no-repeat center;
+	  background-size: cover;
+	  top: 0;
+	  z-index: 1;
+	  opacity: 0;
   }
 
 .welcome h1 {
