@@ -1,15 +1,16 @@
 import React, {useRef, useEffect} from 'react';
-import {TweenMax, TimelineMax, Power1} from 'gsap';
+import { gsap } from 'gsap';
+//import {TweenMax, TimelineMax, Power1} from 'gsap';
 import ScrollMagic from "scrollmagic/scrollmagic/uncompressed/ScrollMagic";
-import "animation.gsap";
-import "debug.addIndicators";
+// import "animation.gsap";
+// import "debug.addIndicators";
 
 
 const Employee = () => {
 
     let employee = useRef(null)
     const controller = new ScrollMagic.Controller({addIndicators: true})
-    const timeline = new TimelineMax()
+    const timeline = new gsap.timeline()
     const flightPath = {
         curviness: 1.25,
         autoRotate: true,
@@ -27,9 +28,9 @@ const Employee = () => {
 
 
     useEffect(() => {
-          const bee = TweenMax.to(employee, 1, {
+          const bee = gsap.to(employee, 1, {
             bezier: flightPath,
-            ease: Power1.easeInOut
+            // ease: Power1.easeInOut
           })
       
           timeline.add(bee)

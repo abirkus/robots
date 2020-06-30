@@ -1,24 +1,27 @@
 import React, {useRef, useEffect} from 'react';
-import {TweenMax, Power0, Ease, Power3, RoughEase} from 'gsap'
+//import {TweenMax, Power0, Ease, Power3, RoughEase} from 'gsap'
+import { gsap } from "gsap";
 import ScrollMagic from "scrollmagic/scrollmagic/uncompressed/ScrollMagic";
-import "animation.gsap";
-import "debug.addIndicators";
+// import "animation.gsap";
+// import "debug.addIndicators";
 
 const Welcome = () => {
   let background = useRef(null)
   let imageL = useRef(null)
   useEffect(() => {
-    TweenMax.to(background, 1, 
+    gsap.to(background,
       {
       delay: 2,
+      duration: 2.5,
       css: { scale: 0, borderRadius: '50% 50% 50% 50%'},
-      ease: Power0.easeInOut
+      ease: 'power0.out'
     })
-    TweenMax.to(imageL, 2,
+    gsap.to(imageL,
       {
+      duration: 2,
       delay: 3,
       opacity: 1,
-      ease: Power3.easeOut
+      ease: 'power3.out'
     })
 
   }, [])

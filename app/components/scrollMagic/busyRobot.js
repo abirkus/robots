@@ -1,8 +1,9 @@
 import React, {useRef, useEffect} from 'react';
-import {TweenMax, Power3} from 'gsap'
+//import {TweenMax, Power3} from 'gsap'
+import { gsap } from 'gsap';
 import ScrollMagic from "scrollmagic/scrollmagic/uncompressed/ScrollMagic";
-import "animation.gsap";
-import "debug.addIndicators";
+// import "animation.gsap";
+// import "debug.addIndicators";
 //import TweenMax from "gsap/src/uncompressed/TweenMax";
 
 const BusyRobot = () => {
@@ -15,7 +16,7 @@ const BusyRobot = () => {
 			triggerHook: 0,
 			duration: '100%'
 		})
-		.setTween(TweenMax.to(logoItem, 0.9, {opacity: 1, y: -20, ease: Power3.easeOut}))
+		.setTween(gsap.to(logoItem, 0.9, {opacity: 1, y: -20, ease: 'power3.out'}))
 		.addIndicators({
 			name: 'fade scene',
 			colorTrigger: 'black',

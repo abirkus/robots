@@ -1,8 +1,9 @@
 import React, {useRef, useEffect} from 'react';
-import {TweenMax, Power0} from 'gsap'
-import ScrollMagic from "scrollmagic/scrollmagic/uncompressed/ScrollMagic";
-import "animation.gsap";
-import "debug.addIndicators";
+//import {TweenMax, Power0} from 'gsap'
+import { gsap } from 'gsap'
+import ScrollMagic from 'scrollmagic'
+// import "animation.gsap";
+// import "debug.addIndicators";
 import { Row, Col } from 'antd'
 // import 'imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/debug.addIndicators'
 // import 'imports-loader?define=>false!scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap'
@@ -18,7 +19,7 @@ const Parallax = () => {
 			triggerHook: 1,
 			duration: '100%'
 		})
-		.setTween(TweenMax.to('.bcg', 1, {y: '-30%', ease: Power0.easeNone}))
+		.setTween(gsap.to('.bcg', {duration: 1, y: '-30%', ease: 'power0.out'}))
 		.addIndicators({
 			name: 'parallax scene',
 			colorTrigger: 'black',
