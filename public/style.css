@@ -31,6 +31,7 @@
 
 .topnav a {
 	color: white;
+	background-color: rgb(6,33,55) !important;
 }
 
 a {
@@ -53,14 +54,14 @@ a {
 	justify-content: center;
 	align-items: center;
 }
-.greeting {
+/* .greeting {
 	flex-direction: column;
 	display: flex;
 	width: 300px;
 	justify-content: center;
 	animation-duration: 2s;
 	animation-name: bounceIn;
-}
+} */
 
 .allItems {
 	display: flex;
@@ -193,17 +194,22 @@ li {
 	  min-height: 100vh;
 	  background: url('humanTouch.jpg') no-repeat center;
 	  background-size: cover;
-	  top: 0;
-	  z-index: 1;
-	  opacity: 0.5;
+	  /* top: 0; */
+	  /* z-index: 1;
+	  opacity: 0.5; */
   }
 
-.welcome h1 {
-	animation-duration: 2s;
-	animation-name: bounceIn;
-}
+  .welcomeText {
+	color: white;
+  }
+
   .bee-container {
 	  min-height: 100vh;
+  }
+
+  .bee {
+	position: relative;
+	left: -400px;
   }
 
   .busyRobot {
