@@ -216,8 +216,8 @@ li {
 
   .busyRobot {
 	min-height: 100vh;
-	background: url('retroRobot.png') no-repeat center;
-	background-size: cover;
+	background: white url('retroRobot.png') no-repeat center;
+	background-size: 1000px 1000px;
 
   }
 
