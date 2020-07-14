@@ -56,10 +56,16 @@ const Employee = () => {
 				id='bee'
 				className='bee'
 			/>
-			<h1>
-				Your robot minions can do anything you desire: from washing
-				dishes, to folding laundry, to cooking dinner
-			</h1>
+			<div className='agenda'>
+				<div>
+					<div>Your robot minions can do anything you desire:</div>
+					<ul>
+						<li>from washing dishes</li>
+						<li>to folding laundry</li>
+						<li>to cooking dinner</li>
+					</ul>
+				</div>
+			</div>
 		</div>
 	)
 }
