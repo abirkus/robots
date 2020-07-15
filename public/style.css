@@ -218,7 +218,9 @@ li {
 	min-height: 100vh;
 	background: white url('retroRobot.png') no-repeat center;
 	background-size: 1000px 1000px;
-
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
   }
 
   .agenda {
@@ -266,3 +268,23 @@ li {
 	  width: 120px;
 	  height: 120px;
   }
+
+  .eye-outer {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1;
+}
+
+.eye-inner {
+  fill: #000;
+}
+.eye-iris {
+	fill: #68b5e2;
+}
+
+ #left-eye {
+	 padding: 0 30px 0 0;
+ }
+ #right-eye {
+	 padding: 0 0 0 30px;
+ }
