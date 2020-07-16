@@ -27,15 +27,10 @@ const BusyRobot = () => {
 	let rightEyeObj
 	let mouse
 
-	var demo = {score: 0},
-		scoreDisplay = useRef(null)
 	const [position, setPosition] = useState({
 		x: 0,
 		y: 0,
 	})
-	function showScore() {
-		scoreDisplay.current.innerHTML = demo.score.toFixed(2)
-	}
 
 	useEffect(() => {
 		const setFromEvent = (e) => {
@@ -65,7 +60,6 @@ const BusyRobot = () => {
 
 		busyRobot.current.addEventListener('mousemove', setFromEvent)
 
-		var tween = TweenLite.to(demo, 20, {score: 100, onUpdate: showScore})
 		TweenMax.to({}, 0.016, {
 			repeat: -1,
 			onRepeat: function () {
@@ -96,7 +90,6 @@ const BusyRobot = () => {
 		var point = mouse.matrixTransform(
 			eyesCanvas.current.getScreenCTM().inverse()
 		)
-		console.log('point', point)
 		leftEyeObj.rotateTo(point)
 		rightEyeObj.rotateTo(point)
 
@@ -118,7 +111,6 @@ const BusyRobot = () => {
 
 			var angle = Math.atan2(dy, dx)
 
-			console.log('are we rotating?', angle)
 			TweenLite.to(element, 0.3, {
 				rotation: angle + '_rad_short',
 			})
@@ -132,9 +124,6 @@ const BusyRobot = () => {
 
 	return (
 		<div className='busyRobot' ref={busyRobot}>
-			<div id='demo'>
-				<div ref={scoreDisplay} id='scoreDisplay'></div>
-			</div>
 			<div className='cursor' ref={cursor}>
 				<img src='/drone.png' className='droneLogo' />
 			</div>
@@ -144,13 +133,13 @@ const BusyRobot = () => {
 			<svg ref={eyesCanvas} id='svg' width='300' height='400'>
 				<g id='left-eye' ref={leftEye}>
 					<circle className='eye-outer' cx='69' cy='308' r='44' />
-					<circle className='eye-iris' cx='69' cy='308' r='30' />
-					<circle className='eye-inner' cx='69' cy='308' r='20' />
+					<circle className='eye-iris' cx='83' cy='308' r='30' />
+					<circle className='eye-inner' cx='93' cy='308' r='20' />
 				</g>
 				<g id='right-eye' ref={rightEye}>
 					<circle className='eye-outer' cx='231' cy='308' r='44' />
-					<circle className='eye-iris' cx='231' cy='308' r='30' />
-					<circle className='eye-inner' cx='231' cy='308' r='20' />
+					<circle className='eye-iris' cx='245' cy='308' r='30' />
+					<circle className='eye-inner' cx='255' cy='308' r='20' />
 				</g>
 				<text x='0' y='15' fill='red'>
 					Exmplore more features by following navbar links up
