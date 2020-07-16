@@ -1,4 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react'
+import {Link} from 'react-router-dom'
+import history from '../../history'
 import {TweenMax, TweenLite, Power3} from 'gsap'
 import ScrollMagic from 'scrollmagic/scrollmagic/uncompressed/ScrollMagic'
 import 'animation.gsap'
@@ -12,9 +14,6 @@ var mouseX = 0,
 
 var requestId = null
 
-// var leftEye = createEye('#left-eye')
-// var rightEye = createEye('#right-eye')
-
 const BusyRobot = () => {
 	let busyRobot = useRef(null)
 	let follower = useRef(null)
@@ -27,10 +26,33 @@ const BusyRobot = () => {
 	let rightEyeObj
 	let mouse
 
+	const handleClickProjects = () => {
+		history.push('/projects')
+		window.location.reload()
+	}
+	const handleClickRobots = () => {
+		history.push('/robots')
+		window.location.reload()
+	}
+
 	const [position, setPosition] = useState({
 		x: 0,
 		y: 0,
 	})
+
+	const scrollTop = () => {
+		window.scrollTo({top: 0, behavior: 'smooth'})
+	}
+
+	const handleMouseEnter = (e) => {
+		TweenMax.to(cursor.current, 0.3, {scale: 1, opacity: 1})
+		TweenMax.to(follower.current, 0.3, {scale: 1, opacity: 1})
+	}
+
+	const handleMouseLeave = (e) => {
+		TweenMax.to(cursor.current, 0.3, {scale: 0, opacity: 0})
+		TweenMax.to(follower.current, 0.3, {scale: 0, opacity: 0})
+	}
 
 	useEffect(() => {
 		const setFromEvent = (e) => {
@@ -48,15 +70,9 @@ const BusyRobot = () => {
 		leftEyeObj = createEye(leftEye.current)
 		rightEyeObj = createEye(rightEye.current)
 
-		busyRobot.current.addEventListener('mouseenter', function (e) {
-			TweenMax.to(cursor.current, 0.3, {scale: 1, opacity: 1})
-			TweenMax.to(follower.current, 0.3, {scale: 1, opacity: 1})
-		})
+		busyRobot.current.addEventListener('mouseenter', handleMouseEnter)
 
-		busyRobot.current.addEventListener('mouseleave', function (e) {
-			TweenMax.to(cursor.current, 0.3, {scale: 0, opacity: 0})
-			TweenMax.to(follower.current, 0.3, {scale: 0, opacity: 0})
-		})
+		busyRobot.current.addEventListener('mouseleave', handleMouseLeave)
 
 		busyRobot.current.addEventListener('mousemove', setFromEvent)
 
@@ -82,7 +98,9 @@ const BusyRobot = () => {
 			},
 		})
 		return () => {
-			window.removeEventListener('mousemove', setFromEvent)
+			busyRobot.current.removeEventListener('mouseleave', () => {})
+			busyRobot.current.removeEventListener('mouseenter', () => {})
+			busyRobot.current.removeEventListener('mousemove', () => {})
 		}
 	}, [])
 
@@ -124,11 +142,8 @@ const BusyRobot = () => {
 
 	return (
 		<div className='busyRobot' ref={busyRobot}>
-			<div className='cursor' ref={cursor}>
-				<img src='/drone.png' className='droneLogo' />
-			</div>
-			<div className='follower' ref={follower}>
-				<img src='/target.png' className='targetLogo' />
+			<div className='link1'>
+				<button onClick={handleClickRobots}>Manage Robots</button>
 			</div>
 			<svg ref={eyesCanvas} id='svg' width='300' height='400'>
 				<g id='left-eye' ref={leftEye}>
@@ -141,11 +156,22 @@ const BusyRobot = () => {
 					<circle className='eye-iris' cx='245' cy='308' r='30' />
 					<circle className='eye-inner' cx='255' cy='308' r='20' />
 				</g>
-				<text x='0' y='15' fill='red'>
+			</svg>
+			<div className='link2'>
+				<button onClick={handleClickProjects}>Manage Projects</button>
+			</div>
+			<div className='infoText'>
+				<div className='cursor' ref={cursor}>
+					<img src='/drone.png' className='droneLogo' />
+				</div>
+				<div className='follower' ref={follower}>
+					<img src='/target.png' className='targetLogo' />
+				</div>
+				<div className='tvTube'>
 					Exmplore more features by following navbar links up
 					{position.x}:{position.y}
-				</text>
-			</svg>
+				</div>
+			</div>
 		</div>
 	)
 }
