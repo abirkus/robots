@@ -1,13 +1,19 @@
 import React, {useRef, useEffect} from 'react'
-import {TweenMax, TimelineMax, Power1} from 'gsap'
+import {TweenMax, TimelineMax, Power1, Bounce} from 'gsap'
 import ScrollMagic from 'scrollmagic/scrollmagic/uncompressed/ScrollMagic'
 import 'animation.gsap'
 import 'debug.addIndicators'
 
 const Employee = () => {
 	let employee = useRef(null)
+	let text1 = useRef(null)
+	let text2 = useRef(null)
+	let text3 = useRef(null)
+	let text4 = useRef(null)
+
 	const controller = new ScrollMagic.Controller({addIndicators: true})
 	const timeline = new TimelineMax()
+	const secondaryTimeline = new TimelineMax()
 	const flightPath = {
 		curviness: 1.25,
 		autoRotate: true,
@@ -24,45 +30,104 @@ const Employee = () => {
 	}
 
 	useEffect(() => {
-		const bee = TweenMax.to(employee, 1, {
+		const waiter = TweenMax.to(employee, 1, {
 			bezier: flightPath,
 			ease: Power1.easeInOut,
 		})
 
-		timeline.add(bee)
+		const agendaText1 = TweenMax.to(text1, 3, {
+			x: 850,
+			fontSize: '2rem',
+		})
+
+		const agendaText2 = TweenMax.to(text2, 3, {
+			x: 850,
+			fontSize: '2rem',
+		})
+
+		const agendaText3 = TweenMax.to(text3, 3, {
+			x: 850,
+			fontSize: '2rem',
+		})
+
+		const agendaText4 = TweenMax.to(text4, 3, {
+			x: 850,
+			fontSize: '2rem',
+		})
+		secondaryTimeline
+			.add(agendaText1)
+			.add(agendaText2)
+			.add(agendaText3)
+			.add(agendaText4)
+
+		timeline.add(waiter)
 
 		new ScrollMagic.Scene({
-			triggerElement: '.bee-container',
+			triggerElement: '.agenda-container',
 			triggerHook: 0,
 			duration: '100%',
 		})
 			.setTween(timeline)
-			.setPin('.bee-container')
+			.setPin('.agenda-container')
 			.addIndicators({
-				name: 'bee scene',
+				name: 'agenda scene',
 				colorTrigger: 'black',
 				indent: 200,
+			})
+			.addTo(controller)
+
+		new ScrollMagic.Scene({
+			triggerElement: '.agenda-container',
+			triggerHook: 0.5,
+			duration: '100%',
+		})
+			.setTween(secondaryTimeline)
+			.addIndicators({
+				name: 'agenda text scene',
+				colorTrigger: 'pink',
+				fontSize: '2rem',
+				indent: 500,
 			})
 			.addTo(controller)
 	}, [])
 
 	return (
-		<div className='bee-container'>
+		<div className='agenda-container'>
 			<img
 				ref={(el) => {
 					employee = el
 				}}
 				src='/robotWaiter.png'
 				id='bee'
-				className='bee'
+				className='waiter'
 			/>
 			<div className='agenda'>
 				<div>
-					<div>Your robot minions can do anything you desire:</div>
+					<div
+						ref={(el) => {
+							text1 = el
+						}}>
+						Your robot minions can do anything you desire:
+					</div>
 					<ul>
-						<li>from washing dishes</li>
-						<li>to folding laundry</li>
-						<li>to cooking dinner</li>
+						<li
+							ref={(el) => {
+								text2 = el
+							}}>
+							From washing dishes
+						</li>
+						<li
+							ref={(el) => {
+								text3 = el
+							}}>
+							To folding laundry
+						</li>
+						<li
+							ref={(el) => {
+								text4 = el
+							}}>
+							To cooking dinner
+						</li>
 					</ul>
 				</div>
 			</div>

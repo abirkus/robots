@@ -40,10 +40,6 @@ const BusyRobot = () => {
 		y: 0,
 	})
 
-	const scrollTop = () => {
-		window.scrollTo({top: 0, behavior: 'smooth'})
-	}
-
 	const handleMouseEnter = (e) => {
 		TweenMax.to(cursor.current, 0.3, {scale: 1, opacity: 1})
 		TweenMax.to(follower.current, 0.3, {scale: 1, opacity: 1})
