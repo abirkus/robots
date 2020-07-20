@@ -1,4 +1,4 @@
-# Junior Phase Final Project
+# Robots Inc
 
 ## Getting started
 
@@ -8,7 +8,6 @@
 4. Start the build process and your application with: `npm run start-dev` and visit http://localhost:1337/ in your browser.
 
 ## Details
-
-### The Premise
-
-StackBot Inc. is a mock business staffed entirely by robots. Each robot may be assigned to several projects at a time but also each project may be assigned to multiple robots. Test out your skills as a manager of StackBot Inc by creating robots, projects, and managing projects to their completion.
+FE library - React Hooks'
+Middleware - React Saga
+Animations Library - GSAP, Scrollmagic
