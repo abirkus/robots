@@ -31,6 +31,7 @@
 
 .topnav a {
 	color: white;
+	background-color: rgb(6,33,55) !important;
 }
 
 a {
@@ -53,14 +54,14 @@ a {
 	justify-content: center;
 	align-items: center;
 }
-.greeting {
+/* .greeting {
 	flex-direction: column;
 	display: flex;
 	width: 300px;
 	justify-content: center;
 	animation-duration: 2s;
 	animation-name: bounceIn;
-}
+} */
 
 .allItems {
 	display: flex;
@@ -130,7 +131,7 @@ li {
   }
   
   .bcg {
-	background: url('warehouse.jpg') no-repeat;
+	background: url('warehouse.jpg') no-repeat center;
 	background-size: cover;
 	position: absolute;
 	width: 100%;
@@ -166,8 +167,15 @@ li {
 
   .myFooter {
 	  text-align: center;
-	  font-size: x-large;
-	  background-color: #232F3E;
+	  background-color: #232F3E !important;
+  }
+
+  .myFooterInner {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: space-evenly;
+	  align-items: center;
+	  font-size: 1.5rem;;
   }
 
   .myHeader {
@@ -178,25 +186,164 @@ li {
 	  width: 100%;
   }
 
-  .welcome {
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  text-align: center;
-	  font-size: 5rem;
-	  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-	  min-height: 100vh;
-	  background: darkslategrey;
+  .welcomeWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	font-size: 5rem;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	min-height: 100vh;
+	background-color: white;
   }
 
-.welcome h1 {
-	animation-duration: 2s;
-	animation-name: bounceIn;
-}
-  .bee-container {
+  .welcome {
 	  min-height: 100vh;
+	  background: url('humanTouch.jpg') no-repeat center;
+	  background-size: cover;
+	  /* top: 0; */
+	  /* z-index: 1;
+	  opacity: 0.5; */
+  }
+
+  .welcomeText {
+	color: white;
+  }
+
+  .bee-container {
+	min-height: 100vh;
+	background: url('agenda.jpg') no-repeat center;
+	background-size: cover;
+  }
+
+  .bee {
+	position: relative;
+	left: -400px;
   }
 
   .busyRobot {
-	  min-height: 100vh;
+	min-height: 100vh;
+	background: white url('retroRobot.png') no-repeat center;
+	background-size: 1000px 1000px;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	align-items: stretch;
   }
+
+  .busyRobot > * {
+  	flex: 1 auto;
+}
+
+@media all and (min-width: 600px) {
+  /* We tell both sidebars to share a row */
+  .link1 { flex: 1 auto; }
+  .link2 { flex: 1 auto; }
+}
+
+@media all and (min-width: 800px) {
+  /* We invert order of first sidebar and main
+   * And tell the main element to take twice as much width as the other two sidebars 
+   */
+  .link1 { order: 1; }
+  #svg   { order: 2; }
+  .link2 { order: 3; }
+  .infoText  { order: 4; }
+}
+
+  .link1 {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	  height: auto;
+  }
+  #svg {
+	flex: 0 0 auto;
+  }
+  .link2 {
+	  display: flex;
+	  justify-content: center;
+	  align-items: center;
+	   height: auto;
+  }
+
+  .infoText {
+	display: flex;
+	flex: 1 100%;
+	justify-content: center;
+	height: auto;
+  }
+
+  .tvTube {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 250px;
+  }
+
+
+  .agenda {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+  }
+
+  .cursor {
+	position: fixed;
+	backface-visibility: hidden;
+	pointer-events: none;
+	opacity: 0;
+    z-index: 1;
+    transition: 0.3s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
+        0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) opacity;
+    user-select: none;
+    pointer-events: none;
+    z-index: 10000;
+    transform: scale(1);
+  }
+
+  .follower {
+	position: fixed;
+	backface-visibility: hidden;
+	pointer-events: none;
+	opacity: 0;
+    border-radius: 100%;
+    z-index: 1;
+    transition: 0.6s cubic-bezier(0.75, -1.27, 0.3, 2.33) transform,
+        0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) opacity, 0.2s cubic-bezier(0.75, -0.27, 0.3, 1.33) background;
+    user-select: none;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(2px, 2px);
+  }
+
+  .droneLogo {
+	  width: 60px;
+	  height: 30px;
+  }
+
+  .targetLogo {
+	  width: 120px;
+	  height: 120px;
+  }
+
+  .eye-outer {
+  fill: white;
+  stroke: #000;
+  stroke-width: 1;
+}
+
+.eye-inner {
+  fill: #000;
+}
+.eye-iris {
+	fill: #68b5e2;
+}
+
+ #left-eye {
+	 padding: 0 30px 0 0;
+ }
+ #right-eye {
+	 padding: 0 0 0 30px;
+ }
