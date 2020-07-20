@@ -8,6 +8,6 @@
 4. Start the build process and your application with: `npm run start-dev` and visit http://localhost:1337/ in your browser.
 
 ## Details
-- FE library - React Hooks'
+- FE library - React Hooks
 - Middleware - React Saga
 - Animations Library - GSAP, Scrollmagic
