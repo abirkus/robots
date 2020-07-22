@@ -11,7 +11,7 @@ const Employee = () => {
 	let text3 = useRef(null)
 	let text4 = useRef(null)
 
-	const controller = new ScrollMagic.Controller({addIndicators: true})
+	const controller = new ScrollMagic.Controller()
 	const timeline = new TimelineMax()
 	const secondaryTimeline = new TimelineMax()
 	const flightPath = {
@@ -69,11 +69,6 @@ const Employee = () => {
 		})
 			.setTween(timeline)
 			.setPin('.agenda-container')
-			.addIndicators({
-				name: 'agenda scene',
-				colorTrigger: 'black',
-				indent: 200,
-			})
 			.addTo(controller)
 
 		new ScrollMagic.Scene({
@@ -82,12 +77,6 @@ const Employee = () => {
 			duration: '100%',
 		})
 			.setTween(secondaryTimeline)
-			.addIndicators({
-				name: 'agenda text scene',
-				colorTrigger: 'pink',
-				fontSize: '2rem',
-				indent: 500,
-			})
 			.addTo(controller)
 	}, [])
 

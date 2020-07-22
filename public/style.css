@@ -166,6 +166,9 @@ a {
 	  background-color: #232F3E !important;
   }
 
+  .myContent {
+	background: linear-gradient(0deg, rgba(252,252,252,1) 0%, rgba(6,33,55,1) 93%);
+  }
   .myFooterInner {
 	  display: flex;
 	  flex-direction: row;
@@ -279,7 +282,15 @@ a {
 	width: 250px;
   }
 
+ #tvTxt {
+	 font-family: 'Orbitron', sans-serif;
+	 color: green;
+ }
 
+ 	#blinkingCursor {
+		  color: green;
+		  width: 20px;
+	 }
   .agenda {
 	display: flex;
 	align-items: center;

@@ -9,7 +9,7 @@ import {Row, Col} from 'antd'
 
 const Parallax = () => {
 	//let logoItem = useRef(null)
-	const controller = new ScrollMagic.Controller({addIndicators: true})
+	const controller = new ScrollMagic.Controller()
 
 	useEffect(() => {
 		const ourScene = new ScrollMagic.Scene({
@@ -20,10 +20,6 @@ const Parallax = () => {
 			.setTween(
 				TweenMax.to('.bcg', 1, {y: '-30%', ease: Power0.easeNone})
 			)
-			.addIndicators({
-				name: 'parallax scene',
-				colorTrigger: 'black',
-			})
 			.addTo(controller)
 
 		const textScene = new ScrollMagic.Scene({
@@ -37,10 +33,6 @@ const Parallax = () => {
 					ease: Power4.easeIn,
 				})
 			)
-			.addIndicators({
-				name: 'parallax text',
-				colorTrigger: 'purple',
-			})
 			.addTo(controller)
 	}, [])
 

@@ -1,10 +1,11 @@
 import React, {useRef, useEffect, useState} from 'react'
-import {Link} from 'react-router-dom'
+import TvTube from './tvTube'
 import history from '../../history'
 import {TweenMax, TweenLite, Power3} from 'gsap'
 import ScrollMagic from 'scrollmagic/scrollmagic/uncompressed/ScrollMagic'
 import 'animation.gsap'
 import 'debug.addIndicators'
+import {Button} from 'antd'
 //import TweenMax from "gsap/src/uncompressed/TweenMax";
 //import {useMousePosition} from './useMousePosition'
 var posX = 0,
@@ -139,22 +140,26 @@ const BusyRobot = () => {
 	return (
 		<div className='busyRobot' ref={busyRobot}>
 			<div className='link1'>
-				<button onClick={handleClickRobots}>Manage Robots</button>
+				<Button type='primary' onClick={handleClickRobots}>
+					Manage Robots
+				</Button>
 			</div>
 			<svg ref={eyesCanvas} id='svg' width='300' height='400'>
 				<g id='left-eye' ref={leftEye}>
-					<circle className='eye-outer' cx='69' cy='308' r='44' />
-					<circle className='eye-iris' cx='83' cy='308' r='30' />
-					<circle className='eye-inner' cx='93' cy='308' r='20' />
+					<circle className='eye-outer' cx='70' cy='281' r='44' />
+					<circle className='eye-iris' cx='84' cy='281' r='30' />
+					<circle className='eye-inner' cx='94' cy='281' r='20' />
 				</g>
 				<g id='right-eye' ref={rightEye}>
-					<circle className='eye-outer' cx='231' cy='308' r='44' />
-					<circle className='eye-iris' cx='245' cy='308' r='30' />
-					<circle className='eye-inner' cx='255' cy='308' r='20' />
+					<circle className='eye-outer' cx='232' cy='281' r='44' />
+					<circle className='eye-iris' cx='246' cy='281' r='30' />
+					<circle className='eye-inner' cx='256' cy='281' r='20' />
 				</g>
 			</svg>
 			<div className='link2'>
-				<button onClick={handleClickProjects}>Manage Projects</button>
+				<Button type='primary' onClick={handleClickProjects}>
+					Manage Projects
+				</Button>
 			</div>
 			<div className='infoText'>
 				<div className='cursor' ref={cursor}>
@@ -164,8 +169,7 @@ const BusyRobot = () => {
 					<img src='/target.png' className='targetLogo' />
 				</div>
 				<div className='tvTube'>
-					Exmplore more features by following navbar links up
-					{position.x}:{position.y}
+					<TvTube />
 				</div>
 			</div>
 		</div>
